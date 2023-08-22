@@ -1,0 +1,50 @@
+npm init -ynp
+npm i typescript @types/node tsx tsup -D
+npx tsc --init
+
+tsconfig.json:
+    "target": "es2020"
+
+npm i fastify
+
+npm i dotenv
+
+npm i zod
+
+npm i eslint @rocketseat/eslint-config -D
+ or (npm i eslint // npx eslint --init)
+
+
+"baseUrl": "./",
+"paths": {
+    "@/*": ["./src/*"]
+},
+
+npm i prisma -D
+
+npx prisma init
+
+
+settings.json:
+
+
+npx prisma generate
+
+npm i @prisma/client
+
+npx prisma migrate dev
+npx prisma migrate deploy
+
+npx prisma studio
+
+docker compose up -D
+docker compose stop (para containers sem deletar)
+docker compose down (apaga containers)
+
+
+npm i bcryptjs
+npm i -D @types/bcryptjs
+
+npm i vitest vite-tsconfig-paths -D
+
+npm i -D @vitest/ui
