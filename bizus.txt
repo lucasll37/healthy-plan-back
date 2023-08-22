@@ -28,7 +28,7 @@ npx prisma init
 settings.json:
 
 
-npx prisma generate
+npx prisma generate // cria de forma automatizada a tipagem do schema
 
 npm i @prisma/client
 

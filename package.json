@@ -13,6 +13,9 @@
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui"
   },
+  "prisma": {
+    "schema": "prisma/models/schema.prisma"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
