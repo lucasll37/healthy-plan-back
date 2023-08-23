@@ -8,3 +8,24 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=docker
       - MYSQL_DATABASE = api-healthy-plan
+    networks:
+    - my-network
+
+  api:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=dev
+      - DATABASE_URL=mysql://root:docker@database/api-healthy-plan
+    depends_on:
+      - database
+    command: ["./migration.sh"]
+    networks:
+    - my-network
+
+networks:
+  my-network:
+    driver: bridge
+
+

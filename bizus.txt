@@ -48,3 +48,7 @@ npm i -D @types/bcryptjs
 npm i vitest vite-tsconfig-paths -D
 
 npm i -D @vitest/ui
+
+
+docker build -t <name_image> .
+docker run --name <name_container> -p 3000:3000 <name_image>

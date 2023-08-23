@@ -1,12 +1,12 @@
-dev:
-	docker compose up -d 
-	npm run dev
+init:
+	docker compose up --build --remove-orphans
 
-test:
-	npm run test:unit
+start:
+	docker compose start
 
-up:
-	docker compose up -d 
+stop:
+	docker compose stop
 
-down:
+clean:
 	docker compose down
+	docker compose down --rmi all
