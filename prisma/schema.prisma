@@ -3,7 +3,7 @@
 
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["native", "rhel-openssl-1.0.x", "debian-openssl-1.0.x", "linux-musl-openssl-3.0.x"]
+  binaryTargets = ["darwin", "darwin-arm64", "debian-openssl-1.0.x", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x", "linux-arm64-openssl-1.1.x", "linux-arm64-openssl-1.0.x", "linux-arm64-openssl-3.0.x", "linux-arm-openssl-1.1.x", "linux-arm-openssl-1.0.x", "linux-arm-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x", "linux-musl-arm64-openssl-1.1.x", "linux-musl-arm64-openssl-3.0.x", "linux-nixos", "linux-static-x64", "linux-static-arm64", "windows", "freebsd11", "freebsd12", "freebsd13", "openbsd", "netbsd", "arm", "native"]
 }
 
 datasource db {
@@ -40,8 +40,10 @@ model Anamnesis {
   haveObsessiveCompulsiveDisorder Boolean
   haveOtherDisorders              Boolean
   additionalObservations          String?
-  createdAt                       DateTime  @default(now())
-  updatedAt                       DateTime? @updatedAt
+
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
 
   // Relations
   trainner Trainer @relation(fields: [trainnerId], references: [id])
@@ -62,6 +64,8 @@ model Athlete {
   trainnerId   String?
   observation  String?
   birthDate    DateTime
+
+  // Default
   createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
 
@@ -83,6 +87,10 @@ model Address {
   cep           String
   athleteId     String @unique
 
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+
   // Relations
   Athlete Athlete @relation(fields: [athleteId], references: [id])
 
@@ -94,8 +102,9 @@ model BodyValuation {
   athleteId  String
   trainnerId String
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
 
   // RELATIONS
   trainner Trainer? @relation(fields: [trainnerId], references: [id])
@@ -111,6 +120,10 @@ model Trainer {
   passwordHash String
   phone        String
 
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+
   athletes      Athlete[]
   Anamnesis     Anamnesis[]
   BodyValuation BodyValuation[]
@@ -121,11 +134,19 @@ model Trainer {
 model Exercise {
   id String @id @default(uuid())
 
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+
   @@map("exercise")
 }
 
 model FlexEvaluation {
   id String @id @default(uuid())
+
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
 
   @@map("flex-evaluation")
 }
@@ -133,11 +154,19 @@ model FlexEvaluation {
 model MethodExercise {
   id String @id @default(uuid())
 
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+
   @@map("method-exercise")
 }
 
 model StatusPhoto {
   id String @id @default(uuid())
+
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
 
   @@map("status-photo")
 }
@@ -145,17 +174,29 @@ model StatusPhoto {
 model Target {
   id String @id @default(uuid())
 
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+
   @@map("target")
 }
 
 model Training {
   id String @id @default(uuid())
 
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+
   @@map("training")
 }
 
 model TrainingEvolution {
   id String @id @default(uuid())
+
+  // Default
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
 
   @@map("training-evolution")
 }
