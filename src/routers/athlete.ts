@@ -4,13 +4,15 @@ import {
     AthleteGetByIdController
 } from "@/controllers/athlete"
 
+import { mockDoc } from "@/docs/athlete";
+
 const athleteCreateController = new AthleteCreateController();
 const athleteGetByIdController = new AthleteGetByIdController()
 
 export async function athleteRoutes(app: FastifyInstance) {
-    app.get("/athlete", ()=>{});
-    app.get("/athlete/:id", athleteGetByIdController.handler);
-    app.post("/athlete", athleteCreateController.handler);
-    app.patch("/athlete/:id", ()=>{});
-    app.delete("/athlete/:id", ()=>{});
+    app.get("/athlete", mockDoc, ()=>{});
+    app.get("/athlete/:id", mockDoc, athleteGetByIdController.handler);
+    app.post("/athlete", mockDoc, athleteCreateController.handler);
+    app.patch("/athlete/:id", mockDoc, ()=>{});
+    app.delete("/athlete/:id", mockDoc, ()=>{});
 }

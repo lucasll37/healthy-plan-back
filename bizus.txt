@@ -52,3 +52,7 @@ npm i -D @vitest/ui
 
 docker build -t <name_image> .
 docker run --name <name_container> -p 3000:3000 <name_image>
+
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)

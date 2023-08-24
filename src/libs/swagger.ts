@@ -7,15 +7,15 @@ export async function swagger(app: FastifyInstance) {
         {
         swagger: {
             info: {
-                title: 'Test swagger',
+                title: 'Healthy Plan API',
                 description: 'Testing the Fastify swagger API',
-                version: '0.1.0'
+                version: '1.0.0'
             },
             externalDocs: {
-                url: 'https://swagger.io',
-                description: 'Find more info here'
+                description: 'Find more info here',
+                url: 'https://swagger.io'
             },
-            host: 'localhost',
+            host: 'http://localhost',
             schemes: ['http'],
             consumes: ['application/json'],
             produces: ['application/json'],
@@ -47,7 +47,7 @@ export async function swagger(app: FastifyInstance) {
     );
 
     await app.register(SwaggerUi, {
-        routePrefix: '/doc',
+        routePrefix: '/docs',
         uiConfig: {
             docExpansion: 'full',
             deepLinking: false

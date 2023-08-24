@@ -1,7 +1,7 @@
     export const docPost  = {
     schema: {
         description: 'post some data',
-        tags: ['address'],
+        tags: ['Address'],
         summary: 'qwerty',
         params: {
         type: 'object',

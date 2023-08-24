@@ -1,21 +1,5 @@
-import { FastifyRequest, FastifyReply } from "fastify";
-// import { z } from "zod";
-
-export async function anamnesisTest(request: FastifyRequest, reply: FastifyReply) {
-
-    // const registerBodySchema = z.object({
-
-    // });
-    
-    // const { name, email, password } = registerBodySchema.parse(request.body);
-    
-    try {
-        console.log("brilhou!!!")
+export const mockDoc = {
+    schema: {
+        tags: ['Anamenisis']
     }
-
-    catch(error) {
-
-    }
-    
-    return reply.status(200).send({msg: "brilhou!!!"});
 }

@@ -23,9 +23,15 @@ dev:
 
 	sleep 10
 	npm run prisma:generate
+	npm run prisma:dev
 	npm run prisma:deploy
 	npm run dev
 
 test:
+	npm run test
+
+test-unit:
 	npm run test:unit
+
+test-e2e :
 	npm run test:e2e
