@@ -1,37 +1,41 @@
-#App
+# Healthy Plan API
 
-GymPass style app
+### node v18.17.x
 
-## RF's (Requisitos funcionais)
+## Routes Documentation
+- [Swagger](http://localhost:3000/docs/)
 
-- [] Deve ser possível x ;
-- [] Deve ser possível se cadastrar;
-- [] Deve ser possível se autenticar;
-- [] Deve ser possível obter o perfil de um usuário logado;
-- [] Deve ser possível obter o número de check-ins realizados pelo usuário logado;
-- [] Deve ser possível o usuário obter o seu histórico de check-ins;
-- [] Deve ser possível o usuário buscar academias próximas;
-- [] Deve ser possível o usuário buscar academias pelo nome;
-- [] Deve ser possível o usuário realizar check-in em uma academia;
-- [] Deve ser possível validar o check-in de um usuário;
-- [] Deve ser possível cadastrar uma academia;
+## Necessary programs
+- [Node.js](https://nodejs.org/en/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
+## Suggested extensions (for VSCode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 
+## How to run
+- Clone the repository
+- Run `npm install` to install all dependencies.
+- Run `make init` to start the database (with docker turned on).
+- Consume API as per routes [documentation](http://localhost:3000/docs/).
 
-## RN's (Regras de negócio)
+## How to run tests
+- Run `make test` to run all tests.
 
-- [] O usuário não deve poder se cadastrar com o e-mail duplicado;
-- [] O usuário não pode fazer 2 check-ins no mesmo dia;
-- [] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
-- [] O check-in do pode ser validado até 20 minutos após criado;
-- [] O check-in só pode ser validado por administradores;
-- [] A academia só pode ser cadastrada por administradores;
+## Development
+- Run `make dev` to start the database (with docker turned on) and the server and init backend application in development mode.
+- Run `make start`
+- Run `make stop`
+- Run `make clear`
 
+## Environment variables
+### Create a `.env` file in the root of the project and fill in the variables according to the `.env.example` file.
 
-## RNF's (REquisitos não-funcionais)
-
-- [] A senha do usuário precisa estar criptografada;
-- [] Os dados da aplicação precisam estar persistidos em um banco de dados PostgreSQL;
-- [] Todas as listas de dados precisam estar paginadas com 20 itens por páginas;
-- [] O usuário deve ser identificado por um JWT (JSON Web Token);
-
+Example:
+```
+DATABASE_URL=mysql://root:docker@localhost/api-healthy-plan
+JWT_SECRET=secret
+PORT=3000
+```

@@ -4,7 +4,9 @@ import { z } from "zod";
 const envSchema = z.object({
     NODE_ENV: z.enum(["dev",  "test", "production"]).default("dev"),
     PORT: z.coerce.number().default(3000),
-    JWT_SECRET: z.string().default("dummy")
+    JWT_SECRET: z.string().default("dummy"),
+    DATABASE_URL: z.string()
+        .default("mysql://root:docker@localhost/api-healthy-plan"),
 });
 
 const _env = envSchema.safeParse(process.env);
