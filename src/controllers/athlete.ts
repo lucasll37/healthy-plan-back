@@ -7,7 +7,11 @@ import { z } from "zod";
 
 export class AthleteCreateController {
 
-    handler(request: FastifyRequest, reply: FastifyReply) {
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        // await request.jwtVerify();
+        // console.log(request.user);
+
 
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
         const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma)

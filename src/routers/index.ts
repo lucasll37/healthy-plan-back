@@ -1,3 +1,4 @@
+import { authenticateRoutes } from "./session";
 import { FastifyInstance } from "fastify";
 import { addressRoutes } from "./address";
 import { anamnesisRoutes } from "./anamnesis";
@@ -14,7 +15,7 @@ import { trainingEvolutionRoutes } from "./trainingEvolution";
 
 
 async function productionRoutes(app: FastifyInstance) {
-    // app.post("/sessions", authenticate);
+    await app.register(authenticateRoutes);
     await app.register(addressRoutes);
     await app.register(anamnesisRoutes);
     await app.register(athleteRoutes);

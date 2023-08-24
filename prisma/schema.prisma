@@ -91,11 +91,11 @@ model Address {
 }
 
 model Trainer {
-  id String @id @default(uuid())
-  // name          String
-  // surname       String
-  // email         String          @unique
-  // passwordHash  String
+  id       String @id @default(uuid())
+  name     String
+  surname  String
+  email    String @unique
+  password String
   // address       Address?        @relation(fields: [addressId], references: [id])
   // addressId     String?
   // birthDate     DateTime

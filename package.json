@@ -8,6 +8,7 @@
     "build": "tsup src --out-dir build",
     "start": "node build/server.js",
     "prisma:generate": "prisma generate",
+    "prisma:dev": "prisma migrate dev --name default",
     "prisma:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "test:unit": "vitest run",
@@ -35,6 +36,7 @@
     "vitest": "0.34.1"
   },
   "dependencies": {
+    "@fastify/jwt": "7.2.0",
     "@fastify/swagger": "8.9.0",
     "@fastify/swagger-ui": "1.9.3",
     "@prisma/client": "5.1.0",

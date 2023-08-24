@@ -1,4 +1,5 @@
 init:
+	# docker container ls -aq | xargs docker container stop | xargs docker container rm
 	docker compose up --build --remove-orphans
 
 start:
@@ -13,7 +14,7 @@ clean:
 	docker rm -f $(docker ps -aq)
 	
 dev:
-	docker container ls -aq | xargs docker container stop | xargs docker container rm
+	# docker container ls -aq | xargs docker container stop | xargs docker container rm
 
 	docker run -p 3306:3306 \
 		-e MYSQL_ROOT_PASSWORD=docker \
