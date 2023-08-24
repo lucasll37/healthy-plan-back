@@ -3,7 +3,9 @@ import { appRoutes } from "./routers";
 import { swagger } from "./libs/swagger"; 
 import { ZodError } from "zod";
 import { env } from "./env";
+import { populateRepositoriesWithMock } from "./mocks";
 
+if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
 
 export async function generateApp(): Promise<FastifyInstance> {
 

@@ -3,7 +3,7 @@
 
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["darwin", "darwin-arm64", "debian-openssl-1.0.x", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x", "linux-arm64-openssl-1.1.x", "linux-arm64-openssl-1.0.x", "linux-arm64-openssl-3.0.x", "linux-arm-openssl-1.1.x", "linux-arm-openssl-1.0.x", "linux-arm-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x", "linux-musl-arm64-openssl-1.1.x", "linux-musl-arm64-openssl-3.0.x", "linux-nixos", "linux-static-x64", "linux-static-arm64", "windows", "freebsd11", "freebsd12", "freebsd13", "openbsd", "netbsd", "arm", "native"]
+  binaryTargets = ["native"]
 }
 
 datasource db {
@@ -12,131 +12,127 @@ datasource db {
 }
 
 model Anamnesis {
-  id                              String    @id @default(uuid())
-  athleteId                       String
-  trainnerId                      String
-  isAlcoholic                     Boolean
-  isSmoker                        Boolean
-  sleepQuality                    String
-  PhysicalActivityHabits          String
-  HydrationHabits                 String
-  EatingHabits                    String
-  AmountWater                     Float
-  UseFoodSupplement               String
-  isAnemic                        Boolean
-  isDiabetic                      Boolean
-  systolicBloodPressure           Int
-  diastolicBloodPressure          Int
-  restingHeartRate                Int
-  heartProblems                   String?
-  allergies                       String?
-  otherDiseases                   String?
-  medicalTreatments               String?
-  medicationUse                   String?
-  UseHealthDevice                 String?
-  haveAnxiety                     Boolean
-  haveDepression                  Boolean
-  haveBipolarDisorder             Boolean
-  haveObsessiveCompulsiveDisorder Boolean
-  haveOtherDisorders              Boolean
-  additionalObservations          String?
+  id String @id @default(uuid())
+  // athlete                   Athlete   @relation(fields: [athleteId], references: [id])
+  // athleteId                 String
+  // trainer                   Trainer   @relation(fields: [trainerId], references: [id])
+  // trainerId                 String
+  // isAlcoholic               Boolean
+  // isSmoker                  Boolean
+  // sleepQuality              String
+  // PhysicalActivityHabits    String
+  // HydrationHabits           String
+  // EatingHabits              String
+  // AmountWater               Float
+  // UseFoodSupplement         String
+  // isAnemic                  Boolean
+  // isDiabetic                Boolean
+  // systolicBloodPressure     Int
+  // diastolicBloodPressure    Int
+  // restingHeartRate          Int
+  // heartProblems             String?
+  // allergies                 String?
+  // otherDiseases             String?
+  // medicalTreatments         String?
+  // medicationUse             String?
+  // UseHealthDevice           String?
+  // haveAnxiety               Boolean
+  // haveDepression            Boolean
+  // haveBipolarDisorder       Boolean
+  // haveObsessiveCompDisorder Boolean
+  // haveOtherDisorders        Boolean
+  // additionalObservations    String?
+  // // Default
+  // createdAt                 DateTime  @default(now())
+  // updatedAt                 DateTime? @updatedAt
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
-
-  // Relations
-  trainner Trainer @relation(fields: [trainnerId], references: [id])
-  athlete  Athlete @relation(fields: [athleteId], references: [id])
-
-  @@map("anamenesis")
+  @@map("anamnesis")
 }
 
 model Athlete {
-  id           String    @id @default(uuid())
-  passwordHash String
-  name         String
-  surname      String
-  phone        String
-  email        String    @unique
-  sex          String
-  addressId    String
-  trainnerId   String?
-  observation  String?
-  birthDate    DateTime
-
+  id          String    @id @default(uuid())
+  name        String
+  surname     String
+  phone       String
+  email       String    @unique
+  avatar      String?
+  sex         String
+  // address       Address         @relation(fields: [addressId], references: [id])
+  // addressId   String
+  // trainer       Trainer?        @relation(fields: [trainerId], references: [id])
+  // trainerId   String?
+  observation String?
+  birthDate   DateTime
   // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
-
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
   // Relations
-  address       Address?
-  trainner      Trainer?        @relation(fields: [trainnerId], references: [id])
-  anamnesis     Anamnesis[]
-  BodyValuation BodyValuation[]
+  // anamnesis     Anamnesis[]
+  // BodyValuation BodyValuation[]
 
   @@map("athlete")
 }
 
 model Address {
-  id            String @id @default(uuid())
-  address       String
-  addressNumber String
-  city          String
-  state         String
-  cep           String
-  athleteId     String @unique
-
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
-
-  // Relations
-  Athlete Athlete @relation(fields: [athleteId], references: [id])
+  id String @id @default(uuid())
+  // addressInfo   String
+  // addressNumber String
+  // city          String
+  // state         String
+  // cep           String
+  // // Default
+  // createdAt     DateTime  @default(now())
+  // updatedAt     DateTime? @updatedAt
+  // // Relations
+  // Athlete       Athlete[]
+  // Trainer       Trainer[]
 
   @@map("address")
 }
 
-model BodyValuation {
-  id         String @id @default(uuid())
-  athleteId  String
-  trainnerId String
-
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
-
-  // RELATIONS
-  trainner Trainer? @relation(fields: [trainnerId], references: [id])
-  athlete  Athlete  @relation(fields: [athleteId], references: [id])
-
-  @@map("body-valuation")
-}
-
 model Trainer {
-  id           String @id @default(uuid())
-  name         String
-  surname      String
-  passwordHash String
-  phone        String
-
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
-
-  athletes      Athlete[]
-  Anamnesis     Anamnesis[]
-  BodyValuation BodyValuation[]
+  id String @id @default(uuid())
+  // name          String
+  // surname       String
+  // email         String          @unique
+  // passwordHash  String
+  // address       Address?        @relation(fields: [addressId], references: [id])
+  // addressId     String?
+  // birthDate     DateTime
+  // sex           String
+  // phone         String
+  // avatar        String?
+  // // Default
+  // createdAt     DateTime        @default(now())
+  // updatedAt     DateTime?       @updatedAt
+  // // Relations
+  // athletes      Athlete[]
+  // Anamnesis     Anamnesis[]
+  // BodyValuation BodyValuation[]
 
   @@map("trainer")
 }
 
+model BodyValuation {
+  id String @id @default(uuid())
+  // athlete   Athlete   @relation(fields: [athleteId], references: [id])
+  // athleteId String
+  // trainer   Trainer   @relation(fields: [trainerId], references: [id])
+  // trainerId String
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
+
+  @@map("body-valuation")
+}
+
+///////////////////////////////////
 model Exercise {
   id String @id @default(uuid())
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
 
   @@map("exercise")
 }
@@ -144,9 +140,9 @@ model Exercise {
 model FlexEvaluation {
   id String @id @default(uuid())
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
 
   @@map("flex-evaluation")
 }
@@ -154,9 +150,9 @@ model FlexEvaluation {
 model MethodExercise {
   id String @id @default(uuid())
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
 
   @@map("method-exercise")
 }
@@ -164,9 +160,9 @@ model MethodExercise {
 model StatusPhoto {
   id String @id @default(uuid())
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
 
   @@map("status-photo")
 }
@@ -174,9 +170,9 @@ model StatusPhoto {
 model Target {
   id String @id @default(uuid())
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
 
   @@map("target")
 }
@@ -184,9 +180,9 @@ model Target {
 model Training {
   id String @id @default(uuid())
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
 
   @@map("training")
 }
@@ -194,9 +190,9 @@ model Training {
 model TrainingEvolution {
   id String @id @default(uuid())
 
-  // Default
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
+  // // Default
+  // createdAt DateTime  @default(now())
+  // updatedAt DateTime? @updatedAt
 
   @@map("training-evolution")
 }

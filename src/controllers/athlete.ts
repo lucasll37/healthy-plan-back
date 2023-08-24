@@ -1,21 +1,62 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-// import { z } from "zod";
+import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma"
+import { AthleteCreateService, AthleteGetByIdService } from "@/services/athlete";
+import { Prisma, Athlete } from "@prisma/client";
+import { z } from "zod";
 
-export async function athleteTest(request: FastifyRequest, reply: FastifyReply) {
 
-    // const registerBodySchema = z.object({
+export class AthleteCreateController {
 
-    // });
+    handler(request: FastifyRequest, reply: FastifyReply) {
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
+        const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma)
     
-    // const { name, email, password } = registerBodySchema.parse(request.body);
-    
-    try {
-        console.log("brilhou!!!")
+        const registerBodySchema = z.object({
+            id: z.string().optional(),
+            name: z.string(),
+            surname: z.string(),
+            phone: z.string(),
+            email: z.string().email(),
+            avatar: z.string().optional(),
+            sex: z.string(),
+            observation: z.string().optional(),
+            birthDate: z.string()
+        });
+            
+        
+        try {
+            const data: Prisma.AthleteCreateInput = registerBodySchema.parse(request.body);
+            athleteCreateService.execute(data);
+        }
+        
+        catch(error) {
+            return reply.status(200).send({msg: "mamou!!!"});    
+        }
+        
+        return reply.status(200).send({msg: "brilhou!!!"});
     }
+}
 
-    catch(error) {
+export class AthleteGetByIdController {
 
-    }
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
+        const athleteGetByIdService = new AthleteGetByIdService(athleteRepositoryPrisma)
     
-    return reply.status(200).send({msg: "brilhou!!!"});
+        const registerBodySchema = z.object({
+            id: z.string()
+        });
+            
+        try {
+            const { id } = registerBodySchema.parse(request.params);
+            const athlete = await athleteGetByIdService.execute(id);
+            return reply.status(200).send({athlete: athlete});
+        }
+        
+        catch(error) {
+            return reply.status(200).send({msg: "mamou!!!"});    
+        }  
+    }
 }

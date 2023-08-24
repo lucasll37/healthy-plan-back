@@ -14,6 +14,4 @@ RUN chmod +x ./migration.sh
 
 RUN npm run build
 
-# RUN  npm run migration:deploy
-
 EXPOSE 3000

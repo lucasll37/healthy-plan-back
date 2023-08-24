@@ -1,10 +1,16 @@
 import { FastifyInstance } from "fastify";
-import { athleteTest } from "@/controllers/athlete";
+import {
+    AthleteCreateController,
+    AthleteGetByIdController
+} from "@/controllers/athlete"
+
+const athleteCreateController = new AthleteCreateController();
+const athleteGetByIdController = new AthleteGetByIdController()
 
 export async function athleteRoutes(app: FastifyInstance) {
-    app.get("/athlete", athleteTest);
-    app.get("/athlete/:id", athleteTest);
-    app.post("/athlete", athleteTest);
-    app.patch("/athlete/:id", athleteTest);
-    app.delete("/athlete/:id", athleteTest);
+    app.get("/athlete", ()=>{});
+    app.get("/athlete/:id", athleteGetByIdController.handler);
+    app.post("/athlete", athleteCreateController.handler);
+    app.patch("/athlete/:id", ()=>{});
+    app.delete("/athlete/:id", ()=>{});
 }

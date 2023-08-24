@@ -1,5 +1,5 @@
 import { Prisma, Exercise } from "@prisma/client";
 
 export interface IExerciseRepository {
-    create(data: Prisma.ExerciseCreateArgs): Promise<Exercise>
+    create(data: Prisma.ExerciseCreateInput): Promise<Exercise>
 }

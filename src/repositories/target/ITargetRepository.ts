@@ -1,5 +1,5 @@
 import { Prisma, Target } from "@prisma/client";
 
 export interface ITargetRepository {
-    create(data: Prisma.TargetCreateArgs): Promise<Target>
+    create(data: Prisma.TargetCreateInput): Promise<Target>
 }
