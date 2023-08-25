@@ -3,11 +3,12 @@ import { TrainerRepositoryPrisma } from "@/repositories/trainer/prisma/TrainerRe
 import { TrainerCreateService, TrainerGetByIdService } from "@/services/trainer";
 import { Prisma, Trainer } from "@prisma/client";
 import { z } from "zod";
+import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
 
 
 export class TrainerCreateController {
 
-    handler(request: FastifyRequest, reply: FastifyReply) {
+    async handler(request: FastifyRequest, reply: FastifyReply) {
 
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma()
         const trainerCreateService = new TrainerCreateService(trainerRepositoryPrisma)
@@ -18,20 +19,28 @@ export class TrainerCreateController {
             surname: z.string(),
             phone: z.string(),
             email: z.string().email(),
-            passwordHash: z.string()
+            password: z.string()
         });
             
         
         try {
             const data: Prisma.TrainerCreateInput = registerBodySchema.parse(request.body);
-            trainerCreateService.execute(data);
+            const trainer = await trainerCreateService.execute(data);
+            trainer.password = "*";
+
+            return reply.status(200).send({ trainer: trainer });
         }
         
         catch(error) {
-            return reply.status(200).send({msg: "mamou!!!"});    
+            if(error instanceof EmailAlreadyExistsError) {
+                return reply.status(400).send({
+                    error
+                });
+            }
+    
+            throw error;
         }
         
-        return reply.status(200).send({msg: "brilhou!!!"});
     }
 }
 
@@ -45,16 +54,20 @@ export class TrainerGetByIdController {
         const registerBodySchema = z.object({
             id: z.string()
         });
-            
+        
         try {
             const { id } = registerBodySchema.parse(request.params);
-            const athlete = await trainerGetByIdService.execute(id);
+            const trainer = await trainerGetByIdService.execute(id);
+
+            if(trainer) {
+                trainer.password = "*";
+            }
             
-            return reply.status(200).send({athlete: athlete});
+            return reply.status(200).send({ trainer });
         }
         
         catch(error) {
-            return reply.status(200).send({msg: "mamou!!!"});    
+            throw new Error();   
         }  
     }
 }

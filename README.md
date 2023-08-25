@@ -26,7 +26,10 @@
 
 ## Development
 - Run `make dev` to start the database (with docker turned on) and the server and init backend application in development mode.
-- Run `make start`
+
+- Run `make db` to start the database (with docker turned on) only with prisma generate e migrations.
+
+- Run `make start` 
 - Run `make stop`
 - Run `make clear`
 

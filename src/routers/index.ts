@@ -16,18 +16,18 @@ import { trainingEvolutionRoutes } from "./trainingEvolution";
 
 async function productionRoutes(app: FastifyInstance) {
     await app.register(authenticateRoutes);
-    await app.register(addressRoutes);
-    await app.register(anamnesisRoutes);
+    // await app.register(addressRoutes);
+    // await app.register(anamnesisRoutes);
     await app.register(athleteRoutes);
-    await app.register(bodyEvaluationRoutes);
-    await app.register(exerciseRoutes);
-    await app.register(flexEvaluationRoutes);
-    await app.register(methodExerciseRoutes);
-    await app.register(statusPhotoRoutes);
-    await app.register(targetRoutes);
+    // await app.register(bodyEvaluationRoutes);
+    // await app.register(exerciseRoutes);
+    // await app.register(flexEvaluationRoutes);
+    // await app.register(methodExerciseRoutes);
+    // await app.register(statusPhotoRoutes);
+    // await app.register(targetRoutes);
     await app.register(trainerRoutes);
-    await app.register(trainingRoutes);
-    await app.register(trainingEvolutionRoutes);
+    // await app.register(trainingRoutes);
+    // await app.register(trainingEvolutionRoutes);
 }
 
 async function releaseRoutes(app: FastifyInstance) {

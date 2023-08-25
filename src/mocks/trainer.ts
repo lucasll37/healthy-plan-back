@@ -6,5 +6,6 @@ export const trainerMock: Prisma.TrainerCreateInput = {
     name: "John",
     surname: "Doe",
     email: `${randomUUID()}@mock.com`,
-    password: "123456"
+    password: "123456",
+    phone: "123456789"
 }

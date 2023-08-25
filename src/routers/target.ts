@@ -1,10 +1,11 @@
 import { FastifyInstance } from "fastify";
+import { mockDoc } from "@/docs/target";
 
 
 export async function targetRoutes(app: FastifyInstance) {
-    app.get("/target", ()=>{});
-    app.get("/target/:id", ()=>{});
-    app.post("/target", ()=>{});
-    app.patch("/target/:id", ()=>{});
-    app.delete("/target/:id", ()=>{});
+    app.get("/target", mockDoc, ()=>{});
+    app.get("/target/:id", mockDoc, ()=>{});
+    app.post("/target", mockDoc, ()=>{});
+    app.patch("/target/:id", mockDoc, ()=>{});
+    app.delete("/target/:id", mockDoc, ()=>{});
 }

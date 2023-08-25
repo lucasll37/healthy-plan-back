@@ -1,3 +1,4 @@
+import { InvalidCredenctialsError } from "@/errors/invalid-credentials";
 import { ITrainerRepository } from "@/repositories/trainer/ITrainerRepository";
 import { Athlete, Prisma, Trainer } from "@prisma/client";
 import { compare } from "bcryptjs";
@@ -21,13 +22,13 @@ export class AuthenticateService {
         const trainer = await this.trainerRepository.findByEmail(email);
 
         if (!trainer) {
-            throw new Error();
+            throw new InvalidCredenctialsError();
         }
         
         const doesPasswordMatch = await compare(password, trainer.password);
 
         if(!doesPasswordMatch) {
-            throw new Error();
+            throw new InvalidCredenctialsError();
         } 
 
         return { trainer };

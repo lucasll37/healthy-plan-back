@@ -1,6 +1,7 @@
 import { Trainer, Prisma } from "@prisma/client";
 import { ITrainerRepository } from "../ITrainerRepository";
 import { randomUUID } from "crypto";
+import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
 
 
 export class TrainerRepositoryInMemory implements ITrainerRepository {
@@ -12,6 +13,14 @@ export class TrainerRepositoryInMemory implements ITrainerRepository {
             ...data,
             id: randomUUID()            
         };
+
+        const emailAlreadyExists = await this.findByEmail(trainer.email);
+
+        if(emailAlreadyExists) {
+            console.log("entrou")
+            throw new EmailAlreadyExistsError();
+        }
+
         this.trainer.push(trainer);
         
         return new Promise(resolve => resolve(trainer));
