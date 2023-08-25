@@ -1,44 +1,56 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma"
 import { AthleteCreateService, AthleteGetByIdService } from "@/services/athlete";
-import { Prisma, Athlete } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { z } from "zod";
+import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
 
 
 export class AthleteCreateController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        // await request.jwtVerify();
-        // console.log(request.user);
-
+        await request.jwtVerify();
 
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
         const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma)
     
-        const registerBodySchema = z.object({
+        const athleteBodySchema = z.object({
             id: z.string().optional(),
             name: z.string(),
             surname: z.string(),
             phone: z.string(),
-            email: z.string().email(),
             avatar: z.string().optional(),
+            email: z.string().email(),
             sex: z.string(),
             observation: z.string().optional(),
             birthDate: z.string()
         });
-            
+
+        const trainerIdBodySchema = z.string()
         
         try {
-            const data: Prisma.AthleteCreateInput = registerBodySchema.parse(request.body);
-            athleteCreateService.execute(data);
+            const data: Prisma.AthleteCreateInput = {
+                ...athleteBodySchema.parse(request.body),
+                trainer: {
+                    connect: {
+                        id: request.user.sub
+                    }
+                }
+            };
+
+            const athlete = await athleteCreateService.execute(data);
+            return reply.status(200).send({athlete: athlete});    
         }
         
         catch(error) {
-            return reply.status(200).send({msg: "mamou!!!"});    
+            if(error instanceof EmailAlreadyExistsError) {
+                return reply.status(400).send(error);
+            }
+    
+            throw error;
         }
         
-        return reply.status(200).send({msg: "brilhou!!!"});
     }
 }
 

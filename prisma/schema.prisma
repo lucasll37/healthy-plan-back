@@ -57,10 +57,10 @@ model Athlete {
   email       String    @unique
   avatar      String?
   sex         String
+  trainer     Trainer   @relation(fields: [trainerId], references: [id])
+  trainerId   String
   // address       Address         @relation(fields: [addressId], references: [id])
   // addressId   String
-  // trainer       Trainer?        @relation(fields: [trainerId], references: [id])
-  // trainerId   String?
   observation String?
   birthDate   DateTime
   // Default
@@ -91,10 +91,10 @@ model Address {
 }
 
 model Trainer {
-  id       String @id @default(uuid())
+  id       String    @id @default(uuid())
   name     String
   surname  String
-  email    String @unique
+  email    String    @unique
   password String
   phone    String
   // address       Address?        @relation(fields: [addressId], references: [id])
@@ -105,8 +105,8 @@ model Trainer {
   // // Default
   // createdAt     DateTime        @default(now())
   // updatedAt     DateTime?       @updatedAt
-  // // Relations
-  // athletes      Athlete[]
+  // Relations
+  athletes Athlete[]
   // Anamnesis     Anamnesis[]
   // BodyValuation BodyValuation[]
 

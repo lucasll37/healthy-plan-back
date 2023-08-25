@@ -11,7 +11,7 @@ import fastifyJwt from "@fastify/jwt";
 
 
 
-if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
+// if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
 
 export const app = fastify();
 

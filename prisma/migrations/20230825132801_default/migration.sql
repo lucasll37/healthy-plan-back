@@ -14,6 +14,7 @@ CREATE TABLE `athlete` (
     `email` VARCHAR(191) NOT NULL,
     `avatar` VARCHAR(191) NULL,
     `sex` VARCHAR(191) NOT NULL,
+    `trainerId` VARCHAR(191) NOT NULL,
     `observation` VARCHAR(191) NULL,
     `birthDate` DATETIME(3) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -98,3 +99,6 @@ CREATE TABLE `training-evolution` (
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `athlete` ADD CONSTRAINT `athlete_trainerId_fkey` FOREIGN KEY (`trainerId`) REFERENCES `trainer`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
