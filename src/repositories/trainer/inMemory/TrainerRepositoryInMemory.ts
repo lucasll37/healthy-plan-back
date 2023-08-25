@@ -17,7 +17,6 @@ export class TrainerRepositoryInMemory implements ITrainerRepository {
         const emailAlreadyExists = await this.findByEmail(trainer.email);
 
         if(emailAlreadyExists) {
-            console.log("entrou")
             throw new EmailAlreadyExistsError();
         }
 

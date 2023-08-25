@@ -12,6 +12,7 @@ export class AthleteCreateController {
 
         await request.jwtVerify();
 
+        
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
         const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma)
     
@@ -24,21 +25,22 @@ export class AthleteCreateController {
             email: z.string().email(),
             sex: z.string(),
             observation: z.string().optional(),
-            birthDate: z.string()
+            birthDate: z.string().refine(stringData => new Date(stringData))
         });
-
-        const trainerIdBodySchema = z.string()
         
         try {
+            const requestBodyParsed = athleteBodySchema.parse(request.body)
+
             const data: Prisma.AthleteCreateInput = {
-                ...athleteBodySchema.parse(request.body),
+                ...requestBodyParsed,
+                birthDate: new Date(requestBodyParsed.birthDate),
                 trainer: {
                     connect: {
                         id: request.user.sub
                     }
                 }
             };
-
+            
             const athlete = await athleteCreateService.execute(data);
             return reply.status(200).send({athlete: athlete});    
         }

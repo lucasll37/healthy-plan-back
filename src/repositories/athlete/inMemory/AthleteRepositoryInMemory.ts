@@ -8,11 +8,13 @@ export class AthleteRepositoryInMemory implements IAthleteRepository {
     private athletes: Athlete[] = [];
 
     async create(data: Prisma.AthleteCreateInput): Promise<Athlete> {
+
         const athlete: Athlete = {
             ...data,
             id: randomUUID(),
             avatar: null,
             observation: null,
+            trainerId: randomUUID(),
             birthDate: new Date(data.birthDate),
             createdAt: new Date(),
             updatedAt: null

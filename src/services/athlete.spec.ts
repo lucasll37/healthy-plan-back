@@ -1,13 +1,33 @@
-import { expect, describe, it, beforeEach } from "vitest";
+import { expect, describe, it, beforeEach, beforeAll } from "vitest";
 import { compare } from "bcryptjs";
 import { AthleteCreateService } from "./athlete";
 import { IAthleteRepository } from "@/repositories/athlete/IAthleteRepository";
 import { AthleteRepositoryInMemory } from "@/repositories/athlete/inMemory/AthleteRepositoryInMemory";
+import { Trainer } from "@prisma/client";
+import { TrainerRepositoryInMemory } from "@/repositories/trainer/inMemory/TrainerRepositoryInMemory";
+import { TrainerCreateService } from "./trainer";
+import { randomUUID } from "crypto";
+import { debug } from "console";
 
 let athleteRepository: IAthleteRepository;
 let sut: AthleteCreateService;
+let trainer: Trainer
 
-describe("Register Use Case", () => {
+describe("Athlete Use Case", () => {
+
+    beforeAll(async () => {
+
+        const trainerRepository = new TrainerRepositoryInMemory();
+        const sut = new TrainerCreateService(trainerRepository);
+
+        trainer = await sut.execute({
+            name: "John",
+            surname: "Doe",
+            email: `${randomUUID()}@mock.com`,
+            password: "123456",
+            phone: "123456789"
+        });
+    })
     
     beforeEach(() => {
         athleteRepository = new AthleteRepositoryInMemory();
@@ -22,7 +42,16 @@ describe("Register Use Case", () => {
             email: "mock@mock.com",
             sex: "M",
             birthDate: new Date("1995-05-05"),
-            phone: "123456789"
+            createdAt: new Date("1995-05-05"),
+            updatedAt: new Date("1995-05-05"),
+            phone: "123456789",
+            avatar: "https://www.google.com",
+            observation: "observation",
+            trainer: {
+                connect: {
+                    id: trainer.id
+                }
+            }
         });
 
         expect(athlete).toHaveProperty("id");

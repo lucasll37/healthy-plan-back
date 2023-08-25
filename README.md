@@ -23,15 +23,15 @@
 
 ## How to run tests
 - Run `make test` to run all tests.
+- Run `make test-unit` to run unitary tests.
+- Run `make test-e2e` to run end-to-end tests.
 
 ## Development
-- Run `make dev` to start the database (with docker turned on) and the server and init backend application in development mode.
-
 - Run `make db` to start the database (with docker turned on) only with prisma generate e migrations.
 
-- Run `make start` 
-- Run `make stop`
-- Run `make clear`
+- Run `make dev` to start the database (with docker turned on) and the server and init backend application in development mode.
+
+- Run `make clear` stops processes started by make init, deleting generated containers
 
 ## Environment variables
 ### Create a `.env` file in the root of the project and fill in the variables according to the `.env.example` file.

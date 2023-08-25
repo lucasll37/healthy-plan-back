@@ -8,16 +8,15 @@ import { ZodError } from "zod";
 import { env } from "./env";
 import { populateRepositoriesWithMock } from "./mocks";
 import fastifyJwt from "@fastify/jwt";
+import { corsOptions } from "../config/cors"
 
 
 
-// if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
+if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
 
 export const app = fastify();
 
-/////////////////////////////////////////////////////////////
-app.register(cors, {origin: "*", methods: ["*"]});
-/////////////////////////////////////////////////////////////
+app.register(cors, corsOptions);
 
 app.register(fastifyJwt, { secret: env.JWT_SECRET })
 
@@ -33,7 +32,6 @@ if(env.NODE_ENV !== "production") {
                 description: 'Find more info here',
                 url: 'https://swagger.io'
             },
-            host: 'http://localhost',
             schemes: ['http'],
             consumes: ['application/json'],
             produces: ['application/json'],
@@ -62,13 +60,26 @@ if(env.NODE_ENV !== "production") {
                     lastName: { type: 'string' },
                     email: {type: 'string', format: 'email' }
                     }
+                },
+                Trainer: {
+                    type: 'object',
+                    required: ['id', 'name', 'surname', 'phone', 'email', 'password'],
+                    properties: {
+                        id: { type: 'string'},
+                        name: {type: 'string'},
+                        surname: {type: 'string'},
+                        phone: {type: 'string'},
+                        email: {type: 'string'},
+                        password: {type: 'string'}
+                    }
                 }
             },
             securityDefinitions: {
                 apiKey: {
                     type: 'apiKey',
-                    name: 'apiKey',
-                    in: 'header'
+                    name: 'Authorization',
+                    in: 'header',
+                    description: 'Digite "Bearer" e em seguida, cole o seu token [Bearer "seu Token"]'
                 }
             }
         }
@@ -77,7 +88,7 @@ if(env.NODE_ENV !== "production") {
     app.register(swaggerUI, {
         routePrefix: '/docs',
         uiConfig: {
-            docExpansion: 'list',
+            docExpansion: 'none',
             deepLinking: false
         }
     });
@@ -87,11 +98,14 @@ app.register(appRoutes);
 
 app.setErrorHandler((error, _, reply) => {
 
+    
     if(error instanceof ZodError) {
         return reply
             .status(400)
-            .send({message: "Validation failed",
-                issues: error.format()});
+            .send({
+                message: "Validation failed",
+                issues: error.format()
+            });
     }
 
     if(env.NODE_ENV !== "production") {

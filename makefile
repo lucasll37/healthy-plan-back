@@ -2,22 +2,13 @@ init:
 	# docker container ls -aq | xargs docker container stop | xargs docker container rm
 	docker compose up --build --remove-orphans
 
-start:
-	docker compose start
-
 stop:
 	docker compose stop
 
-clean:
+clear:
 	docker compose down
 	docker compose down --rmi all
 	docker rm -f $(docker ps -aq)
-	
-dev:
-	npm run prisma:generate
-	npm run prisma:dev
-	npm run prisma:deploy
-	npm run dev
 
 db:
 	# docker container ls -aq | xargs docker container stop | xargs docker container rm
@@ -26,6 +17,12 @@ db:
 		-e MYSQL_ROOT_PASSWORD=docker \
 		-e MYSQL_DATABASE=api-healthy-plan \
 		-d mysql:latest
+	
+dev:
+	npm run prisma:generate
+	npm run prisma:dev --name init
+	npm run prisma:deploy
+	npm run dev
 
 test:
 	npm run test
