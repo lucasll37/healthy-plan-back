@@ -12,63 +12,61 @@ datasource db {
 }
 
 model Anamnesis {
-  id String @id @default(uuid())
-  // athlete                   Athlete   @relation(fields: [athleteId], references: [id])
-  // athleteId                 String
-  // trainer                   Trainer   @relation(fields: [trainerId], references: [id])
-  // trainerId                 String
-  // isAlcoholic               Boolean
-  // isSmoker                  Boolean
-  // sleepQuality              String
-  // PhysicalActivityHabits    String
-  // HydrationHabits           String
-  // EatingHabits              String
-  // AmountWater               Float
-  // UseFoodSupplement         String
-  // isAnemic                  Boolean
-  // isDiabetic                Boolean
-  // systolicBloodPressure     Int
-  // diastolicBloodPressure    Int
-  // restingHeartRate          Int
-  // heartProblems             String?
-  // allergies                 String?
-  // otherDiseases             String?
-  // medicalTreatments         String?
-  // medicationUse             String?
-  // UseHealthDevice           String?
-  // haveAnxiety               Boolean
-  // haveDepression            Boolean
-  // haveBipolarDisorder       Boolean
-  // haveObsessiveCompDisorder Boolean
-  // haveOtherDisorders        Boolean
-  // additionalObservations    String?
-  // // Default
-  // createdAt                 DateTime  @default(now())
-  // updatedAt                 DateTime? @updatedAt
+  id                        String    @id @default(uuid())
+  athlete                   Athlete   @relation(fields: [athleteId], references: [id])
+  athleteId                 String
+  isAlcoholic               Boolean
+  isSmoker                  Boolean
+  sleepQuality              String
+  PhysicalActivityHabits    String
+  HydrationHabits           String
+  EatingHabits              String
+  AmountWater               Float
+  UseFoodSupplement         String
+  isAnemic                  Boolean
+  isDiabetic                Boolean
+  systolicBloodPressure     Int
+  diastolicBloodPressure    Int
+  restingHeartRate          Int
+  heartProblems             String?
+  allergies                 String?
+  otherDiseases             String?
+  medicalTreatments         String?
+  medicationUse             String?
+  UseHealthDevice           String?
+  haveAnxiety               Boolean
+  haveDepression            Boolean
+  haveBipolarDisorder       Boolean
+  haveObsessiveCompDisorder Boolean
+  haveOtherDisorders        Boolean
+  additionalObservations    String?
+  // Default
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime? @updatedAt
 
   @@map("anamnesis")
 }
 
 model Athlete {
-  id          String    @id @default(uuid())
+  id          String      @id @default(uuid())
   name        String
   surname     String
   phone       String
-  email       String    @unique
+  email       String      @unique
   avatar      String?
   sex         String
-  trainer     Trainer   @relation(fields: [trainerId], references: [id])
+  trainer     Trainer     @relation(fields: [trainerId], references: [id])
   trainerId   String
-  address     Address   @relation(fields: [addressId], references: [id])
-  addressId   String    @unique
+  address     Address     @relation(fields: [addressId], references: [id])
+  addressId   String      @unique
   observation String?
   birthDate   DateTime
   // Default
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime? @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime?   @updatedAt
   // Relations
-  // anamnesis     Anamnesis[]
   // BodyValuation BodyValuation[]
+  Anamnesis   Anamnesis[]
 
   @@map("athlete")
 }

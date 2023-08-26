@@ -34,3 +34,47 @@ export const athleteMock: Prisma.AthleteCreateInput = {
         }
     }
 }
+
+export const anamnesisMock: Prisma.AnamnesisCreateInput = {
+    isAlcoholic: false,
+    isSmoker: false,
+    sleepQuality: "Ótimo",
+    PhysicalActivityHabits: "Ótimo",
+    HydrationHabits: "Ótimo",
+    EatingHabits: "Ótimo",
+    AmountWater: 2,
+    UseFoodSupplement: "Ótimo",
+    isAnemic: false,
+    isDiabetic: false,
+    systolicBloodPressure: 12,
+    diastolicBloodPressure: 8,
+    restingHeartRate: 65,
+    haveAnxiety: false,
+    haveDepression: false,
+    haveBipolarDisorder: false,
+    haveObsessiveCompDisorder: false,
+    haveOtherDisorders: false,
+    heartProblems: "Não",
+    allergies: "Não",
+    otherDiseases: "Não",
+    medicalTreatments: "Não",
+    medicationUse: "Não",
+    UseHealthDevice: "Não",
+    athlete: {
+        connect: {
+            id: "will be replaced by id athlete mock"
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
