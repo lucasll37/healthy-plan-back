@@ -1,10 +1,10 @@
+import { createPrivateKey } from "crypto"
+
 export const mockDoc = {
     schema: {
-        tags: ['Athlete'],
-        security: [{ apiKey: [] }]
+        tags: ['Athlete']
     }
 }
-
 
 export const athleteCreateDoc = {
     schema: {
@@ -21,16 +21,26 @@ export const athleteCreateDoc = {
                 sex: {type: 'string'},
                 birthDate: {type: 'string', format: 'date'},
                 avatar: {type: 'string'},
-                observation: {type: 'string'}
+                observation: {type: 'string'},
+                addressInfo: {type: 'string'},
+                addressNumber: {type: 'string'},
+                cep: {type: 'string'},
+                city: {type: 'string'},
+                state: {type: 'string'}
             },
-            required: ['name', 'surname', 'phone', 'email', 'sex', 'birthDate'],
-            // example: {
-            //     name: 'John',
-            //     surname: 'Doe',
-            //     phone: '123456789',
-            //     email: 'john@doe.com',
-            //     password: 'abcdefgh'
-            // }
+            required: [
+                'name',
+                'surname',
+                'phone',
+                'email',
+                'sex',
+                'birthDate',
+                'addressInfo',
+                'addressNumber',
+                'cep',
+                'city',
+                'state'
+            ]
         },
         response: {
             201: {

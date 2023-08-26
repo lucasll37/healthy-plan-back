@@ -8,8 +8,9 @@ export class AthleteCreateService {
 
     async execute(data: Prisma.AthleteCreateInput): Promise<Athlete> {
         const athlete = await this.athleteRepository.findByEmail(data.email);
-
-        if(athlete && athlete.id) {
+        
+        if(athlete) {
+            console.log("la ele")
             throw new EmailAlreadyExistsError();
         }
 

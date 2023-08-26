@@ -1,42 +1,19 @@
 import { expect, describe, it, beforeEach, beforeAll } from "vitest";
-import { compare } from "bcryptjs";
 import { AthleteCreateService } from "./athlete";
 import { IAthleteRepository } from "@/repositories/athlete/IAthleteRepository";
 import { AthleteRepositoryInMemory } from "@/repositories/athlete/inMemory/AthleteRepositoryInMemory";
-import { Trainer } from "@prisma/client";
-import { TrainerRepositoryInMemory } from "@/repositories/trainer/inMemory/TrainerRepositoryInMemory";
-import { TrainerCreateService } from "./trainer";
 import { randomUUID } from "crypto";
-import { debug } from "console";
+import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
 
 let athleteRepository: IAthleteRepository;
 let sut: AthleteCreateService;
-let trainer: Trainer
+let athlete: any;
 
 describe("Athlete Use Case", () => {
 
     beforeAll(async () => {
 
-        const trainerRepository = new TrainerRepositoryInMemory();
-        const sut = new TrainerCreateService(trainerRepository);
-
-        trainer = await sut.execute({
-            name: "John",
-            surname: "Doe",
-            email: `${randomUUID()}@mock.com`,
-            password: "123456",
-            phone: "123456789"
-        });
-    })
-    
-    beforeEach(() => {
-        athleteRepository = new AthleteRepositoryInMemory();
-        sut = new AthleteCreateService(athleteRepository);
-    });
-
-    it("should be able create a new athlete", async () => {
-
-        const athlete = await sut.execute({
+        athlete = {
             name: "John",
             surname: "Doe",
             email: "mock@mock.com",
@@ -49,48 +26,39 @@ describe("Athlete Use Case", () => {
             observation: "observation",
             trainer: {
                 connect: {
-                    id: trainer.id
+                    id: randomUUID()
+                    // id: trainer.id
+                }
+            },
+            address: {
+                create: {
+                    addressInfo: "Rua dos bobos",
+                    addressNumber: "0",
+                    cep: "12228-610",
+                    city: "São Sosé dos Campos",
+                    state: "SP"
                 }
             }
-        });
-
-        expect(athlete).toHaveProperty("id");
+        }
+        
+    })
+    
+    beforeEach(() => {
+        athleteRepository = new AthleteRepositoryInMemory();
+        sut = new AthleteCreateService(athleteRepository);
     });
 
-    // it("should hash user password upon registration", async () => {
+    it("should be able create a new athlete", async () => {
 
-    //     const { user } = await sut.execute({
-    //         name: "John Doe",
-    //         email: "johndoe@example.com",
-    //         password: "123456"
-    //     });
+        const athleteCreated = await sut.execute(athlete);
+        expect(athleteCreated).toHaveProperty("id");
+    });
 
-    //     const isPasswordCorrectlyHashed = await compare(
-    //         "123456",
-    //         user.password_hash
-    //     );
-        
-    //     expect(isPasswordCorrectlyHashed).toBe(true);
-    // });
+    it("shouldn't be able create a new athlete that already exists", async () => {
 
-
-
-    // it("should not be able to register with email twice", async () => {
-
-    //     const email = "johndoe@example.com";
-
-    //     await sut.execute({
-    //         name: "John Doe",
-    //         email,
-    //         password: "123456"
-    //     });
-
-    //     await expect(() =>
-    //         sut.execute({
-    //             name: "John Doe",
-    //             email,
-    //             password: "123456"
-    //         })
-    //     ).rejects.toBeInstanceOf(UserAlreadyExistsError);
-    // });
+        await sut.execute(athlete);
+        await expect(async () => {
+            await sut.execute(athlete);
+            }).rejects.toBeInstanceOf(EmailAlreadyExistsError);
+    });
 });

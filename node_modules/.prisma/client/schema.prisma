@@ -59,8 +59,8 @@ model Athlete {
   sex         String
   trainer     Trainer   @relation(fields: [trainerId], references: [id])
   trainerId   String
-  // address       Address         @relation(fields: [addressId], references: [id])
-  // addressId   String
+  address     Address   @relation(fields: [addressId], references: [id])
+  addressId   String    @unique
   observation String?
   birthDate   DateTime
   // Default
@@ -74,18 +74,17 @@ model Athlete {
 }
 
 model Address {
-  id String @id @default(uuid())
-  // addressInfo   String
-  // addressNumber String
-  // city          String
-  // state         String
-  // cep           String
-  // // Default
-  // createdAt     DateTime  @default(now())
-  // updatedAt     DateTime? @updatedAt
-  // // Relations
-  // Athlete       Athlete[]
-  // Trainer       Trainer[]
+  id            String    @id @default(uuid())
+  addressInfo   String
+  addressNumber String
+  city          String
+  state         String
+  cep           String
+  // Default
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  // Relations
+  Athlete       Athlete[]
 
   @@map("address")
 }
@@ -97,8 +96,7 @@ model Trainer {
   email    String    @unique
   password String
   phone    String
-  // address       Address?        @relation(fields: [addressId], references: [id])
-  // addressId     String?
+  // trainerAddressId String    @unique
   // birthDate     DateTime
   // sex           String
   // avatar        String?

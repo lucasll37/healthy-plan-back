@@ -23,5 +23,14 @@ export const athleteMock: Prisma.AthleteCreateInput = {
         connect: {
             id: "will be replaced by id trainer mock"
         }
+    },
+    address: {
+        create: {
+            addressInfo: "Rua dos bobos",
+            addressNumber: "0",
+            cep: "cep",
+            city: "São Sosé dos Campos",
+            state: "SP"
+        }
     }
 }

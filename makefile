@@ -1,5 +1,5 @@
 init:
-	# docker container ls -aq | xargs docker container stop | xargs docker container rm
+	docker container ls -aq | xargs docker container stop | xargs docker container rm -f
 	docker compose up --build --remove-orphans
 
 stop:
@@ -11,7 +11,7 @@ clear:
 	docker rm -f $(docker ps -aq)
 
 db:
-	# docker container ls -aq | xargs docker container stop | xargs docker container rm
+	docker container ls -aq | xargs docker container stop | xargs docker container rm -f
 
 	docker run -p 3306:3306 \
 		-e MYSQL_ROOT_PASSWORD=docker \
@@ -20,7 +20,7 @@ db:
 	
 dev:
 	npm run prisma:generate
-	npm run prisma:dev --name init
+	npm run prisma:dev
 	npm run prisma:deploy
 	npm run dev
 

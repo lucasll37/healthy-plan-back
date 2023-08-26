@@ -11,7 +11,6 @@ import fastifyJwt from "@fastify/jwt";
 import { corsOptions } from "../config/cors"
 
 
-
 if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
 
 export const app = fastify();

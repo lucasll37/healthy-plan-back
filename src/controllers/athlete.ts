@@ -25,18 +25,38 @@ export class AthleteCreateController {
             email: z.string().email(),
             sex: z.string(),
             observation: z.string().optional(),
-            birthDate: z.string().refine(stringData => new Date(stringData))
+            birthDate: z.string().refine(stringData => new Date(stringData)),
+            addressInfo: z.string(),
+            addressNumber: z.string(),
+            city: z.string(),
+            state: z.string(),
+            cep: z.string()
         });
+
         
         try {
             const requestBodyParsed = athleteBodySchema.parse(request.body)
 
             const data: Prisma.AthleteCreateInput = {
-                ...requestBodyParsed,
+                name: requestBodyParsed.name,
+                surname: requestBodyParsed.surname,
+                phone: requestBodyParsed.phone,
+                avatar: requestBodyParsed.avatar,
+                email: requestBodyParsed.email,
+                sex: requestBodyParsed.sex,
                 birthDate: new Date(requestBodyParsed.birthDate),
                 trainer: {
                     connect: {
                         id: request.user.sub
+                    }
+                },
+                address: {
+                    create: {
+                        addressInfo: requestBodyParsed.addressInfo,
+                        addressNumber: requestBodyParsed.addressInfo,
+                        cep: requestBodyParsed.cep,
+                        city: requestBodyParsed.city,
+                        state: requestBodyParsed.state
                     }
                 }
             };

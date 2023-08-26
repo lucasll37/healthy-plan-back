@@ -37,7 +37,7 @@ describe("Trainer Use Case", () => {
         
         await sut.execute(trainer);
 
-        await expect(() => sut.execute(trainer))
+        await expect(async () => await sut.execute(trainer))
             .rejects.toBeInstanceOf(EmailAlreadyExistsError);
     });
 
