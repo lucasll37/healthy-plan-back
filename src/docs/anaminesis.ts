@@ -1,6 +1,6 @@
 export const mockDoc = {
     schema: {
-        tags: ['Anamnisis']
+        tags: ['Anamnesis']
     }
 }
 
@@ -12,29 +12,13 @@ export const AnamnesisCreateDoc = {
         body: {
             type: 'object',
             properties: {
-                name: {type: 'string'},
-                surname: {type: 'string'},
-                phone: {type: 'string'},
-                email: {type: 'string', format: 'email'},
-                sex: {type: 'string'},
-                birthDate: {type: 'string', format: 'date'},
-                avatar: {type: 'string'},
-                observation: {type: 'string'},
-                addressInfo: {type: 'string'},
-                addressNumber: {type: 'string'},
-                cep: {type: 'string'},
-                city: {type: 'string'},
-                state: {type: 'string'}
-
-
-
                 isAlcoholic: {type: 'boolean'},
                 isSmoker: {type: 'boolean'},
                 sleepQuality: {type: 'string'},
                 PhysicalActivityHabits: {type: 'string'},
                 HydrationHabits: {type: 'string'},
                 EatingHabits: {type: 'string'},
-                AmountWater: {type: 'float'}, // float ou number ?
+                // AmountWater: {type: 'float'}, // float ou number ?
                 UseFoodSupplement: {type: 'string'},
                 isAnemic: {type: 'boolean'},
                 isDiabetic: {type: 'boolean'},
@@ -52,11 +36,29 @@ export const AnamnesisCreateDoc = {
                 otherDiseases: {type: 'string'},
                 medicalTreatments: {type: 'string'},
                 medicationUse: {type: 'string'},
-                UseHealthDevice: {type: 'string'}
+                UseHealthDevice: {type: 'string'},
+                additionalObservations: {type: 'string'}
             },
             required: [
-
-                // TO BO CONTINUE!!!
+                'isAlcoholic',
+                'isSmoker',
+                'sleepQuality',
+                'PhysicalActivityHabits',
+                'HydrationHabits',
+                'EatingHabits',
+                'AmountWater',
+                'UseFoodSupplement',
+                'isAnemic',
+                'isDiabetic',
+                'systolicBloodPressure',
+                'diastolicBloodPressure',
+                'restingHeartRate',
+                'haveAnxiety',
+                'haveDepression',
+                'haveBipolarDisorder',
+                'haveObsessiveCompDisorder',
+                'haveOtherDisorders',
+                'AthleteId'
             ]
         },
         response: {

@@ -60,6 +60,7 @@ export const anamnesisMock: Prisma.AnamnesisCreateInput = {
     medicalTreatments: "Não",
     medicationUse: "Não",
     UseHealthDevice: "Não",
+    additionalObservations: "Não",
     athlete: {
         connect: {
             id: "will be replaced by id athlete mock"

@@ -36,7 +36,7 @@ if(env.NODE_ENV !== "production") {
             produces: ['application/json'],
             tags: [
                 // { name: 'Address', description: 'Address related end-points' },
-                // { name: 'Anamnesis', description: 'Anamnesis related end-points' },
+                { name: 'Anamnesis', description: 'Anamnesis related end-points' },
                 { name: 'Athlete', description: 'Athlete related end-points' },
                 // { name: 'Body Evaluation', description: 'Body Evaluation related end-points' },
                 // { name: 'Exercise', description: 'Exercise related end-points' },
@@ -50,14 +50,68 @@ if(env.NODE_ENV !== "production") {
                 // { name: 'Training Evolution', description: 'Training Evolution related end-points' }
             ],
             definitions: {
-                User: {
+                Anamnesis: {
                     type: 'object',
-                    required: ['id', 'email'],
                     properties: {
-                    id: { type: 'string', format: 'uuid' },
-                    firstName: { type: 'string' },
-                    lastName: { type: 'string' },
-                    email: {type: 'string', format: 'email' }
+                        isAlcoholic: {type: 'boolean'},
+                        isSmoker: {type: 'boolean'},
+                        sleepQuality: {type: 'string'},
+                        PhysicalActivityHabits: {type: 'string'},
+                        HydrationHabits: {type: 'string'},
+                        EatingHabits: {type: 'string'},
+                        // AmountWater: {type: 'float'}, // float ou number ?
+                        UseFoodSupplement: {type: 'string'},
+                        isAnemic: {type: 'boolean'},
+                        isDiabetic: {type: 'boolean'},
+                        systolicBloodPressure: {type: 'integer'},
+                        diastolicBloodPressure: {type: 'integer'},
+                        restingHeartRate: {type: 'string'},
+                        haveAnxiety: {type: 'boolean'},
+                        haveDepression: {type: 'boolean'},
+                        haveBipolarDisorder: {type: 'boolean'},
+                        haveObsessiveCompDisorder: {type: 'boolean'},
+                        haveOtherDisorders: {type: 'boolean'},
+                        AthleteId: {type: 'string', format: 'uuid'},
+                        heartProblems: {type: 'string'},
+                        allergies: {type: 'string'},
+                        otherDiseases: {type: 'string'},
+                        medicalTreatments: {type: 'string'},
+                        medicationUse: {type: 'string'},
+                        UseHealthDevice: {type: 'string'},
+                        additionalObservations: {type: 'string'}
+                    },
+                    required: [
+                        'isAlcoholic',
+                        'isSmoker',
+                        'sleepQuality',
+                        'PhysicalActivityHabits',
+                        'HydrationHabits',
+                        'EatingHabits',
+                        'AmountWater',
+                        'UseFoodSupplement',
+                        'isAnemic',
+                        'isDiabetic',
+                        'systolicBloodPressure',
+                        'diastolicBloodPressure',
+                        'restingHeartRate',
+                        'haveAnxiety',
+                        'haveDepression',
+                        'haveBipolarDisorder',
+                        'haveObsessiveCompDisorder',
+                        'haveOtherDisorders',
+                        'AthleteId'
+                    ]
+                },
+                Athlete: {
+                    type: 'object',
+                    required: ['id', 'name', 'surname', 'phone', 'email', 'password'],
+                    properties: {
+                        id: { type: 'string', format: 'uuid' },
+                        name: {type: 'string', example: 'John'},
+                        surname: {type: 'string', example: 'Doe'},
+                        phone: {type: 'string', example: '123456789'},
+                        email: {type: 'string', example: 'john@doe.com'},
+                        password: {type: 'string'}
                     }
                 },
                 Trainer: {
