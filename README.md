@@ -26,6 +26,7 @@ With the application running in development mode (default):
 ## How to run
 - Clone the repository
 - Run `npm install` to install all dependencies.
+- Make sure docker is up and running.
 - Run `make init` to start the database (with docker turned on).
 - Consume API as per routes [documentation](http://localhost:3000/docs/).
 
