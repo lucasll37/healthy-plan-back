@@ -62,22 +62,15 @@ export const createTrainerDoc = {
 
 export const getTrainerByIdDoc = {
     schema: {
-        description: 'Get personal trainer by ID',
+        description: 'Get personal trainer by Id',
         tags: ['Trainer'],
-        summary: 'Get personal trainer by ID',
+        summary: 'Get personal trainer by Id',
         params: {
             type: 'object',
             properties: {
-                id: {type: 'string'}
+                id: {type: 'string', format: 'uuid'}
             },
-            required: ['id'],
-            // example: {
-            //     name: 'John',
-            //     surname: 'Doe',
-            //     phone: '123456789',
-            //     email: 'john@doe.com',
-            //     password: 'abcdefgh'
-            // }
+            required: ['id']
         },
         response: {
             201: {

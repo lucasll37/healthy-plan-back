@@ -1,58 +1,8 @@
-npm init -ynp
-npm i typescript @types/node tsx tsup -D
-npx tsc --init
+Para a mão em novas entidades!
 
-tsconfig.json:
-    "target": "es2020"
+Fazer:
 
-npm i fastify
-
-npm i dotenv
-
-npm i zod
-
-npm i eslint @rocketseat/eslint-config -D
- or (npm i eslint // npx eslint --init)
-
-
-"baseUrl": "./",
-"paths": {
-    "@/*": ["./src/*"]
-},
-
-npm i prisma -D
-
-npx prisma init
-
-
-settings.json:
-
-
-npx prisma generate // cria de forma automatizada a tipagem do schema
-
-npm i @prisma/client
-
-npx prisma migrate dev
-npx prisma migrate deploy
-
-npx prisma studio
-
-docker compose up -D
-docker compose stop (para containers sem deletar)
-docker compose down (apaga containers)
-
-
-npm i bcryptjs
-npm i -D @types/bcryptjs
-
-npm i vitest vite-tsconfig-paths -D
-
-npm i -D @vitest/ui
-
-
-docker build -t <name_image> .
-docker run --name <name_container> -p 3000:3000 <name_image>
-
-
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
+cruds
+documentação
+testes
+mocks

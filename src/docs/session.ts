@@ -1,5 +1,3 @@
-import fastifyJwt from "@fastify/jwt";
-
 export const sessionDoc = {
     schema: {
         description: 'Create session for personal trainer',
@@ -8,14 +6,10 @@ export const sessionDoc = {
         body: {
             type: 'object',
             properties: {
-                email: {type: 'string'},
+                email: {type: 'string', format: 'email'},
                 password: {type: 'string'}
             },
-            required: ['email', 'password'],
-            // example: {
-            //     email: 'john@doe.com',
-            //     password: 'abcdefgh'
-            // }
+            required: ['email', 'password']
         },
         response: {
         201: {

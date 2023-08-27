@@ -48,25 +48,25 @@ model Anamnesis {
 }
 
 model Athlete {
-  id          String      @id @default(uuid())
-  name        String
-  surname     String
-  phone       String
-  email       String      @unique
-  avatar      String?
-  sex         String
-  trainer     Trainer     @relation(fields: [trainerId], references: [id])
-  trainerId   String
-  address     Address     @relation(fields: [addressId], references: [id])
-  addressId   String      @unique
-  observation String?
-  birthDate   DateTime
+  id             String          @id @default(uuid())
+  name           String
+  surname        String
+  phone          String
+  email          String          @unique
+  avatar         String?
+  sex            String
+  observation    String?
+  birthDate      DateTime
+  trainer        Trainer         @relation(fields: [trainerId], references: [id])
+  trainerId      String
+  address        Address         @relation(fields: [addressId], references: [id])
+  addressId      String          @unique
   // Default
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime?   @updatedAt
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
   // Relations
-  // BodyValuation BodyValuation[]
-  Anamnesis   Anamnesis[]
+  bodyValuations BodyValuation[]
+  Anamnesis      Anamnesis[]
 
   @@map("athlete")
 }
@@ -88,110 +88,120 @@ model Address {
 }
 
 model Trainer {
-  id       String    @id @default(uuid())
-  name     String
-  surname  String
-  email    String    @unique
-  password String
-  phone    String
-  // trainerAddressId String    @unique
-  // birthDate     DateTime
-  // sex           String
-  // avatar        String?
-  // // Default
-  // createdAt     DateTime        @default(now())
-  // updatedAt     DateTime?       @updatedAt
+  id        String    @id @default(uuid())
+  name      String
+  surname   String
+  email     String    @unique
+  password  String
+  phone     String
+  avatar    String?
+  // Default
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
   // Relations
-  athletes Athlete[]
-  // Anamnesis     Anamnesis[]
-  // BodyValuation BodyValuation[]
+  athletes  Athlete[]
 
   @@map("trainer")
 }
 
 model BodyValuation {
-  id String @id @default(uuid())
-  // athlete   Athlete   @relation(fields: [athleteId], references: [id])
-  // athleteId String
-  // trainer   Trainer   @relation(fields: [trainerId], references: [id])
-  // trainerId String
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id                   String    @id @default(uuid())
+  ageAtTheMoment       Int
+  fatMass_kg           Float
+  leanMass_kg          Float
+  weight_cm            Float
+  height_kg            Float
+  bodyMassIndex        Float
+  bodyMassClass        String
+  skeletalMass         Float
+  bodyAge              Float
+  basalMetabolicRate   Int
+  waistRatioHip        Float
+  visceralFat          String
+  neck_circ_cm         Float
+  chest_circ_cm        Float
+  rightForearm_circ_cm Float
+  leftForearm_circ_cm  Float
+  rightArm_circ_cm     Float
+  leftArm_circ_cm      Float
+  waist_circ_cm        Float
+  abdomen_circ_cm      Float
+  hip_circ_cm          Float
+  rightThigh_circ_cm   Float
+  leftThigh_circ_cm    Float
+  rightCalf_circ_cm    Float
+  leftCalf_circ_cm     Float
+  fatPercentage        Float
+  // Relations
+  athlete              Athlete   @relation(fields: [athleteId], references: [id])
+  athleteId            String
+  // Default
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime? @updatedAt
 
   @@map("body-valuation")
 }
 
-///////////////////////////////////
+///////////////////// IMPLEMENTAR ///////////////////////
 model Exercise {
-  id String @id @default(uuid())
-
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id        String   @id @default(uuid())
+  // Default
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("exercise")
 }
 
 model FlexEvaluation {
-  id String @id @default(uuid())
-
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id        String   @id @default(uuid())
+  // Default
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("flex-evaluation")
 }
 
 model MethodExercise {
-  id String @id @default(uuid())
-
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id        String   @id @default(uuid())
+  // Default
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("method-exercise")
 }
 
 model StatusPhoto {
-  id String @id @default(uuid())
-
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id        String   @id @default(uuid())
+  // Default
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("status-photo")
 }
 
 model Target {
-  id String @id @default(uuid())
-
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id        String   @id @default(uuid())
+  // Default
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("target")
 }
 
 model Training {
-  id String @id @default(uuid())
-
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id        String    @id @default(uuid())
+  // Default
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   @@map("training")
 }
 
 model TrainingEvolution {
-  id String @id @default(uuid())
-
-  // // Default
-  // createdAt DateTime  @default(now())
-  // updatedAt DateTime? @updatedAt
+  id        String    @id @default(uuid())
+  // Default
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   @@map("training-evolution")
 }
-
-// @ campo
-// @@ tabela

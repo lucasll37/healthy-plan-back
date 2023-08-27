@@ -1,8 +1,44 @@
-import { createPrivateKey } from "crypto"
-
-export const mockDoc = {
+export const athleteGetByIdDoc = {
     schema: {
-        tags: ['Athlete']
+        description: 'Get athlete by Id',
+        tags: ['Athlete'],
+        summary: 'Get athlete by Id',
+        params: {
+            type: 'object',
+            properties: {
+                id: { type: 'string', format: 'uuid'}
+            },
+            required: ['id']
+        },
+        response: {
+            200: {
+                description: 'Successful response. Personal trainer created',
+                type: 'object',
+                properties: {
+                    id: { type: 'string', format: 'uuid' },
+                    name: {type: 'string'},
+                    surname: {type: 'string'},
+                    phone: {type: 'string'},
+                    email: {type: 'string', format: 'email'},
+                    password: {type: 'string'}
+                }
+            },
+            400: {
+                description: 'Bad Request response. Invalid data',
+                type: 'object',
+                properties: {
+                    error: { type: 'string' }
+                }
+            },
+            500: {
+                description: 'testestsetse',
+                type: 'object',
+                properties: {
+                    error: { type: 'string' }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
     }
 }
 
@@ -78,6 +114,5 @@ export const athleteCreateDoc = {
             }
         },
         security: [{ apiKey: [] }]
-
     }
 }
