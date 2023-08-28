@@ -86,7 +86,7 @@ export class AnamnesisCreateController {
         
         catch(error) {
             if(error instanceof AthleteDontExistsError) {
-                return reply.status(400).send(error);
+                return reply.status(error.code).send(error);
             }
     
             throw error;

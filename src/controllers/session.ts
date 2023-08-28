@@ -2,6 +2,7 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { TrainerRepositoryPrisma } from "@/repositories/trainer/prisma/TrainerRepositoryPrisma";
 import { AuthenticateService } from "@/services/session";
 import { z } from "zod";
+import { InvalidCredenctialsError } from "@/errors/invalid-credentials";
 
 
 export class AuthenticateController {
@@ -31,11 +32,11 @@ export class AuthenticateController {
         }
     
         catch(error) {
-            // if(error instanceof InvalidCredenctialsError) {
-            //     return reply.status(400).send({
-            //         message: error.message
-            //     });
-            // }
+            if(error instanceof InvalidCredenctialsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
     
             throw error;
         }

@@ -37,14 +37,17 @@ app.setErrorHandler((error, _, reply) => {
                 issues: error.format()
             });
     }
-
-    if(env.NODE_ENV !== "production") {
-        console.error(error.message);
-    }
-
-    else {
-        // TODO: Send error to Sentry
-    }
-
+        
+        if(env.NODE_ENV !== "production") {
+            console.error(error.message);
+            return reply.status(400).send({
+                error: error.message
+            });
+        }
+        
+        else {
+            // TODO: Send error to Sentry
+        }
+        
     return reply.status(500).send({message: "Internal server error"});
 });

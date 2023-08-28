@@ -1,3 +1,4 @@
+import { AthleteDontExistsError } from "@/errors/athlete-dont-exists";
 import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
 import { IAthleteRepository } from "@/repositories/athlete/IAthleteRepository";
 import { Athlete, Prisma } from "@prisma/client";
@@ -10,7 +11,6 @@ export class AthleteCreateService {
         const athlete = await this.athleteRepository.findByEmail(data.email);
         
         if(athlete) {
-            console.log("la ele")
             throw new EmailAlreadyExistsError();
         }
 
@@ -22,7 +22,13 @@ export class AthleteGetByIdService {
 
     constructor(private athleteRepository: IAthleteRepository) { }
 
-    async execute(id: string): Promise<Athlete | null> {
-        return await this.athleteRepository.findById(id);
+    async execute(id: string): Promise<Athlete> {
+        const athlete = await this.athleteRepository.findById(id);
+
+        if(!athlete) {
+            throw new AthleteDontExistsError();
+        }
+
+        return athlete;
     }
 }

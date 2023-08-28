@@ -4,6 +4,7 @@ import { TrainerCreateService, TrainerGetByIdService } from "@/services/trainer"
 import { Prisma, Trainer } from "@prisma/client";
 import { z } from "zod";
 import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
+import { TrainerDontExistsError } from "@/errors/trainer-dont-exists";
 
 
 export class TrainerCreateController {
@@ -33,7 +34,7 @@ export class TrainerCreateController {
         
         catch(error) {
             if(error instanceof EmailAlreadyExistsError) {
-                return reply.status(400).send({
+                return reply.status(error.code).send({
                     error
                 });
             }
@@ -59,15 +60,21 @@ export class TrainerGetByIdController {
             const { id } = registerBodySchema.parse(request.params);
             const trainer = await trainerGetByIdService.execute(id);
 
-            if(trainer) {
-                trainer.password = "*";
-            }
+            // if(trainer) {
+            //     trainer.password = "*";
+            // }
             
-            return reply.status(200).send({ trainer });
+            return reply.status(200).send( trainer );
         }
         
         catch(error) {
-            throw new Error();   
-        }  
+            if(error instanceof TrainerDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+    
+            throw error;
+        } 
     }
 }

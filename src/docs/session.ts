@@ -23,21 +23,14 @@ export const sessionDoc = {
             description: 'Bad Request response. Invalid data',
             type: 'object',
             properties: {
-                message: { type: 'string' }
-            }
-        },
-        409: {
-            description: 'Conflict response. Personal trainer already exists',
-            type: 'object',
-            properties: {
-                message: { type: 'string' }
+                error: { type: 'string' }
             }
         },
         500: {
             description: 'testestsetse',
             type: 'object',
             properties: {
-                message: { type: 'string' }
+                error: { type: 'string' }
             }
         }
 

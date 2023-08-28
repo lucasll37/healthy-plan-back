@@ -68,7 +68,39 @@ export const anamnesisMock: Prisma.AnamnesisCreateInput = {
     }
 }
 
-
+export const bodyEvaluationMock: Prisma.BodyEvaluationCreateInput = {
+    ageAtTheMoment: 0,
+    fatMass_kg: 0,
+    leanMass_kg: 0,
+    weight_cm: 0,
+    height_kg: 0,
+    bodyMassIndex: 0,
+    bodyMassClass: '0',
+    skeletalMass: 0,
+    bodyAge: 0,
+    basalMetabolicRate: 0,
+    waistRatioHip: 0,
+    visceralFat: '0',
+    neck_circ_cm: 0,
+    chest_circ_cm: 0,
+    rightForearm_circ_cm: 0,
+    leftForearm_circ_cm: 0,
+    rightArm_circ_cm: 0,
+    leftArm_circ_cm: 0,
+    waist_circ_cm: 0,
+    abdomen_circ_cm: 0,
+    hip_circ_cm: 0,
+    rightThigh_circ_cm: 0,
+    leftThigh_circ_cm: 0,
+    rightCalf_circ_cm: 0,
+    leftCalf_circ_cm: 0,
+    fatPercentage: 0,
+    athlete: {
+        connect: {
+            id: "will be replaced by id athlete mock"
+        }
+    }
+};
 
 
 

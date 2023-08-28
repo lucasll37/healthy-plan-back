@@ -1,5 +1,5 @@
-import { Prisma, BodyValuation } from "@prisma/client";
+import { Prisma, BodyEvaluation } from "@prisma/client";
 
 export interface IBodyValuationRepository {
-    create(data: Prisma.BodyValuationCreateInput): Promise<BodyValuation>
+    create(data: Prisma.BodyEvaluationCreateInput): Promise<BodyEvaluation>
 }

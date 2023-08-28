@@ -4,6 +4,7 @@ import { AthleteCreateService, AthleteGetByIdService } from "@/services/athlete"
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
+import { AthleteDontExistsError } from "@/errors/athlete-dont-exists";
 
 
 export class AthleteCreateController {
@@ -67,7 +68,7 @@ export class AthleteCreateController {
         
         catch(error) {
             if(error instanceof EmailAlreadyExistsError) {
-                return reply.status(400).send(error);
+                return reply.status(error.code).send(error);
             }
     
             throw error;
@@ -80,6 +81,8 @@ export class AthleteGetByIdController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
+        await request.jwtVerify();
+
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
         const athleteGetByIdService = new AthleteGetByIdService(athleteRepositoryPrisma)
     
@@ -90,11 +93,17 @@ export class AthleteGetByIdController {
         try {
             const { id } = registerBodySchema.parse(request.params);
             const athlete = await athleteGetByIdService.execute(id);
-            return reply.status(200).send({athlete: athlete});
+            return reply.status(200).send(athlete);
         }
         
         catch(error) {
-            return reply.status(200).send({msg: "mamou!!!"});    
-        }  
+            if(error instanceof AthleteDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+    
+            throw error;
+        } 
     }
 }
