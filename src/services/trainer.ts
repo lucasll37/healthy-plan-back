@@ -2,7 +2,7 @@ import { EmailAlreadyExistsError } from "../errors/email-already-exists";
 import { TrainerDontExistsError } from "../errors/trainer-dont-exists";
 import { ITrainerRepository } from "../repositories/trainer/ITrainerRepository";
 import { Trainer, Prisma } from "@prisma/client";
-import { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 export class TrainerCreateService {
     constructor(private trainerRepository: ITrainerRepository) { }
@@ -11,7 +11,7 @@ export class TrainerCreateService {
         try {
             return await this.trainerRepository.create({
                 ...data,
-                password: await hash(data.password, 6),
+                password: await bcrypt.hash(data.password, 6),
             });
         }
 

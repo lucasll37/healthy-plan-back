@@ -1,0 +1,32 @@
+name: Run E2E Tests
+
+on: [push]
+
+jobs:
+
+  run-E2E-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      database:
+        image: mysql:latest
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: docker
+          MYSQL_DATABASE: api-healthy-plan
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      
+      - run: npm ci
+
+      - run: npm run test:e2e
+        env:
+          JWT_SECRET: secret
+          DATABASE_URL: "mysql://root:docker@localhost/api-healthy-plan"

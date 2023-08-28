@@ -22,13 +22,17 @@ export class AuthenticateController {
             const { email, password } = authenticateBodySchema.parse(request.body);
             const { trainer } = await authenticateService.execute({ email, password });
 
-            const token = await reply.jwtSign({}, {
+            const token = await reply.jwtSign({
+                // role: trainer.role,
+            }, {
                 sign: {
                     sub: trainer.id,
                 }
             })
 
-            const refreshToken = await reply.jwtSign({}, {
+            const refreshToken = await reply.jwtSign({
+                // role: trainer.role,
+            }, {
                 sign: {
                     sub: trainer.id,
                     expiresIn: "7d"
@@ -62,13 +66,17 @@ export class RefreshTokenController {
     async handler(request: FastifyRequest, reply: FastifyReply) {
         await request.jwtVerify({ onlyCookie: true });
 
-        const token = await reply.jwtSign({}, {
+        const token = await reply.jwtSign({
+                // role: trainer.role,
+        }, {
             sign: {
                 sub: request.user.sub,
             }
         })
 
-        const refreshToken = await reply.jwtSign({}, {
+        const refreshToken = await reply.jwtSign({
+                // role: trainer.role,
+        }, {
             sign: {
                 sub: request.user.sub,
                 expiresIn: "1d"

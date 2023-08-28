@@ -4,5 +4,9 @@ Fazer:
 
 cruds
 documentação
-testes
+testes unitários
+testes de integração
 mocks
+
+compare
+env testes

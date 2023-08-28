@@ -205,3 +205,8 @@ model TrainingEvolution {
 
   @@map("training-evolution")
 }
+
+enum Sex {
+  M
+  F
+}

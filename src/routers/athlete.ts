@@ -1,4 +1,5 @@
 import { FastifyInstance } from "fastify";
+import { verifyJwt } from "@/middleware/verify-jwt";
 import {
     AthleteCreateController,
     AthleteGetByIdController
