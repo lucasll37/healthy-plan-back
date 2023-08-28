@@ -1,7 +1,7 @@
 import { Trainer, Prisma } from "@prisma/client";
 import { ITrainerRepository } from "../ITrainerRepository";
 import { randomUUID } from "crypto";
-import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
+import { EmailAlreadyExistsError } from "../../../errors/email-already-exists";
 
 
 export class TrainerRepositoryInMemory implements ITrainerRepository {
@@ -11,6 +11,9 @@ export class TrainerRepositoryInMemory implements ITrainerRepository {
     async create(data: Prisma.TrainerCreateInput): Promise<Trainer> {
         const trainer: Trainer = {
             ...data,
+            avatar: data.avatar || null,
+            createdAt: new Date(),
+            updatedAt: new Date(),
             id: randomUUID()            
         };
 

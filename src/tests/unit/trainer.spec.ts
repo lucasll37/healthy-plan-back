@@ -1,8 +1,9 @@
 import { expect, describe, it } from "vitest";
-import { TrainerCreateService, TrainerGetByIdService } from "./trainer";
-import { TrainerRepositoryInMemory } from "@/repositories/trainer/inMemory/TrainerRepositoryInMemory";
+import { TrainerCreateService, TrainerGetByIdService } from "../../services/trainer";
+import { TrainerRepositoryInMemory } from "../../repositories/trainer/inMemory/TrainerRepositoryInMemory";
 import { randomUUID } from "crypto";
-import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
+import { EmailAlreadyExistsError } from "../../errors/email-already-exists";
+import { TrainerDontExistsError } from "../../errors/trainer-dont-exists";
 
 describe("Trainer Use Case", () => {
 
@@ -67,8 +68,8 @@ describe("Trainer Use Case", () => {
         const trainerRepository = new TrainerRepositoryInMemory();
         const sut = new TrainerGetByIdService(trainerRepository);
         
-        const trainerFound = await sut.execute(randomUUID());
-
-        expect(trainerFound).toBeNull();
+        await expect(async () => {
+            await sut.execute(randomUUID())
+        }).rejects.toBeInstanceOf(TrainerDontExistsError);
     });
 });

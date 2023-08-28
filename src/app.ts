@@ -8,7 +8,9 @@ import { ZodError } from "zod";
 import { env } from "./env";
 import { populateRepositoriesWithMock } from "./mocks";
 import fastifyJwt from "@fastify/jwt";
+import fastifyCookie from "@fastify/cookie";
 import { corsOptions } from "../config/cors"
+import { JWTConfig } from "./libs/jwt";
 
 
 if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
@@ -16,7 +18,21 @@ if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
 export const app = fastify();
 
 app.register(cors, corsOptions);
-app.register(fastifyJwt, { secret: env.JWT_SECRET })
+app.register(fastifyJwt,
+    JWTConfig
+//     {
+//     secret: env.JWT_SECRET,
+//     cookie: {
+//         signed: false,
+//         cookieName: 'refreshToken',
+//     },
+//     sign: {
+//         expiresIn: "10m",
+//     }
+// }
+)
+
+app.register(fastifyCookie);
 
 if(env.NODE_ENV !== "production") {
 

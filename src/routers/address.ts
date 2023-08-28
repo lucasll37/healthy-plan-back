@@ -1,9 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { docPost, mockDoc } from "@/docs/address"
-import { AddressTest } from "@/controllers/address"
 
 
-const addressTest = new AddressTest()
 
 
 export async function addressRoutes(app: FastifyInstance) {

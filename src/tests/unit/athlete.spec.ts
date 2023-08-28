@@ -1,9 +1,9 @@
 import { expect, describe, it, beforeEach, beforeAll } from "vitest";
-import { AthleteCreateService } from "./athlete";
-import { IAthleteRepository } from "@/repositories/athlete/IAthleteRepository";
-import { AthleteRepositoryInMemory } from "@/repositories/athlete/inMemory/AthleteRepositoryInMemory";
+import { AthleteCreateService } from "../../services/athlete";
+import { IAthleteRepository } from "../../repositories/athlete/IAthleteRepository";
+import { AthleteRepositoryInMemory } from "../../repositories/athlete/inMemory/AthleteRepositoryInMemory";
 import { randomUUID } from "crypto";
-import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
+import { EmailAlreadyExistsError } from "../../errors/email-already-exists";
 
 let athleteRepository: IAthleteRepository;
 let sut: AthleteCreateService;

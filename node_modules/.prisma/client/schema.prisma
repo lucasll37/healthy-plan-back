@@ -139,7 +139,7 @@ model BodyEvaluation {
   createdAt            DateTime  @default(now())
   updatedAt            DateTime? @updatedAt
 
-  @@map("body-valuation")
+  @@map("body-evaluation")
 }
 
 ///////////////////// IMPLEMENTAR ///////////////////////

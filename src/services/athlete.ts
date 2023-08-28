@@ -1,6 +1,6 @@
-import { AthleteDontExistsError } from "@/errors/athlete-dont-exists";
-import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
-import { IAthleteRepository } from "@/repositories/athlete/IAthleteRepository";
+import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
+import { EmailAlreadyExistsError } from "../errors/email-already-exists";
+import { IAthleteRepository } from "../repositories/athlete/IAthleteRepository";
 import { Athlete, Prisma } from "@prisma/client";
 
 export class AthleteCreateService {

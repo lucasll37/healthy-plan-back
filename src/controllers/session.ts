@@ -28,7 +28,21 @@ export class AuthenticateController {
                 }
             })
 
-            return reply.status(200).send({ token });
+            const refreshToken = await reply.jwtSign({}, {
+                sign: {
+                    sub: trainer.id,
+                    expiresIn: "7d"
+                }
+            })
+
+            return reply
+                .setCookie("refreshToken", refreshToken, {
+                    path: "/",
+                    secure: true, // https? set true
+                    sameSite: true, // somente acessado pelo mesmo site
+                    httpOnly: true, // somente acessado pelo backend
+                })
+                .status(200).send({ token });
         }
     
         catch(error) {
@@ -43,3 +57,31 @@ export class AuthenticateController {
     }
 }
 
+export class RefreshTokenController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+        await request.jwtVerify({ onlyCookie: true });
+
+        const token = await reply.jwtSign({}, {
+            sign: {
+                sub: request.user.sub,
+            }
+        })
+
+        const refreshToken = await reply.jwtSign({}, {
+            sign: {
+                sub: request.user.sub,
+                expiresIn: "1d"
+            }
+        })
+
+        return reply
+            .setCookie("refreshToken", refreshToken, {
+                path: "/",
+                secure: true, // https? set true
+                sameSite: true, // somente acessado pelo mesmo site
+                httpOnly: true, // somente acessado pelo backend
+            })
+            .status(200).send({ token });
+    }
+}

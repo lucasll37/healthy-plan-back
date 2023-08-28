@@ -1,6 +1,6 @@
-import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
-import { TrainerDontExistsError } from "@/errors/trainer-dont-exists";
-import { ITrainerRepository } from "@/repositories/trainer/ITrainerRepository";
+import { EmailAlreadyExistsError } from "../errors/email-already-exists";
+import { TrainerDontExistsError } from "../errors/trainer-dont-exists";
+import { ITrainerRepository } from "../repositories/trainer/ITrainerRepository";
 import { Trainer, Prisma } from "@prisma/client";
 import { hash } from "bcryptjs";
 
