@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc } from "@/docs/flexEvaluation";
+import { mockDoc } from "../docs/flexEvaluation";
 
 
 export async function flexEvaluationRoutes(app: FastifyInstance) {

@@ -1,9 +1,8 @@
 {
   "name": "curso",
   "version": "1.0.0",
-  "description": "GymPass style app",
+  "description": "Healthy Plan API",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
@@ -11,7 +10,6 @@
     "prisma:generate": "prisma generate",
     "prisma:dev": "prisma migrate dev",
     "prisma:deploy": "prisma migrate deploy",
-    "prisma:studio": "prisma studio",
     "test:create-prisma-environment": "npm link ./prisma/vitest-environment-prisma",
     "test:install-prisma-environment": "npm link vitest-environment-prisma",
     "test": "vitest run --dir src/tests/unit",

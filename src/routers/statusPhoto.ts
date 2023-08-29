@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc } from "@/docs/statusPhoto";
+import { mockDoc } from "../docs/statusPhoto";
 
 
 export async function statusPhotoRoutes(app: FastifyInstance) {

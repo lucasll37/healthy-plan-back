@@ -1,6 +1,6 @@
 import { BodyEvaluation, Prisma } from "@prisma/client";
 import { IBodyValuationRepository } from "../IBodyEvaluationRepository";
-import { prisma } from "@/libs/prisma";
+import { prisma } from "../../../libs/prisma";
 
 export class BodyEvaluationRepositoryPrisma implements IBodyValuationRepository {
 

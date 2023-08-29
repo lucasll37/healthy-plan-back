@@ -1,12 +1,12 @@
-import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma"
-import { TrainerRepositoryPrisma } from "@/repositories/trainer/prisma/TrainerRepositoryPrisma"
-import { AnamnesisRepositoryPrisma } from "@/repositories/anamnesis/prisma/AnamnesisRepositoryPrisma"
-import { BodyEvaluationRepositoryPrisma } from "@/repositories/bodyEvaluation/prisma/BodyEvaluationRepositoryPrisma"
+import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma"
+import { TrainerRepositoryPrisma } from "../repositories/trainer/prisma/TrainerRepositoryPrisma"
+import { AnamnesisRepositoryPrisma } from "../repositories/anamnesis/prisma/AnamnesisRepositoryPrisma"
+import { BodyEvaluationRepositoryPrisma } from "../repositories/bodyEvaluation/prisma/BodyEvaluationRepositoryPrisma"
 
-import { AthleteCreateService } from "@/services/athlete"
-import { TrainerCreateService } from "@/services/trainer"
-import { AnamnesisCreateService } from "@/services/anaminesis"
-import { BodyEvaluationCreateService } from "@/services/bodyEvaluation"
+import { AthleteCreateService } from "../services/athlete"
+import { TrainerCreateService } from "../services/trainer"
+import { AnamnesisCreateService } from "../services/anaminesis"
+import { BodyEvaluationCreateService } from "../services/bodyEvaluation"
 
 
 import {

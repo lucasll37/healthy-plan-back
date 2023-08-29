@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { createTrainerDoc, mockDoc, getTrainerByIdDoc } from "@/docs/trainer";
-import { TrainerCreateController, TrainerGetByIdController } from "@/controllers/trainer";
+import { createTrainerDoc, mockDoc, getTrainerByIdDoc } from "../docs/trainer";
+import { TrainerCreateController, TrainerGetByIdController } from "../controllers/trainer";
 
 const trainerCreateController = new TrainerCreateController();
 const trainerGetByIdController = new TrainerGetByIdController();

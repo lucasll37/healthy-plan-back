@@ -1,8 +1,8 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { TrainerRepositoryPrisma } from "@/repositories/trainer/prisma/TrainerRepositoryPrisma";
-import { AuthenticateService } from "@/services/session";
+import { TrainerRepositoryPrisma } from "../repositories/trainer/prisma/TrainerRepositoryPrisma";
+import { AuthenticateService } from "../services/session";
 import { z } from "zod";
-import { InvalidCredenctialsError } from "@/errors/invalid-credentials";
+import { InvalidCredenctialsError } from "../errors/invalid-credentials";
 
 
 export class AuthenticateController {

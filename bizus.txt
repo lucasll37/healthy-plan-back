@@ -1,12 +1,1 @@
-Para a mão em novas entidades!
-
-Fazer:
-
-cruds
-documentação
-testes unitários
 testes de integração
-mocks
-
-compare
-env testes

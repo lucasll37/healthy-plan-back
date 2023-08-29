@@ -1,6 +1,6 @@
 import { Athlete, Prisma } from "@prisma/client";
 import { IAthleteRepository } from "../IAthleteRepository";
-import { prisma } from "@/libs/prisma";
+import { prisma } from "../../../libs/prisma";
 
 export class AthleteRepositoryPrisma implements IAthleteRepository {
 

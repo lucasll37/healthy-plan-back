@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc, bodyEvaluationCreateDoc } from "@/docs/bodyEvaluation";
-import { BodyEvaluationCreateController } from "@/controllers/bodyEvaluation";
+import { mockDoc, bodyEvaluationCreateDoc } from "../docs/bodyEvaluation";
+import { BodyEvaluationCreateController } from "../controllers/bodyEvaluation";
 
 const bodyEvaluationCreateController = new BodyEvaluationCreateController();
 

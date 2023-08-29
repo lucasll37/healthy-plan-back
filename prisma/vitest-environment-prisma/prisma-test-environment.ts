@@ -20,18 +20,6 @@ if(!process.env.DATABASE_URL) {
 export default <Environment>{
     name: 'prisma',
     transformMode: 'web',
-    // async setupVM() {
-    //   const vm = await import('node:vm')
-    //   const context = vm.createContext()
-    //   return {
-    //     getVmContext() {
-    //       return context
-    //     },
-    //     teardown() {
-    //       // called after all tests with this env have been run
-    //     }
-    //   }
-    // },
     async setup() {
     const schema = randomUUID()
     console.log(generateDatabaseURL(schema))

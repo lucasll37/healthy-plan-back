@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
-import { verifyJwt } from "@/middleware/verify-jwt";
+import { verifyJwt } from "../middleware/verify-jwt";
 import {
     AthleteCreateController,
     AthleteGetByIdController
-} from "@/controllers/athlete"
+} from "../controllers/athlete"
 
-import { athleteGetByIdDoc, athleteCreateDoc } from "@/docs/athlete";
+import { athleteGetByIdDoc, athleteCreateDoc } from "../docs/athlete";
 
 const athleteCreateController = new AthleteCreateController();
 const athleteGetByIdController = new AthleteGetByIdController()

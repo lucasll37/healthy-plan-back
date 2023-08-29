@@ -18,19 +18,7 @@ if(env.NODE_ENV !== "production") populateRepositoriesWithMock()
 export const app = fastify();
 
 app.register(cors, corsOptions);
-app.register(fastifyJwt,
-    JWTConfig
-//     {
-//     secret: env.JWT_SECRET,
-//     cookie: {
-//         signed: false,
-//         cookieName: 'refreshToken',
-//     },
-//     sign: {
-//         expiresIn: "10m",
-//     }
-// }
-)
+app.register(fastifyJwt, JWTConfig)
 
 app.register(fastifyCookie);
 

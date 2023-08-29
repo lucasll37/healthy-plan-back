@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { AnamnesisCreateDoc, mockDoc } from "@/docs/anaminesis";
-import { AnamnesisCreateController } from "@/controllers/anaminesis";
+import { AnamnesisCreateDoc, mockDoc } from "../docs/anaminesis";
+import { AnamnesisCreateController } from "../controllers/anaminesis";
 
 const anamnesisCreateController = new AnamnesisCreateController();
 

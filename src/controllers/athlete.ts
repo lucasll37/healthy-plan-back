@@ -1,10 +1,10 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma"
-import { AthleteCreateService, AthleteGetByIdService } from "@/services/athlete";
+import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma"
+import { AthleteCreateService, AthleteGetByIdService } from "../services/athlete";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
-import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
-import { AthleteDontExistsError } from "@/errors/athlete-dont-exists";
+import { EmailAlreadyExistsError } from "../errors/email-already-exists";
+import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
 
 
 export class AthleteCreateController {

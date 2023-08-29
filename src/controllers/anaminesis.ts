@@ -1,9 +1,9 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
-import { AthleteDontExistsError } from "@/errors/athlete-dont-exists";
-import { AnamnesisRepositoryPrisma } from "@/repositories/anamnesis/prisma/AnamnesisRepositoryPrisma";
-import { AnamnesisCreateService } from "@/services/anaminesis";
+import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
+import { AnamnesisRepositoryPrisma } from "../repositories/anamnesis/prisma/AnamnesisRepositoryPrisma";
+import { AnamnesisCreateService } from "../services/anaminesis";
 
 
 export class AnamnesisCreateController {

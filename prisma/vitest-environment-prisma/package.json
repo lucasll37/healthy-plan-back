@@ -2,8 +2,10 @@
   "name": "vitest-environment-prisma",
   "version": "1.0.0",
   "description": "",
-  "main": "prisma-test-environment.ts",
-  "type": "module",
+  "main": "prisma-test-environment.js",
+  "scripts": {
+    "build": "tsc prisma-test-environment.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"

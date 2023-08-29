@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc } from "@/docs/exercise";
+import { mockDoc } from "../docs/exercise";
 
 
 export async function exerciseRoutes(app: FastifyInstance) {
