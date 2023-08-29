@@ -39,9 +39,9 @@ describe("Athlete Use Case", () => {
                     state: "SP"
                 }
             }
-        }
+        };
         
-    })
+    });
     
     beforeEach(() => {
         athleteRepository = new AthleteRepositoryInMemory();
@@ -59,6 +59,6 @@ describe("Athlete Use Case", () => {
         await sut.execute(athlete);
         await expect(async () => {
             await sut.execute(athlete);
-            }).rejects.toBeInstanceOf(EmailAlreadyExistsError);
+        }).rejects.toBeInstanceOf(EmailAlreadyExistsError);
     });
 });

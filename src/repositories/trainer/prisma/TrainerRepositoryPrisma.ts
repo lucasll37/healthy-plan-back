@@ -11,7 +11,7 @@ export class TrainerRepositoryPrisma implements ITrainerRepository {
     async findByEmail(email: string): Promise<Trainer | null> {
         const trainer = await prisma.trainer.findUnique({
             where: { email }
-        })
+        });
         
         return trainer;
     }
@@ -19,7 +19,7 @@ export class TrainerRepositoryPrisma implements ITrainerRepository {
     async findById(id: string): Promise<Trainer | null> {
         const trainer = await prisma.trainer.findUnique({
             where: { id }
-        })
+        });
         
         return trainer;
     }

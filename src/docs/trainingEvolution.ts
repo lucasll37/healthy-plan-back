@@ -1,5 +1,5 @@
 export const mockDoc = {
     schema: {
-        tags: ['Training Evolution']
+        tags: ["Training Evolution"]
     }
-}
+};

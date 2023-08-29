@@ -29,12 +29,12 @@ export class TrainerRepositoryInMemory implements ITrainerRepository {
     }
 
     findByEmail(email: string): Promise<Trainer | null> {
-        const trainer = this.trainer.find(trainer => trainer.email === email)
+        const trainer = this.trainer.find(trainer => trainer.email === email);
         return new Promise(resolve => resolve( trainer || null));
     }
 
     findById(id: string): Promise<Trainer | null> {
-        const trainer = this.trainer.find(trainer => trainer.id === id)
+        const trainer = this.trainer.find(trainer => trainer.id === id);
         return new Promise(resolve => resolve( trainer || null));
     }
 }

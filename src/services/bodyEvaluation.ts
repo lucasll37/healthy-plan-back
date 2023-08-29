@@ -6,7 +6,7 @@ import { BodyEvaluation, Prisma } from "@prisma/client";
 
 interface IServiceParams {
     data: Prisma.BodyEvaluationCreateInput
-    trainerId: String
+    trainerId: string
 }
 export class BodyEvaluationCreateService {
 
@@ -17,7 +17,7 @@ export class BodyEvaluationCreateService {
 
 
     async execute({ data, trainerId }: IServiceParams): Promise<BodyEvaluation> {
-        var athlete = await this.athleteRepository.findById(data.athlete.connect!.id!);
+        const athlete = await this.athleteRepository.findById(data.athlete.connect!.id!);
         
         if(!athlete){
             throw new AthleteDontExistsError();

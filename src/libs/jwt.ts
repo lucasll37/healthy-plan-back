@@ -5,9 +5,9 @@ export const JWTConfig: FastifyJWTOptions = {
     secret: env.JWT_SECRET,
     cookie: {
         signed: false,
-        cookieName: 'refreshToken',
+        cookieName: "refreshToken",
     },
     sign: {
         expiresIn: "10m",
     }
-}
+};

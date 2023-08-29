@@ -13,8 +13,8 @@ export class AnamnesisCreateController {
         await request.jwtVerify();
 
         
-        const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma()
-        const anamnesisCreateService = new AnamnesisCreateService(anamnesisRepositoryPrisma)
+        const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma();
+        const anamnesisCreateService = new AnamnesisCreateService(anamnesisRepositoryPrisma);
     
         const athleteBodySchema = z.object({
             isAlcoholic: z.boolean(),
@@ -46,7 +46,7 @@ export class AnamnesisCreateController {
 
         
         try {
-            const requestBodyParsed = athleteBodySchema.parse(request.body)
+            const requestBodyParsed = athleteBodySchema.parse(request.body);
 
             const data: Prisma.AnamnesisCreateInput = {
                 isAlcoholic: requestBodyParsed.isAlcoholic,

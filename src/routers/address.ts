@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { docPost, mockDoc } from "../docs/address"
+import { docPost, mockDoc } from "../docs/address";
 
 
 

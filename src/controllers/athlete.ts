@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma"
+import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma";
 import { AthleteCreateService, AthleteGetByIdService } from "../services/athlete";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
@@ -14,8 +14,8 @@ export class AthleteCreateController {
         await request.jwtVerify();
 
         
-        const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
-        const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma)
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma);
     
         const athleteBodySchema = z.object({
             id: z.string().optional(),
@@ -36,7 +36,7 @@ export class AthleteCreateController {
 
         
         try {
-            const requestBodyParsed = athleteBodySchema.parse(request.body)
+            const requestBodyParsed = athleteBodySchema.parse(request.body);
 
             const data: Prisma.AthleteCreateInput = {
                 name: requestBodyParsed.name,
@@ -83,8 +83,8 @@ export class AthleteGetByIdController {
 
         await request.jwtVerify();
 
-        const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
-        const athleteGetByIdService = new AthleteGetByIdService(athleteRepositoryPrisma)
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const athleteGetByIdService = new AthleteGetByIdService(athleteRepositoryPrisma);
     
         const registerBodySchema = z.object({
             id: z.string()

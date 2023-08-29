@@ -9,8 +9,8 @@ export class AuthenticateController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        const trainerRepositoryPrisma = new TrainerRepositoryPrisma()
-        const authenticateService = new AuthenticateService(trainerRepositoryPrisma)
+        const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
+        const authenticateService = new AuthenticateService(trainerRepositoryPrisma);
     
         const authenticateBodySchema = z.object({
             email: z.string().email(),
@@ -28,7 +28,7 @@ export class AuthenticateController {
                 sign: {
                     sub: trainer.id,
                 }
-            })
+            });
 
             const refreshToken = await reply.jwtSign({
                 // role: trainer.role,
@@ -37,7 +37,7 @@ export class AuthenticateController {
                     sub: trainer.id,
                     expiresIn: "7d"
                 }
-            })
+            });
 
             return reply
                 .setCookie("refreshToken", refreshToken, {
@@ -67,21 +67,21 @@ export class RefreshTokenController {
         await request.jwtVerify({ onlyCookie: true });
 
         const token = await reply.jwtSign({
-                // role: trainer.role,
+            // role: trainer.role,
         }, {
             sign: {
                 sub: request.user.sub,
             }
-        })
+        });
 
         const refreshToken = await reply.jwtSign({
-                // role: trainer.role,
+            // role: trainer.role,
         }, {
             sign: {
                 sub: request.user.sub,
                 expiresIn: "1d"
             }
-        })
+        });
 
         return reply
             .setCookie("refreshToken", refreshToken, {

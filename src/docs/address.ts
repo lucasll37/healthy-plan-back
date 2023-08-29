@@ -1,55 +1,55 @@
-    export const docPost  = {
-        schema: {
-            description: 'post some data',
-            tags: ['Address'],
-            summary: 'qwerty',
-            params: {
-            type: 'object',
+export const docPost  = {
+    schema: {
+        description: "post some data",
+        tags: ["Address"],
+        summary: "qwerty",
+        params: {
+            type: "object",
             properties: {
                 id: {
-                type: 'string',
-                description: 'user id'
+                    type: "string",
+                    description: "user id"
                 }
             }
-            },
-            body: {
-            type: 'object',
+        },
+        body: {
+            type: "object",
             properties: {
-                hello: { type: 'string' },
+                hello: { type: "string" },
                 obj: {
-                type: 'object',
-                properties: {
-                    some: { type: 'string' }
-                }
+                    type: "object",
+                    properties: {
+                        some: { type: "string" }
+                    }
                 }
             }
-            },
-            response: {
+        },
+        response: {
             201: {
-                description: 'Successful response',
-                type: 'object',
+                description: "Successful response",
+                type: "object",
                 properties: {
-                hello: { type: 'string' }
+                    hello: { type: "string" }
                 }
             },
             default: {
-                description: 'Default response',
-                type: 'object',
+                description: "Default response",
+                type: "object",
                 properties: {
-                foo: { type: 'string' }
+                    foo: { type: "string" }
                 }
             }
-            },
-            security: [
+        },
+        security: [
             {
                 "apiKey": []
             }
-            ]
-        }
+        ]
     }
+};
 
-    export const mockDoc = {
-        schema: {
-            tags: ['Address']
-        }
+export const mockDoc = {
+    schema: {
+        tags: ["Address"]
     }
+};

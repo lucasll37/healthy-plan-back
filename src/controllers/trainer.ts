@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { TrainerRepositoryPrisma } from "@/repositories/trainer/prisma/TrainerRepositoryPrisma"
+import { TrainerRepositoryPrisma } from "@/repositories/trainer/prisma/TrainerRepositoryPrisma";
 import { TrainerCreateService, TrainerGetByIdService } from "@/services/trainer";
 import { Prisma, Trainer } from "@prisma/client";
 import { z } from "zod";
@@ -11,8 +11,8 @@ export class TrainerCreateController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        const trainerRepositoryPrisma = new TrainerRepositoryPrisma()
-        const trainerCreateService = new TrainerCreateService(trainerRepositoryPrisma)
+        const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
+        const trainerCreateService = new TrainerCreateService(trainerRepositoryPrisma);
 
         const registerBodySchema = z.object({
             id: z.string().optional(),
@@ -49,8 +49,8 @@ export class TrainerGetByIdController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        const trainerRepositoryPrisma = new TrainerRepositoryPrisma()
-        const trainerGetByIdService = new TrainerGetByIdService(trainerRepositoryPrisma)
+        const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
+        const trainerGetByIdService = new TrainerGetByIdService(trainerRepositoryPrisma);
 
         const registerBodySchema = z.object({
             id: z.string()

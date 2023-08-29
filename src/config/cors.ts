@@ -3,4 +3,4 @@ export const corsOptions = {
 
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
     // allowedHeaders: ["Content-Type", "Authorization"]
-}
+};

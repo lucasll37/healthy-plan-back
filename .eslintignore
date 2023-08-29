@@ -1,0 +1,7 @@
+*.min.js
+assets/
+coverage/
+node_modules
+tsconfig.json
+*.sh
+*.md

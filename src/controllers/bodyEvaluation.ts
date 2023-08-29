@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { BodyEvaluationRepositoryPrisma } from "@/repositories/bodyEvaluation/prisma/BodyEvaluationRepositoryPrisma";
-import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma"
+import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { AthleteCreateService } from "@/services/athlete";
@@ -15,13 +15,13 @@ export class BodyEvaluationCreateController {
 
         await request.jwtVerify();
 
-        const athleteRepositoryPrisma = new AthleteRepositoryPrisma()
-        const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma()
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma();
         
         const bodyEvaluationCreateService = new BodyEvaluationCreateService(
             bodyEvaluationRepositoryPrisma,
             athleteRepositoryPrisma
-        )
+        );
     
         const athleteBodySchema = z.object({
             ageAtTheMoment: z.number(),
@@ -54,7 +54,7 @@ export class BodyEvaluationCreateController {
         });
         
         try {
-            const requestBodyParsed = athleteBodySchema.parse(request.body)
+            const requestBodyParsed = athleteBodySchema.parse(request.body);
 
             const data: Prisma.BodyEvaluationCreateInput = {
                 ageAtTheMoment: requestBodyParsed.ageAtTheMoment,

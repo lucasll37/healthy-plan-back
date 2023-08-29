@@ -34,7 +34,7 @@ describe("Trainer Use Case", () => {
             email: `${randomUUID()}@mock.com`,
             password: "123456",
             phone: "123456789"
-        }
+        };
         
         await sut.execute(trainer);
 
@@ -55,7 +55,7 @@ describe("Trainer Use Case", () => {
             email: `${randomUUID()}@mock.com`,
             password: "123456",
             phone: "123456789"
-        }
+        };
 
         const trainerCreated = await trainerCreateService.execute(trainer);
         const trainerFound = await sut.execute(trainerCreated.id);
@@ -69,7 +69,7 @@ describe("Trainer Use Case", () => {
         const sut = new TrainerGetByIdService(trainerRepository);
         
         await expect(async () => {
-            await sut.execute(randomUUID())
+            await sut.execute(randomUUID());
         }).rejects.toBeInstanceOf(TrainerDontExistsError);
     });
 });

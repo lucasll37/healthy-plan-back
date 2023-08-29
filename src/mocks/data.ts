@@ -8,7 +8,7 @@ export const trainerMock: Prisma.TrainerCreateInput = {
     email: `${randomUUID()}@mock.com`,
     password: "123456",
     phone: "123456789"
-}
+};
 
 export const athleteMock: Prisma.AthleteCreateInput = {
     name: "John",
@@ -33,7 +33,7 @@ export const athleteMock: Prisma.AthleteCreateInput = {
             state: "SP"
         }
     }
-}
+};
 
 export const anamnesisMock: Prisma.AnamnesisCreateInput = {
     isAlcoholic: false,
@@ -66,7 +66,7 @@ export const anamnesisMock: Prisma.AnamnesisCreateInput = {
             id: "will be replaced by id athlete mock"
         }
     }
-}
+};
 
 export const bodyEvaluationMock: Prisma.BodyEvaluationCreateInput = {
     ageAtTheMoment: 0,
@@ -75,12 +75,12 @@ export const bodyEvaluationMock: Prisma.BodyEvaluationCreateInput = {
     weight_cm: 0,
     height_kg: 0,
     bodyMassIndex: 0,
-    bodyMassClass: '0',
+    bodyMassClass: "0",
     skeletalMass: 0,
     bodyAge: 0,
     basalMetabolicRate: 0,
     waistRatioHip: 0,
-    visceralFat: '0',
+    visceralFat: "0",
     neck_circ_cm: 0,
     chest_circ_cm: 0,
     rightForearm_circ_cm: 0,
