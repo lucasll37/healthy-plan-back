@@ -11,10 +11,10 @@ describe("Trainer (e2e)", () => {
     afterAll(async () => {
         await app.close();
     });
-    
+
     it("Should create a new trainer", async () => {
         const response = await request(app.server)
-            .post("/trainer")
+            .post("/v1/trainer")
             // .set('Authorization', `Bearer ${token}`)
             .send({
                 // Continua!!!
