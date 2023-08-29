@@ -12,17 +12,16 @@ clear:
 	docker container ls -aq | xargs docker container stop | xargs docker container rm -f
 
 db:
-	docker container ls -aq | xargs docker container stop | xargs docker container rm -f
+	docker run -p 5432:5432 \
+      -e POSTGRESQL_USERNAME=root \
+      -e POSTGRESQL_PASSWORD=docker \
+      -e POSTGRESQL_DATABASE=api-healthy-plan \
+      --name postgresql \
+      -d bitnami/postgresql:latest
 
-	docker run -p 3306:3306 \
-		-e MYSQL_ROOT_PASSWORD=docker \
-		-e MYSQL_DATABASE=api-healthy-plan \
-		-d mysql:latest
-	
 dev:
 	npm run prisma:generate
 	npm run prisma:dev
-	npm run prisma:deploy
 	npm run dev
 
 test:
@@ -31,5 +30,5 @@ test:
 test-unit:
 	npm run test:unit
 
-test-e2e :
+test-e2e:
 	npm run test:e2e

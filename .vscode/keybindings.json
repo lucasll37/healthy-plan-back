@@ -1,5 +1,7 @@
-// {
-//     "key": "ctrl+shift+alt+e",
-//     "command": "workbench.action.tasks.runTask",
-//     "args": "build"
-// }
+// [
+//     {
+//         "key": "ctrl+'",
+//         "command": "workbench.action.terminal.toggleTerminal",
+//         "when": "terminalFocus"
+//     }
+// ]

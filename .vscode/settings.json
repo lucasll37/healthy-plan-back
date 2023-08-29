@@ -1,5 +1,10 @@
 {
     "[prisma]": {
         "editor.formatOnSave": true
-    }
+    },
+      "editor.fontSize": 14,
+      "editor.tabSize": 4,
+      "window.zoomLevel": 0,
+    //   "editor.fontFamily": "Consolas, 'Courier New', monospace",
+      "terminal.explorerKind": "integrated"
 }

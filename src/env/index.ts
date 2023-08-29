@@ -6,7 +6,6 @@ const envSchema = z.object({
     PORT: z.coerce.number().default(3000),
     JWT_SECRET: z.string().default("dummy"),
     DATABASE_URL: z.string()
-        .default("mysql://root:docker@localhost/api-healthy-plan"),
 });
 
 const _env = envSchema.safeParse(process.env);

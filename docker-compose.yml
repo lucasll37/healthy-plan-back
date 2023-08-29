@@ -2,22 +2,24 @@ version: '3.1'
 
 services:
   database:
-    image: mysql:latest
+    image: 'bitnami/postgresql:latest'
     ports:
-      - 3306:3306
+    - 5432:5432
     environment:
-      - MYSQL_ROOT_PASSWORD=docker
-      - MYSQL_DATABASE = api-healthy-plan
+      - POSTGRESQL_USERNAME=root
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=api-healthy-plan
     networks:
-    - my-network
+      - my-network
 
   api:
     build: .
     ports:
       - 3000:3000
     environment:
+      - DATABASE_URL=postgresql://root:docker@database:5432/api-healthy-plan
       - NODE_ENV=dev
-      - DATABASE_URL=mysql://root:docker@database/api-healthy-plan
+
     depends_on:
       - database
     command: ["./migration.sh"]

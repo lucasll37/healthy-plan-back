@@ -2,7 +2,7 @@ import fastify from "fastify";
 import { appRoutes } from "./routers";
 import swagger from "@fastify/swagger";
 import swaggerUI from "@fastify/swagger-ui";
-import { swaggerConfig, swaggerUIConfig } from "./libs/swagger"; 
+import { swaggerConfig, swaggerUIConfig } from "./libs/swagger";
 import cors from '@fastify/cors';
 import { env } from "./env";
 import { populateRepositoriesWithMock } from "./mocks";
@@ -20,7 +20,7 @@ app.register(fastifyJwt, JWTConfig)
 app.register(fastifyCookie);
 
 if(env.NODE_ENV !== "production") {
-    populateRepositoriesWithMock()
+    // populateRepositoriesWithMock()
     app.register(swagger, swaggerConfig);
     app.register(swaggerUI, swaggerUIConfig);
 }

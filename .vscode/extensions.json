@@ -1,3 +1,13 @@
-// {
-//     "recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
-//   }
+{
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "Prisma.prisma",
+        "EditorConfig.EditorConfig",
+        "mhutchie.git-graph",
+        "PKief.material-icon-theme",
+        "natqe.reload",
+        "styled-components.vscode-styled-components"
+    ]
+  }

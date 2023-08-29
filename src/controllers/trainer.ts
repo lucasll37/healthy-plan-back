@@ -13,17 +13,17 @@ export class TrainerCreateController {
 
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma()
         const trainerCreateService = new TrainerCreateService(trainerRepositoryPrisma)
-    
+
         const registerBodySchema = z.object({
             id: z.string().optional(),
             name: z.string(),
             surname: z.string(),
             phone: z.string(),
             email: z.string().email(),
-            password: z.string()
+            password: z.string().min(6)
         });
-            
-        
+
+
         try {
             const data: Prisma.TrainerCreateInput = registerBodySchema.parse(request.body);
             const trainer = await trainerCreateService.execute(data);
@@ -31,17 +31,17 @@ export class TrainerCreateController {
 
             return reply.status(200).send({ trainer: trainer });
         }
-        
+
         catch(error) {
             if(error instanceof EmailAlreadyExistsError) {
                 return reply.status(error.code).send({
                     error
                 });
             }
-    
+
             throw error;
         }
-        
+
     }
 }
 
@@ -51,11 +51,11 @@ export class TrainerGetByIdController {
 
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma()
         const trainerGetByIdService = new TrainerGetByIdService(trainerRepositoryPrisma)
-    
+
         const registerBodySchema = z.object({
             id: z.string()
         });
-        
+
         try {
             const { id } = registerBodySchema.parse(request.params);
             const trainer = await trainerGetByIdService.execute(id);
@@ -63,18 +63,18 @@ export class TrainerGetByIdController {
             // if(trainer) {
             //     trainer.password = "*";
             // }
-            
+
             return reply.status(200).send( trainer );
         }
-        
+
         catch(error) {
             if(error instanceof TrainerDontExistsError) {
                 return reply.status(error.code).send({
                     error: error.message
                 });
             }
-    
+
             throw error;
-        } 
+        }
     }
 }
