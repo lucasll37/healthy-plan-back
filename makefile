@@ -9,6 +9,7 @@ clear:
 	docker compose down
 	docker compose down --rmi all
 	docker rm -f $(docker ps -aq)
+	docker container ls -aq | xargs docker container stop | xargs docker container rm -f
 
 db:
 	docker container ls -aq | xargs docker container stop | xargs docker container rm -f

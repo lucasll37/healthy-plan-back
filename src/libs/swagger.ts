@@ -1,6 +1,14 @@
 import { FastifySwaggerOptions, SwaggerOptions } from "@fastify/swagger"
 import { FastifySwaggerUiOptions } from "@fastify/swagger-ui"
 
+export const swaggerUIConfig: FastifySwaggerUiOptions = {
+    routePrefix: '/docs',
+    uiConfig: {
+        docExpansion: 'none',
+        deepLinking: false
+    }
+}
+
 export const swaggerConfig: SwaggerOptions = {
     swagger: {
         info: {
@@ -241,12 +249,4 @@ export const swaggerConfig: SwaggerOptions = {
         }
     }
 
-}
-
-export const swaggerUIConfig: FastifySwaggerUiOptions = {
-    routePrefix: '/docs',
-    uiConfig: {
-        docExpansion: 'none',
-        deepLinking: false
-    }
 }
