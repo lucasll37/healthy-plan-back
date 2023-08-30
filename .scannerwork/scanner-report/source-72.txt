@@ -1,14 +1,15 @@
 import { FastifyInstance } from "fastify";
-import { createTrainerDoc, mockDoc, getTrainerByIdDoc } from "../docs/trainer";
-import { TrainerCreateController, TrainerGetByIdController } from "../controllers/trainer";
+import { mockDoc, bodyEvaluationCreateDoc } from "../docs/bodyEvaluation";
+import { BodyEvaluationCreateController } from "../controllers/bodyEvaluation";
 
-const trainerCreateController = new TrainerCreateController();
-const trainerGetByIdController = new TrainerGetByIdController();
+const bodyEvaluationCreateController = new BodyEvaluationCreateController();
 
-export async function trainerRoutes(app: FastifyInstance) {
-    // app.get("/trainer", mockDoc, ()=>{});
-    app.get("/trainer/:id", getTrainerByIdDoc, trainerGetByIdController.handler);
-    app.post("/trainer", createTrainerDoc, trainerCreateController.handler);
-    // app.patch("/trainer/:id", mockDoc, ()=>{});
-    // app.delete("/trainer/:id", mockDoc, ()=>{});
+export async function bodyEvaluationRoutes(app: FastifyInstance) {
+    // app.get("/body-evaluation", mockDoc, ()=>{});
+    // app.get("/body-evaluation/:id", mockDoc, ()=>{});
+    app.post("/body-evaluation", bodyEvaluationCreateDoc, bodyEvaluationCreateController.handler);
+    // app.patch("/body-evaluation/:id", mockDoc, ()=>{});
+    // app.delete("/body-evaluation/:id", mockDoc, ()=>{});
+
+
 }

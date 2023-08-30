@@ -1,18 +1,6 @@
 import { createClient } from 'redis';
+import { env } from '../env';
 
-const client = createClient({
-    username: '',
-    password: '',
-    socket: {
-        host: 'localhost',
-        port: 6379
-    }
-});
-
-client.on('error', err => console.log('Redis Client Error', err));
-
-export async function redis() {
-    await client.connect();
-    return client;
-}
-
+export const client = createClient({
+    url: env.CACHE_URL
+}).connect();

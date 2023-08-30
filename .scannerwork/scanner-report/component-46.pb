@@ -1,1 +1,1 @@
-. 2tsXhrsrc/services/statusPhoto.ts
+. 2tsX4hrsrc/services/trainer.ts

@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc } from "../docs/training";
+import { mockDoc } from "../docs/statusPhoto";
 
 
-export async function trainingRoutes(app: FastifyInstance) {
-    app.get("/training", mockDoc, ()=>{});
-    app.get("/training/:id", mockDoc, ()=>{});
-    app.post("/training", mockDoc, ()=>{});
-    app.patch("/training/:id", mockDoc, ()=>{});
-    app.delete("/training/:id", mockDoc, ()=>{});
+export async function statusPhotoRoutes(app: FastifyInstance) {
+    app.get("/status-photo", mockDoc, ()=>{});
+    app.get("/status-photo/:id", mockDoc, ()=>{});
+    app.post("/status-photo", mockDoc, ()=>{});
+    app.patch("/status-photo/:id", mockDoc, ()=>{});
+    app.delete("/status-photo/:id", mockDoc, ()=>{});
 }

@@ -1,14 +1,14 @@
 import { FastifyInstance } from "fastify";
-import { AnamnesisCreateDoc, mockDoc } from "../docs/anaminesis";
-import { AnamnesisCreateController } from "../controllers/anaminesis";
+import { createTrainerDoc, mockDoc, getTrainerByIdDoc } from "../docs/trainer";
+import { TrainerCreateController, TrainerGetByIdController } from "../controllers/trainer";
 
-const anamnesisCreateController = new AnamnesisCreateController();
+const trainerCreateController = new TrainerCreateController();
+const trainerGetByIdController = new TrainerGetByIdController();
 
-export async function anamnesisRoutes(app: FastifyInstance) {
-    // app.get("/anamnesis", mockDoc, ()=>{});
-    // app.get("/anamnesis/:id", mockDoc, ()=>{});
-    app.post("/anamnesis", AnamnesisCreateDoc, anamnesisCreateController.handler);
-    // app.patch("/anamnesis/:id", mockDoc, ()=>{});
-    // app.delete("/anamnesis/:id", mockDoc, ()=>{});
-
+export async function trainerRoutes(app: FastifyInstance) {
+    // app.get("/trainer", mockDoc, ()=>{});
+    app.get("/trainer/:id", getTrainerByIdDoc, trainerGetByIdController.handler);
+    app.post("/trainer", createTrainerDoc, trainerCreateController.handler);
+    // app.patch("/trainer/:id", mockDoc, ()=>{});
+    // app.delete("/trainer/:id", mockDoc, ()=>{});
 }

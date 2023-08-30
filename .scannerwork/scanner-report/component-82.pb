@@ -1,1 +1,1 @@
-R 2tsXhr src/routers/trainingEvolution.ts
+R 2tsXhrsrc/routers/session.ts

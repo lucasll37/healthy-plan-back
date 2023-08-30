@@ -1,1 +1,1 @@
-> 2tsXhr!src/errors/trainer-dont-exists.ts
+> 2tsXhr!src/errors/invalid-credentials.ts

@@ -1,11 +1,6 @@
-import { FastifyInstance } from "fastify";
-import { mockDoc } from "../docs/methodExercise";
+import { PrismaClient } from "@prisma/client";
+import { env } from "../env";
 
-
-export async function methodExerciseRoutes(app: FastifyInstance) {
-    app.get("/method-exercise", mockDoc, ()=>{});
-    app.get("/method-exercise/:id", mockDoc, ()=>{});
-    app.post("/method-exercise", mockDoc, ()=>{});
-    app.patch("/method-exercise/:id", mockDoc, ()=>{});
-    app.delete("/method-exercise/:id", mockDoc, ()=>{});
-}
+export const prisma = new PrismaClient({
+    log: env.NODE_ENV === "dev" ? ["query"]: [],
+});

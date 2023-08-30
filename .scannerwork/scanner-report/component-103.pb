@@ -1,1 +1,1 @@
-g 2tsX7hrsrc/docs/address.ts
+g 2tsXhrsrc/docs/exercise.ts

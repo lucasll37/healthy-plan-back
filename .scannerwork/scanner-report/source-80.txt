@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc } from "../docs/flexEvaluation";
+import { mockDoc } from "../docs/training";
 
 
-export async function flexEvaluationRoutes(app: FastifyInstance) {
-    app.get("/flex-valuation", mockDoc, ()=>{});
-    app.get("/flex-valuation/:id", mockDoc, ()=>{});
-    app.post("/flex-valuation", mockDoc, ()=>{});
-    app.patch("/flex-valuation/:id", mockDoc, ()=>{});
-    app.delete("/flex-valuation/:id", mockDoc, ()=>{});
+export async function trainingRoutes(app: FastifyInstance) {
+    app.get("/training", mockDoc, ()=>{});
+    app.get("/training/:id", mockDoc, ()=>{});
+    app.post("/training", mockDoc, ()=>{});
+    app.patch("/training/:id", mockDoc, ()=>{});
+    app.delete("/training/:id", mockDoc, ()=>{});
 }

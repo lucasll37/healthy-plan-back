@@ -19,8 +19,8 @@ Bundled analyzers:
   - VB.NET Code Quality and Security 9.3.0.71466 (vbnet)
   - Configuration detection fot Code Quality and Security 1.2.0.267 (config)
 Global server settings:
-  - sonar.core.id=147B411E-AYpHvZzAFE-_2jMVTxfU
-  - sonar.core.startTime=2023-08-30T18:38:42+0000
+  - sonar.core.id=147B411E-AYpIgWtAGSCfSLCTCG6T
+  - sonar.core.startTime=2023-08-30T22:12:34+0000
   - sonar.forceAuthentication=true
 Project server settings:
 Project scanner properties:

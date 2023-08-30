@@ -1,7 +1,7 @@
-export class AthleteAndTrainerDontMeet extends Error {
+export class AthleteDontExistsError extends Error {
     public code = 400;
 
     constructor() {
-        super("Athlete And Trainer Don't Meet");
+        super("Athlete don't exists");
     }
 }

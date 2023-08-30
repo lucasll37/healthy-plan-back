@@ -1,1 +1,1 @@
-M 2tsXhrsrc/routers/training.ts
+M 2tsXhrsrc/routers/statusPhoto.ts

@@ -1,1 +1,1 @@
-i 2tsXfhrsrc/docs/anaminesis.ts
+i 2tsXhrsrc/docs/training.ts

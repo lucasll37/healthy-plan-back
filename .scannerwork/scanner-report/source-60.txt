@@ -1,7 +1,7 @@
-export class InvalidCredenctialsError extends Error {
+export class EmailAlreadyExistsError extends Error {
     public code = 400;
 
     constructor() {
-        super("Invalid Credentials Error");
+        super("User already exists");
     }
 }

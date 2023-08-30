@@ -1,105 +1,26 @@
-export const athleteGetByIdDoc = {
+export const sessionDoc = {
     schema: {
-        description: "Get athlete by Id",
-        tags: ["Athlete"],
-        summary: "Get athlete by Id",
-        params: {
-            type: "object",
-            properties: {
-                id: { type: "string", format: "uuid"}
-            },
-            required: ["id"]
-        },
-        response: {
-            200: {
-                description: "Successful response. Personal trainer created",
-                type: "object",
-                properties: {
-                    id: { type: "string", format: "uuid" },
-                    name: {type: "string"},
-                    surname: {type: "string"},
-                    phone: {type: "string"},
-                    email: {type: "string", format: "email"},
-                    password: {type: "string"}
-                }
-            },
-            400: {
-                description: "Bad Request response. Invalid data",
-                type: "object",
-                properties: {
-                    error: { type: "string" }
-                }
-            },
-            500: {
-                description: "testestsetse",
-                type: "object",
-                properties: {
-                    error: { type: "string" }
-                }
-            }
-        },
-        security: [{ apiKey: [] }]
-    }
-};
-
-export const athleteCreateDoc = {
-    schema: {
-        description: "Crete a new athlete",
-        tags: ["Athlete"],
-        summary: "Crete a new athlete",
+        description: "Create session for personal trainer",
+        tags: ["Session"],
+        summary: "Create session for personal trainer",
         body: {
             type: "object",
             properties: {
-                name: {type: "string"},
-                surname: {type: "string"},
-                phone: {type: "string"},
                 email: {type: "string", format: "email"},
-                sex: {type: "string"},
-                birthDate: {type: "string", format: "date"},
-                avatar: {type: "string"},
-                observation: {type: "string"},
-                addressInfo: {type: "string"},
-                addressNumber: {type: "string"},
-                cep: {type: "string"},
-                city: {type: "string"},
-                state: {type: "string"}
+                password: {type: "string"}
             },
-            required: [
-                "name",
-                "surname",
-                "phone",
-                "email",
-                "sex",
-                "birthDate",
-                "addressInfo",
-                "addressNumber",
-                "cep",
-                "city",
-                "state"
-            ]
+            required: ["email", "password"]
         },
         response: {
             201: {
                 description: "Successful response. Personal trainer created",
                 type: "object",
                 properties: {
-                    id: { type: "string", format: "uuid" },
-                    name: {type: "string", example: "John"},
-                    surname: {type: "string", example: "Doe"},
-                    phone: {type: "string", example: "123456789"},
-                    email: {type: "string", example: "john@doe.com"},
-                    password: {type: "string"}
+                    token: { type: "string"}
                 }
             },
             400: {
                 description: "Bad Request response. Invalid data",
-                type: "object",
-                properties: {
-                    error: { type: "string" }
-                }
-            },
-            409: {
-                description: "Conflict response. Personal trainer already exists",
                 type: "object",
                 properties: {
                     error: { type: "string" }
@@ -112,7 +33,37 @@ export const athleteCreateDoc = {
                     error: { type: "string" }
                 }
             }
-        },
-        security: [{ apiKey: [] }]
+        }
+    }
+};
+
+export const refreshTokenDoc = {
+    schema: {
+        description: "Execute a refresh token",
+        tags: ["Session"],
+        summary: "Execute a refresh token and return a new token without the need to login again",
+        response: {
+            201: {
+                description: "Successful response. Token trainer created",
+                type: "object",
+                properties: {
+                    token: { type: "string"}
+                }
+            },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "testestsetse",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        }
     }
 };

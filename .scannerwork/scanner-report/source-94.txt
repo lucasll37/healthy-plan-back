@@ -1,109 +1,95 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma";
-import { AthleteCreateService, AthleteGetByIdService } from "../services/athlete";
-import { Prisma } from "@prisma/client";
+import { TrainerRepositoryPrisma } from "../repositories/trainer/prisma/TrainerRepositoryPrisma";
+import { AuthenticateService } from "../services/session";
 import { z } from "zod";
-import { EmailAlreadyExistsError } from "../errors/email-already-exists";
-import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
+import { InvalidCredenctialsError } from "../errors/invalid-credentials";
 
 
-export class AthleteCreateController {
+export class AuthenticateController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        await request.jwtVerify();
-
-        
-        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
-        const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma);
+        const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
+        const authenticateService = new AuthenticateService(trainerRepositoryPrisma);
     
-        const athleteBodySchema = z.object({
-            id: z.string().optional(),
-            name: z.string(),
-            surname: z.string(),
-            phone: z.string(),
-            avatar: z.string().optional(),
+        const authenticateBodySchema = z.object({
             email: z.string().email(),
-            sex: z.string(),
-            observation: z.string().optional(),
-            birthDate: z.string().refine(stringData => new Date(stringData)),
-            addressInfo: z.string(),
-            addressNumber: z.string(),
-            city: z.string(),
-            state: z.string(),
-            cep: z.string()
+            password: z.string().min(6),
         });
-
+            
         
-        try {
-            const requestBodyParsed = athleteBodySchema.parse(request.body);
+        try {  
+            const { email, password } = authenticateBodySchema.parse(request.body);
+            const { trainer } = await authenticateService.execute({ email, password });
 
-            const data: Prisma.AthleteCreateInput = {
-                name: requestBodyParsed.name,
-                surname: requestBodyParsed.surname,
-                phone: requestBodyParsed.phone,
-                avatar: requestBodyParsed.avatar,
-                email: requestBodyParsed.email,
-                sex: requestBodyParsed.sex,
-                birthDate: new Date(requestBodyParsed.birthDate),
-                trainer: {
-                    connect: {
-                        id: request.user.sub
-                    }
-                },
-                address: {
-                    create: {
-                        addressInfo: requestBodyParsed.addressInfo,
-                        addressNumber: requestBodyParsed.addressInfo,
-                        cep: requestBodyParsed.cep,
-                        city: requestBodyParsed.city,
-                        state: requestBodyParsed.state
-                    }
+            const token = await reply.jwtSign({
+                // role: trainer.role,
+            }, {
+                sign: {
+                    sub: trainer.id,
                 }
-            };
-            
-            const athlete = await athleteCreateService.execute(data);
-            return reply.status(200).send({athlete: athlete});    
+            });
+
+            const refreshToken = await reply.jwtSign({
+                // role: trainer.role,
+            }, {
+                sign: {
+                    sub: trainer.id,
+                    expiresIn: "7d"
+                }
+            });
+
+            return reply
+                .setCookie("refreshToken", refreshToken, {
+                    path: "/",
+                    secure: true, // https? set true
+                    sameSite: true, // somente acessado pelo mesmo site
+                    httpOnly: true, // somente acessado pelo backend
+                })
+                .status(200).send({ token });
         }
-        
-        catch(error) {
-            if(error instanceof EmailAlreadyExistsError) {
-                return reply.status(error.code).send(error);
-            }
     
-            throw error;
-        }
-        
-    }
-}
-
-export class AthleteGetByIdController {
-
-    async handler(request: FastifyRequest, reply: FastifyReply) {
-
-        await request.jwtVerify();
-
-        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
-        const athleteGetByIdService = new AthleteGetByIdService(athleteRepositoryPrisma);
-    
-        const registerBodySchema = z.object({
-            id: z.string()
-        });
-            
-        try {
-            const { id } = registerBodySchema.parse(request.params);
-            const athlete = await athleteGetByIdService.execute(id);
-            return reply.status(200).send(athlete);
-        }
-        
         catch(error) {
-            if(error instanceof AthleteDontExistsError) {
+            if(error instanceof InvalidCredenctialsError) {
                 return reply.status(error.code).send({
                     error: error.message
                 });
             }
     
             throw error;
-        } 
+        }
+    }
+}
+
+export class RefreshTokenController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+        await request.jwtVerify({ onlyCookie: true });
+
+        const token = await reply.jwtSign({
+            // role: trainer.role,
+        }, {
+            sign: {
+                sub: request.user.sub,
+            }
+        });
+
+        const refreshToken = await reply.jwtSign({
+            // role: trainer.role,
+        }, {
+            sign: {
+                sub: request.user.sub,
+                expiresIn: "1d"
+            }
+        });
+
+        return reply
+            .setCookie("refreshToken", refreshToken, {
+                path: "/",
+                secure: true, // https? set true
+                sameSite: true, // somente acessado pelo mesmo site
+                httpOnly: true, // somente acessado pelo backend
+            })
+            .status(200).send({ token });
     }
 }

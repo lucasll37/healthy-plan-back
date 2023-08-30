@@ -4,9 +4,14 @@ import { ITrainerRepository } from "../repositories/trainer/ITrainerRepository";
 import { Trainer, Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { CacheRedis } from "@/cache/redis/CacheRedis";
+import { ICache } from "@/cache/ICache";
 
 export class TrainerCreateService {
-    constructor(private trainerRepository: ITrainerRepository) { }
+    private cache: ICache;
+
+    constructor(private trainerRepository: ITrainerRepository) {
+        this.cache = new CacheRedis();
+    }
 
     async execute(data: Prisma.TrainerCreateInput): Promise<Trainer> {
         try {
@@ -14,7 +19,7 @@ export class TrainerCreateService {
                 ...data,
                 password: await bcrypt.hash(data.password, 6),
             });
-            new CacheRedis().set("trainer", trainer.id, trainer);
+            this.cache.set<Trainer>(trainer.id, trainer);
             return trainer;
         }
 
@@ -25,10 +30,18 @@ export class TrainerCreateService {
 }
 
 export class TrainerGetByIdService {
-    constructor(private trainerRepository: ITrainerRepository) { }
+    private cache: ICache;
+
+    constructor(private trainerRepository: ITrainerRepository) {
+        this.cache = new CacheRedis();
+    }
 
     async execute(id: string): Promise<Trainer> {
-        const trainer = await this.trainerRepository.findById(id);
+        const trainer =
+            await this.cache.get<Trainer>(id)
+            ??
+            await this.trainerRepository.findById(id);
+
         if (!trainer) {
             throw new TrainerDontExistsError();
         }

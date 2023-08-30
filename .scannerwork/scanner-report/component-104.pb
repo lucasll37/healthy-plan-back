@@ -1,1 +1,1 @@
-h 2tsXFhrsrc/docs/session.ts
+h 2tsXhrsrc/docs/statusPhoto.ts

@@ -1,15 +1,22 @@
-import { ICache, IEntity } from "../ICache";
-import { redis } from "@/libs/redis";
+import { ICache } from "../ICache";
+import { client } from "@/libs/redis";
 
 export class CacheRedis implements ICache {
-    async set(entity: IEntity, id: string, obj: Object): Promise<void> {
-        const client = await redis();
-        await client.set(`${entity}-${id}`, JSON.stringify(obj));
+    async set<T>(id: string, obj: Object): Promise<void> {
+        try {
+            await client.set(`${id}`, JSON.stringify(obj));
+        }
+        catch { return }
     }
-    async get(entity: IEntity, id: string): Promise<Object | null> {
-        const client = await redis();
-        const value = await client.get(`${entity}-${id}`);
-        if(value) return JSON.parse(value);
-        return null;
+    async get<T>(id: string): Promise<T | null> {
+        try {
+            const value = await client.get(`${id}`);
+            if(value) {
+                return JSON.parse(value);
+            }
+
+            return null;
+        }
+        catch { return null }
     }
 }

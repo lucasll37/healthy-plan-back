@@ -1,1 +1,1 @@
-8 2tsX5hrsrc/mocks/index.ts
+8 2tsXhrsrc/config/cors.ts

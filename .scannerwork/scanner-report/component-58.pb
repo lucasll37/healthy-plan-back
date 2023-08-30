@@ -1,1 +1,1 @@
-: 2tsXhr"src/errors/email-already-exists.ts
+: 2tsX5hrsrc/mocks/index.ts

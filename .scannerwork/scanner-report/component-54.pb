@@ -1,1 +1,1 @@
-6 2tsXhrsrc/config/cors.ts
+6 2tsX-hrsrc/services/athlete.ts

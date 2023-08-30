@@ -1,1 +1,1 @@
-X 2tsXhrsrc/controllers/statusPhoto.ts
+X 2tsXhr!src/controllers/methodExercise.ts

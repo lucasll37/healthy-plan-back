@@ -1,1 +1,1 @@
-W 2tsXhrsrc/controllers/exercise.ts
+W 2tsXhrsrc/controllers/target.ts

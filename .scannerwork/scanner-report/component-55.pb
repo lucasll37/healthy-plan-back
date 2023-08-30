@@ -1,1 +1,1 @@
-7 2tsXrhrsrc/mocks/data.ts
+7 2tsXhr!src/services/trainingEvolution.ts

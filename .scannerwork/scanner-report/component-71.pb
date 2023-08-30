@@ -1,1 +1,1 @@
-G 2tsXhrsrc/routers/methodExercise.ts
+G 2tsXhrsrc/libs/prisma.ts

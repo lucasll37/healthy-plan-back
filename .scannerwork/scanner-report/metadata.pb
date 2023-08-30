@@ -1,91 +1,91 @@
-àÕú½¤1meu_projeto_typescript(:B
+£Ò‰Ä¤1meu_projeto_typescript(:B
 
 kubernetes4
-AYpHvgh1FE-_2jMVT9fS	Sonar way
-kubernetes °‰ø½¤1:4
+AYpIgdKXGSCfSLCTCS6R	Sonar way
+kubernetes °£‡Ä¤1:4
 css-
-AYpHvgjZFE-_2jMVT9gR	Sonar waycss ˜‘ø½¤1:8
+AYpIgdLZGSCfSLCTCS7Q	Sonar waycss °£‡Ä¤1:8
 scala/
-AYpHvgkWFE-_2jMVT9hu	Sonar wayscala ˜‘ø½¤1:4
+AYpIgdMWGSCfSLCTCS8t	Sonar wayscala °£‡Ä¤1:4
 jsp-
-AYpHvglFFE-_2jMVT9iO	Sonar wayjsp ˜‘ø½¤1:2
+AYpIgdNIGSCfSLCTCS9N	Sonar wayjsp °£‡Ä¤1:2
 go,
-AYpHvglMFE-_2jMVT9jJ	Sonar waygo ˜‘ø½¤1::
+AYpIgdNPGSCfSLCTCS-I	Sonar waygo °£‡Ä¤1::
 kotlin0
-AYpHvgmcFE-_2jMVT9nO	Sonar waykotlin ˜‘ø½¤1:2
+AYpIgdOaGSCfSLCTCTCN	Sonar waykotlin °£‡Ä¤1:2
 js,
-AYpHvgoFFE-_2jMVT9wk	Sonar wayjs ˜‘ø½¤1:2
+AYpIgdP_GSCfSLCTCTLj	Sonar wayjs °£‡Ä¤1:2
 py,
-AYpHvgp6FE-_2jMVT96q	Sonar waypy ˜‘ø½¤1:<
+AYpIgdSKGSCfSLCTCTVp	Sonar waypy °£‡Ä¤1:<
 secrets1
-AYpHvgrVFE-_2jMVT999	Sonar waysecrets ˜‘ø½¤1::
+AYpIgdTpGSCfSLCTCTY8	Sonar waysecrets °£‡Ä¤1::
 docker0
-AYpHvgssFE-_2jMVT-AV	Sonar waydocker ˜‘ø½¤1:6
+AYpIgdVBGSCfSLCTCTbU	Sonar waydocker °£‡Ä¤1:6
 ruby.
-AYpHvgr-FE-_2jMVT9_K	Sonar wayruby ˜‘ø½¤1:2
+AYpIgdUWGSCfSLCTCTaJ	Sonar wayruby °£‡Ä¤1:2
 cs,
-AYpHvguSFE-_2jMVT-Jt	Sonar waycs ˜‘ø½¤1:6
+AYpIgdWLGSCfSLCTCTks	Sonar waycs °£‡Ä¤1:6
 java.
-AYpHvgwyFE-_2jMVT-dv	Sonar wayjava ˜‘ø½¤1:4
+AYpIgdY8GSCfSLCTCT4u	Sonar wayjava ˜«‡Ä¤1:4
 web-
-AYpHvgyqFE-_2jMVT-mM	Sonar wayweb €™ø½¤1:6
+AYpIgdbaGSCfSLCTCUBL	Sonar wayweb ˜«‡Ä¤1:6
 flex.
-AYpHvg0CFE-_2jMVT-pa	Sonar wayflex €™ø½¤1:4
+AYpIgdc7GSCfSLCTCUEZ	Sonar wayflex ˜«‡Ä¤1:4
 xml-
-AYpHvgzLFE-_2jMVT-nb	Sonar wayxml €™ø½¤1:6
+AYpIgdcNGSCfSLCTCUCa	Sonar wayxml ˜«‡Ä¤1:6
 json.
-AYpHvg0rFE-_2jMVT-qL	Sonar wayjson €™ø½¤1:4
+AYpIgddzGSCfSLCTCUFK	Sonar wayjson ˜«‡Ä¤1:4
 php-
-AYpHvg1GFE-_2jMVT-wJ	Sonar wayphp €™ø½¤1:@
+AYpIgdefGSCfSLCTCULI	Sonar wayphp ˜«‡Ä¤1:@
 	terraform3
-AYpHvg2TFE-_2jMVT-0m	Sonar way	terraform €™ø½¤1:6
+AYpIgdfnGSCfSLCTCUPl	Sonar way	terraform ˜«‡Ä¤1:6
 text.
-AYpHvg25FE-_2jMVT-1c	Sonar waytext €™ø½¤1:8
+AYpIgdgVGSCfSLCTCUQb	Sonar waytext ˜«‡Ä¤1:8
 vbnet/
-AYpHvg3uFE-_2jMVT-6H	Sonar wayvbnet €™ø½¤1:J
+AYpIgdhJGSCfSLCTCUVG	Sonar wayvbnet ˜«‡Ä¤1:J
 cloudformation8
-AYpHvg4lFE-_2jMVT-9N	Sonar waycloudformation €™ø½¤1:2
+AYpIgdiLGSCfSLCTCUYM	Sonar waycloudformation ˜«‡Ä¤1:2
 ts,
-AYpHvg5rFE-_2jMVT_FS	Sonar wayts €™ø½¤1:6
+AYpIgdjrGSCfSLCTCUgR	Sonar wayts ˜«‡Ä¤1:6
 yaml.
-AYpHvg5PFE-_2jMVT-9q	Sonar wayyaml €™ø½¤1B
+AYpIgdi4GSCfSLCTCUYp	Sonar wayyaml ˜«‡Ä¤1B
 python
-pythonãø½¤1B
+pythonï²‡Ä¤1B
 cayc
-caycäø½¤1B
+caycð²‡Ä¤1B
 go
-goäø½¤1B
+goñ²‡Ä¤1B
 jacoco
-jacocoäø½¤1B
+jacocoñ²‡Ä¤1B
 kotlin
-kotlinäø½¤1B
+kotlinð²‡Ä¤1B
 iac
-iacäø½¤1B!
+iacñ²‡Ä¤1B!
 
 javascript
 
-javascriptäø½¤1B
+javascriptñ²‡Ä¤1B
 ruby
-rubyäø½¤1B!
+rubyñ²‡Ä¤1B!
 
 sonarscala
 
-sonarscalaäø½¤1B
+sonarscalañ²‡Ä¤1B
 csharp
-csharpäø½¤1B
+csharpñ²‡Ä¤1B
 java
-javaäø½¤1B
+javañ²‡Ä¤1B
 web
-webåø½¤1B
+webñ²‡Ä¤1B
 flex
-flexåø½¤1B
+flexñ²‡Ä¤1B
 xml
-xmlåø½¤1B
+xmlñ²‡Ä¤1B
 php
-phpåø½¤1B
+phpò²‡Ä¤1B
 text
-textèø½¤1B
+textò²‡Ä¤1B
 vbnet
-vbnetìø½¤1B
+vbnetô²‡Ä¤1B
 config
-configíø½¤1j(26ebd1f3fe85f1448d890ebbcd928881ff4005ba‚1.0
+configô²‡Ä¤1j(de7ec4ed93a4c090ed481a81576f4b12368b05c7‚1.0

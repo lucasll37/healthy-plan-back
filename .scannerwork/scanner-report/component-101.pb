@@ -1,1 +1,1 @@
-e 2tsXhrsrc/docs/statusPhoto.ts
+e 2tsXhrsrc/docs/methodExercise.ts

@@ -1,18 +1,4 @@
-import "dotenv/config";
-import { z } from "zod";
-
-const envSchema = z.object({
-    NODE_ENV: z.enum(["dev",  "test", "production"]).default("dev"),
-    PORT: z.coerce.number().default(3000),
-    JWT_SECRET: z.string().default("dummy"),
-    DATABASE_URL: z.string()
-});
-
-const _env = envSchema.safeParse(process.env);
-
-if(!_env.success) {
-    console.error("Invalid enviroment variables", _env.error.format());
-    throw new Error("Invalid enviroment variables");
+export interface ICache {
+    set<T>(id: string, obj: Object): Promise<void>
+    get<T>(id: string): Promise<T | null>
 }
-
-export const env = _env.data;

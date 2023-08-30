@@ -1,1 +1,1 @@
-D 2tsXhrsrc/libs/prisma.ts
+D 2tsXhrsrc/libs/redis.ts

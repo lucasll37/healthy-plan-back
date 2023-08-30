@@ -1,1 +1,1 @@
-[ 2tsX_hrsrc/controllers/session.ts
+[ 2tsXhrsrc/controllers/statusPhoto.ts

@@ -1,1 +1,1 @@
-- 2tsXhrsrc/services/exercise.ts
+- 2tsXhrsrc/services/methodExercise.ts

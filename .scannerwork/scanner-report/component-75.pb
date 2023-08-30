@@ -1,1 +1,1 @@
-K 2tsXhrsrc/routers/anamnesis.ts
+K 2tsXhrsrc/routers/trainer.ts

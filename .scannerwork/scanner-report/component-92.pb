@@ -1,1 +1,1 @@
-\ 2tsX`hrsrc/controllers/anaminesis.ts
+\ 2tsXhrsrc/controllers/training.ts

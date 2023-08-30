@@ -1,1 +1,1 @@
-< 2tsXhr!src/errors/invalid-credentials.ts
+< 2tsXhr"src/errors/email-already-exists.ts

@@ -1,11 +1,13 @@
-import { FastifyInstance } from "fastify";
-import { mockDoc } from "../docs/target";
+import { FastifyJWTOptions } from "@fastify/jwt";
+import { env } from "../env";
 
-
-export async function targetRoutes(app: FastifyInstance) {
-    app.get("/target", mockDoc, ()=>{});
-    app.get("/target/:id", mockDoc, ()=>{});
-    app.post("/target", mockDoc, ()=>{});
-    app.patch("/target/:id", mockDoc, ()=>{});
-    app.delete("/target/:id", mockDoc, ()=>{});
-}
+export const JWTConfig: FastifyJWTOptions = {
+    secret: env.JWT_SECRET,
+    cookie: {
+        signed: false,
+        cookieName: "refreshToken",
+    },
+    sign: {
+        expiresIn: "10m",
+    }
+};

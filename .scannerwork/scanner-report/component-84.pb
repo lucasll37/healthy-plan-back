@@ -1,1 +1,1 @@
-T 2tsXhrsrc/controllers/target.ts
+T 2tsXhrsrc/routers/athlete.ts

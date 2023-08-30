@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc } from "../docs/exercise";
+import { mockDoc } from "../docs/target";
 
 
-export async function exerciseRoutes(app: FastifyInstance) {
-    app.get("/exercise", mockDoc, ()=>{});
-    app.get("/exercise/:id", mockDoc, ()=>{});
-    app.post("/exercise", mockDoc, ()=>{});
-    app.patch("/exercise/:id", mockDoc, ()=>{});
-    app.delete("/exercise/:id", mockDoc, ()=>{});
+export async function targetRoutes(app: FastifyInstance) {
+    app.get("/target", mockDoc, ()=>{});
+    app.get("/target/:id", mockDoc, ()=>{});
+    app.post("/target", mockDoc, ()=>{});
+    app.patch("/target/:id", mockDoc, ()=>{});
+    app.delete("/target/:id", mockDoc, ()=>{});
 }

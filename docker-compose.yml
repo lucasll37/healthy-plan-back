@@ -28,22 +28,24 @@ services:
         restart: always
         environment:
         - DATABASE_URL=postgresql://root:docker@database:5432/api-healthy-plan
+        - CACHE_URL=redis://redis:6379
         - NODE_ENV=dev
 
         depends_on:
         - database
+        - redis
         command: ["./migration.sh"]
         networks:
         - my-network
 
-    # sonarqube:
-    #     image: sonarqube:latest
-    #     ports:
-    #     - "9000:9000"
-    #     - "9092:9092"
-    #     restart: always
-    #     networks:
-    #     - my-network
+    sonarqube:
+        image: sonarqube:latest
+        ports:
+        - "9000:9000"
+        - "9092:9092"
+        restart: always
+        networks:
+        - my-network
 
 networks:
     my-network:

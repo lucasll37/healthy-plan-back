@@ -1,1 +1,1 @@
-U 2tsXhr!src/controllers/methodExercise.ts
+U 2tsXhr src/routers/trainingEvolution.ts

@@ -1,2 +1,1 @@
-@ 2tsXhr
-src/app.ts
+@ 2tsXhr!src/errors/trainer-dont-exists.ts

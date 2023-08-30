@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc } from "../docs/trainingEvolution";
+import { AuthenticateController, RefreshTokenController } from "../controllers/session";
+import { sessionDoc, refreshTokenDoc } from "../docs/session";
 
+const authenticateController = new AuthenticateController();
+const refreshTokenController = new RefreshTokenController();
 
-export async function trainingEvolutionRoutes(app: FastifyInstance) {
-    app.get("/training-evolution", mockDoc, ()=>{});
-    app.get("/training-evolution/:id", mockDoc, ()=>{});
-    app.post("/training-evolution", mockDoc, ()=>{});
-    app.patch("/training-evolution/:id", mockDoc, ()=>{});
-    app.delete("/training-evolution/:id", mockDoc, ()=>{});
+export async function authenticateRoutes(app: FastifyInstance) {
+    app.post("/session", sessionDoc, authenticateController.handler);
+    app.patch("/session/refresh-token", refreshTokenDoc, refreshTokenController.handler);
 }
