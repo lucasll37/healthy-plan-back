@@ -1,33 +1,50 @@
 version: '3.1'
 
 services:
-  database:
-    image: 'bitnami/postgresql:latest'
-    ports:
-    - 5432:5432
-    environment:
-      - POSTGRESQL_USERNAME=root
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=api-healthy-plan
-    networks:
-      - my-network
+    database:
+        image: 'bitnami/postgresql:latest'
+        ports:
+        - 5432:5432
+        restart: always
+        environment:
+        - POSTGRESQL_USERNAME=root
+        - POSTGRESQL_PASSWORD=docker
+        - POSTGRESQL_DATABASE=api-healthy-plan
+        networks:
+        - my-network
 
-  api:
-    build: .
-    ports:
-      - 3000:3000
-    environment:
-      - DATABASE_URL=postgresql://root:docker@database:5432/api-healthy-plan
-      - NODE_ENV=dev
+    redis:
+        image: 'redis:latest'
+        ports:
+        - 6379:6379
+        restart: always
+        networks:
+        - my-network
 
-    depends_on:
-      - database
-    command: ["./migration.sh"]
-    networks:
-    - my-network
+    api:
+        build: .
+        ports:
+        - 3000:3000
+        restart: always
+        environment:
+        - DATABASE_URL=postgresql://root:docker@database:5432/api-healthy-plan
+        - NODE_ENV=dev
+
+        depends_on:
+        - database
+        command: ["./migration.sh"]
+        networks:
+        - my-network
+
+    # sonarqube:
+    #     image: sonarqube:latest
+    #     ports:
+    #     - "9000:9000"
+    #     - "9092:9092"
+    #     restart: always
+    #     networks:
+    #     - my-network
 
 networks:
-  my-network:
-    driver: bridge
-
-
+    my-network:
+        driver: bridge

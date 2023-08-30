@@ -1,0 +1,1 @@
+ 2tsXhr6src/repositories/statusPhoto/IStatusPhotoRepository.ts

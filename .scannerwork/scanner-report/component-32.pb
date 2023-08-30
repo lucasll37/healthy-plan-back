@@ -1,0 +1,1 @@
+  2tsX(hr>src/repositories/trainer/inMemory/TrainerRepositoryInMemory.ts
