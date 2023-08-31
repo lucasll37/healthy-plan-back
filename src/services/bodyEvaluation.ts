@@ -16,7 +16,7 @@ export class BodyEvaluationCreateService {
     constructor(
         private bodyEvaluationRepository: IBodyValuationRepository,
         private athleteRepository: IAthleteRepository
-        ) {
+    ) {
         this.cache = new CacheRedis();
     }
 

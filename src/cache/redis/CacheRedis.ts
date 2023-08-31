@@ -2,11 +2,11 @@ import { ICache } from "../ICache";
 import { client } from "@/libs/redis";
 
 export class CacheRedis implements ICache {
-    async set<T>(id: string, obj: Object): Promise<void> {
+    async set<T>(id: string, obj: T): Promise<void> {
         try {
             await client.set(`${id}`, JSON.stringify(obj));
         }
-        catch { return }
+        catch { return; }
     }
     async get<T>(id: string): Promise<T | null> {
         try {
@@ -17,6 +17,6 @@ export class CacheRedis implements ICache {
 
             return null;
         }
-        catch { return null }
+        catch { return null; }
     }
 }

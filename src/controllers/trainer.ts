@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { TrainerRepositoryPrisma } from "@/repositories/trainer/prisma/TrainerRepositoryPrisma";
 import { TrainerCreateService, TrainerGetByIdService } from "@/services/trainer";
-import { Prisma, Trainer } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { EmailAlreadyExistsError } from "@/errors/email-already-exists";
 import { TrainerDontExistsError } from "@/errors/trainer-dont-exists";

@@ -1,8 +1,6 @@
 import { BodyEvaluation, Prisma } from "@prisma/client";
 import { IBodyValuationRepository } from "../IBodyEvaluationRepository";
 
-type IData = Prisma.AddressCreateArgs;
-
 export class BodyEvaluationRepositoryInMemory implements IBodyValuationRepository {
 
     private bodyEvaluations: BodyEvaluation[] = [];

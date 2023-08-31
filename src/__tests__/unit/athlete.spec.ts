@@ -4,10 +4,12 @@ import { IAthleteRepository } from "../../repositories/athlete/IAthleteRepositor
 import { AthleteRepositoryInMemory } from "../../repositories/athlete/inMemory/AthleteRepositoryInMemory";
 import { randomUUID } from "crypto";
 import { EmailAlreadyExistsError } from "../../errors/email-already-exists";
+import { Prisma } from "@prisma/client";
+
 
 let athleteRepository: IAthleteRepository;
 let sut: AthleteCreateService;
-let athlete: any;
+let athlete: Prisma.AthleteCreateInput;
 
 describe("Athlete Use Case", () => {
 
@@ -40,9 +42,9 @@ describe("Athlete Use Case", () => {
                 }
             }
         };
-        
+
     });
-    
+
     beforeEach(() => {
         athleteRepository = new AthleteRepositoryInMemory();
         sut = new AthleteCreateService(athleteRepository);
