@@ -23,24 +23,98 @@ With the application running in development mode (default):
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 
+## Docker utils:
+- Force stop all containers:
+    ```
+    docker stop -f $(docker ps -a -q)
+    ```
+- Force remove all containers:
+    ```
+    docker rm -f $(docker ps -a -q)
+    ```
+- Force stop and remove all containers:
+    ```
+    docker stop -f $(docker ps -a -q) && docker rm -f $(docker ps -a -q)
+    ```
+
 ## How to run
-- Clone the repository
-- Run `npm install` to install all dependencies.
+- Clone the repository (ssh):
+    ```
+    git clone git@github.com:lucasll37/healthy-plan-back.git
+    ```
+    ou (https):
+    ```
+    git clone https://github.com/lucasll37/healthy-plan-back.git
+    ```
+- Install all dependencies:
+    ```
+    npm install
+    ```
 - Make sure docker is up and running.
-- Run `make init` to start the database (with docker turned on).
+
+- Start the relational database:
+    ```
+    docker run -p 5432:5432 -e POSTGRESQL_USERNAME=root -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=api-healthy-plan -d bitnami/postgresql:latest
+    ```
+- Start the cache database (optional):
+    ```
+    docker run -p 6379:6379 -d redis:alpine
+    ```
+- Apply database schema (migrations):
+    ```
+    npm run prisma:generate
+    npm run prisma:deploy
+    ```
+- Build the application:
+    ```
+    npm run build
+    ```
+- Start the application:
+    ```
+    npm run start
+    ```
 - Consume API as per routes [documentation](http://localhost:3000/docs/).
 
 ## How to run tests
-- Run `make test` to run all tests.
-- Run `make test-unit` to run unitary tests.
-- Run `make test-e2e` to run end-to-end tests.
+- Run all tests (unit + end-to-end):
+    ```
+    npm run test
+    ```
+- Run unit tests:
+    ```
+    npm run test:unit
+    ```
+- Run e2e (end-to-end) tests:
+    ```
+    npm run test:e2e
+    ```
+- Run code static analysis:
+    - Start Sonarqube aplicattion:
+        ```
+        docker run -p 9000:9000 -p 9092:9092 -d sonarqube:latest
+        ```
+    - Start Sonarqube scanner:
+        ```
+        npm run sonar:scanner
+        ```
+    - Afer scan, access Sonarqube dashboard:
+        ```
+        http://localhost:9000/
+        ```
+        with credentials:
+        ```
+        user: admin
+        password: admin
+        ```
 
+    Obs.: The e2e tests need the relational database application to be running.
 ## Development
-- Run `make db` to start the database (with docker turned on) only with prisma generate e migrations.
-
-- Run `make dev` to start the database (with docker turned on) and the server and init backend application in development mode.
-
-- Run `make clear` stops processes started by make init, deleting generated containers
+- Execute the initial steps of *How to run*, replacing `npm run prisma:generate` e
+`npm run prisma:deploy` with the commands:
+    ```
+    npm run prisma:generate
+    npm run dev
+    ```
 
 ## Environment variables
 ### Create a `.env` file in the root of the project and fill in the variables according to the `.env.example` file.

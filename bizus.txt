@@ -1,3 +1,5 @@
 docker run -p 5432:5432 -e POSTGRESQL_USERNAME=root -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=api-healthy-plan -d bitnami/postgresql:latest
 
 docker run -p 6379:6379 -d redis:latest
+
+docker run -p 9000:9000 -p 9092:9092 -d sonarqube:latest

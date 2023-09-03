@@ -17,6 +17,11 @@ jobs:
           POSTGRESQL_PASSWORD: docker
           POSTGRESQL_DATABASE: api-healthy-plan
 
+      cache:
+        image: 'redis:latest'
+        ports:
+          - 6379:6379
+
     steps:
       - uses: actions/checkout@v3
 
@@ -31,4 +36,5 @@ jobs:
     #   - run: npm run test:e2e
         env:
           JWT_SECRET: secret
-          DATABASE_URL: "mysql://root:docker@localhost/api-healthy-plan"
+          DATABASE_URL: postgresql://root:docker@database:5432/api-healthy-plan
+          CACHE_URL: "redis://cache:6379"
