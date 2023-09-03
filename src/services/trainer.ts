@@ -17,9 +17,10 @@ export class TrainerCreateService {
         try {
             const trainer = await this.trainerRepository.create({
                 ...data,
-                password: await bcrypt.hash(data.password, 6),
+                password: await bcrypt.hash(data.password, 6)
             });
-            this.cache.set<Trainer>(trainer.id, trainer);
+
+            await this.cache.set<Trainer>(trainer.id, trainer);
             return trainer;
         }
 
@@ -47,5 +48,41 @@ export class TrainerGetByIdService {
         }
 
         return trainer;
+    }
+}
+
+export class TrainerUpdateService {
+    private cache: ICache;
+
+    constructor(private trainerRepository: ITrainerRepository) {
+        this.cache = new CacheRedis();
+    }
+
+    async execute(id: string, data: Prisma.TrainerUpdateInput): Promise<Trainer> {
+        try {
+            const trainer = await this.trainerRepository.update(id, data);
+            await this.cache.set<Trainer>(trainer.id, trainer);
+
+            console.log(trainer); // aqui
+            return trainer;
+        }
+
+        catch {
+            throw new TrainerDontExistsError();
+        }
+    }
+}
+
+export class TrainerDeleteService {
+
+    constructor(private trainerRepository: ITrainerRepository) {}
+
+    async execute(id: string): Promise<void> {
+        try {
+            await this.trainerRepository.delete(id);
+        }
+        catch {
+            throw new TrainerDontExistsError();
+        }
     }
 }

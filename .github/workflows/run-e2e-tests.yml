@@ -9,12 +9,13 @@ jobs:
 
     services:
       database:
-        image: mysql:latest
+        image: 'bitnami/postgresql:latest'
         ports:
-          - 3306:3306
+          - 5432:5432
         env:
-          MYSQL_ROOT_PASSWORD: docker
-          MYSQL_DATABASE: api-healthy-plan
+          POSTGRESQL_USERNAME: root
+          POSTGRESQL_PASSWORD: docker
+          POSTGRESQL_DATABASE: api-healthy-plan
 
     steps:
       - uses: actions/checkout@v3

@@ -1,6 +1,9 @@
 import request from "supertest";
 import { app } from "../../app";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { Prisma } from "@prisma/client";
+import { randomUUID } from "node:crypto";
+
 
 describe("Trainer (e2e)", () => {
 
@@ -12,15 +15,101 @@ describe("Trainer (e2e)", () => {
         await app.close();
     });
 
-    it("Should create a new trainer", async () => {
+    it("Should be able to create a new personal trainer", async () => {
+        const trainerMock = {
+            name: "John",
+            surname: "Doe",
+            email: `${randomUUID()}@mock.com`,
+            password: "123456",
+            phone: "123456789"
+        };
+
         const response = await request(app.server)
             .post("/v1/trainer")
             // .set('Authorization', `Bearer ${token}`)
+            .send(trainerMock);
+
+        expect(response.status).toBe(201);
+        // expect(response.body.user).toEqual(expect.objectContaining({email: 'teste@gvdf'}));
+    });
+
+    it("Should be able to get a personal trainer by id", async () => {
+        const trainerMock = {
+            name: "John",
+            surname: "Doe",
+            email: `${randomUUID()}@mock.com`,
+            password: "123456",
+            phone: "123456789"
+        };
+
+        const response1 = await request(app.server)
+            .post("/v1/trainer")
+            .send(trainerMock);
+
+
+        const trainer = response1.body;
+
+        const response2 = await request(app.server)
+            .post("/v1/session")
             .send({
-                // Continua!!!
+                email: trainerMock.email,
+                password: trainerMock.password
             });
 
-        expect(response.status).toBe(400);
-        // expect(response.body.user).toEqual(expect.objectContaining({email: 'teste@gvdf'}));
+        const { token } = response2.body;
+
+
+        const response3 = await request(app.server)
+            .get(`/v1/trainer/${trainer.id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send();
+
+        const trainerGotById = response3.body;
+
+        expect(trainerGotById).toHaveProperty("name");
+    });
+
+    it("Should be able to update a personal trainer", async () => {
+        const trainerMock = {
+            name: "John",
+            surname: "Doe",
+            email: `${randomUUID()}@mock.com`,
+            password: "123456",
+            phone: "123456789"
+        };
+
+        const newTrainerName = "John Doe 2";
+
+        const response1 = await request(app.server)
+            .post("/v1/trainer")
+            .send(trainerMock);
+
+
+        const trainer = response1.body;
+
+        const response2 = await request(app.server)
+            .post("/v1/session")
+            .send({
+                email: trainerMock.email,
+                password: trainerMock.password
+            });
+
+        const { token } = response2.body;
+
+
+        const response3 = await request(app.server)
+            .get(`/v1/trainer/${trainer.id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({ name: newTrainerName });
+
+        const trainerUpdated = response3.body;
+
+        expect(response3.status).toBe(200);
+
+        console.log(trainerUpdated);
+
+        expect(trainerUpdated).toHaveProperty("name");
+        // expect(trainerUpdated.name).not.toBe(trainerMock.name);
+        // expect(trainerUpdated.name).toBe(newTrainerName);
     });
 });

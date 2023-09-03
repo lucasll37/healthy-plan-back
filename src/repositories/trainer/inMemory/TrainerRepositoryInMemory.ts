@@ -5,36 +5,52 @@ import { EmailAlreadyExistsError } from "../../../errors/email-already-exists";
 
 
 export class TrainerRepositoryInMemory implements ITrainerRepository {
-    
-    private trainer: Trainer[] = [];
-    
+
+    private trainers: Trainer[] = [];
+
     async create(data: Prisma.TrainerCreateInput): Promise<Trainer> {
-        const trainer: Trainer = {
+        const trainers: Trainer = {
             ...data,
+            id: randomUUID(),
             avatar: data.avatar || null,
             createdAt: new Date(),
-            updatedAt: new Date(),
-            id: randomUUID()            
+            updatedAt: new Date()
         };
 
-        const emailAlreadyExists = await this.findByEmail(trainer.email);
+        const emailAlreadyExists = await this.findByEmail(trainers.email);
 
         if(emailAlreadyExists) {
             throw new EmailAlreadyExistsError();
         }
 
-        this.trainer.push(trainer);
-        
-        return new Promise(resolve => resolve(trainer));
+        this.trainers.push(trainers);
+
+        return new Promise(resolve => resolve(trainers));
     }
 
     findByEmail(email: string): Promise<Trainer | null> {
-        const trainer = this.trainer.find(trainer => trainer.email === email);
-        return new Promise(resolve => resolve( trainer || null));
+        const trainers = this.trainers.find(trainers => trainers.email === email);
+        return new Promise(resolve => resolve( trainers || null));
     }
 
     findById(id: string): Promise<Trainer | null> {
-        const trainer = this.trainer.find(trainer => trainer.id === id);
-        return new Promise(resolve => resolve( trainer || null));
+        const trainers = this.trainers.find(trainers => trainers.id === id);
+        return new Promise(resolve => resolve( trainers || null));
+    }
+
+    update(id: string, data: Prisma.TrainerUpdateInput): Promise<Trainer> {
+        const index = this.trainers.findIndex(trainers => trainers.id === id);
+        if(index === -1) throw new Error();
+
+        const updatedAthlete = Object.assign(this.trainers[index], data);
+
+        return new Promise<Trainer>(resolve => resolve(updatedAthlete));
+    }
+    delete(id: string): Promise<void> {
+        const index = this.trainers.findIndex(trainers => trainers.id === id);
+        if(index === -1) throw new Error();
+        this.trainers.splice(index, 1);
+
+        return new Promise<void>(resolve => resolve());
     }
 }

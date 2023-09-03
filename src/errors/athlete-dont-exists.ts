@@ -1,5 +1,5 @@
 export class AthleteDontExistsError extends Error {
-    public code = 400;
+    public code = 404;
 
     constructor() {
         super("Athlete don't exists");

@@ -20,7 +20,7 @@ app.register(fastifyJwt, JWTConfig);
 app.register(fastifyCookie);
 
 if(env.NODE_ENV !== "production") {
-    // populateRepositoriesWithMock()
+    // populateRepositoriesWithMock();
     app.register(swagger, swaggerConfig);
     app.register(swaggerUI, swaggerUIConfig);
 }

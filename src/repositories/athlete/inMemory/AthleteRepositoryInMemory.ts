@@ -4,7 +4,7 @@ import { randomUUID } from "node:crypto";
 
 
 export class AthleteRepositoryInMemory implements IAthleteRepository {
-    
+
     private athletes: Athlete[] = [];
 
     async create(data: Prisma.AthleteCreateInput): Promise<Athlete> {
@@ -22,12 +22,11 @@ export class AthleteRepositoryInMemory implements IAthleteRepository {
             trainerId: data.trainer.connect!.id!,
             birthDate: new Date(data.birthDate),
             createdAt: new Date(),
-            updatedAt: new Date(),
-
+            updatedAt: new Date()
         };
-        
+
         this.athletes.push(athlete);
-        
+
         return new Promise(resolve => resolve(athlete));
     }
 
