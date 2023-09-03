@@ -2,5 +2,5 @@ projectKey=meu_projeto_typescript
 serverUrl=http://localhost:9000
 serverVersion=10.1.0.73491
 dashboardUrl=http://localhost:9000/dashboard?id=meu_projeto_typescript
-ceTaskId=AYpIgrJeGSCfSLCTCUki
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYpIgrJeGSCfSLCTCUki
+ceTaskId=AYpcoch6pF6UpkYjoQu7
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYpcoch6pF6UpkYjoQu7

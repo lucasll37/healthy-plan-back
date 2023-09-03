@@ -24,17 +24,9 @@ With the application running in development mode (default):
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 
 ## Docker utils:
-- Force stop all containers:
-    ```
-    docker stop -f $(docker ps -a -q)
-    ```
-- Force remove all containers:
-    ```
-    docker rm -f $(docker ps -a -q)
-    ```
 - Force stop and remove all containers:
     ```
-    docker stop -f $(docker ps -a -q) && docker rm -f $(docker ps -a -q)
+    docker rm $(docker ps -a -q) -f
     ```
 
 ## How to run
@@ -58,7 +50,7 @@ With the application running in development mode (default):
     ```
 - Start the cache database (optional):
     ```
-    docker run -p 6379:6379 -d redis:alpine
+    docker run -p 6379:6379 -d redis:latest
     ```
 - Apply database schema (migrations):
     ```
@@ -103,7 +95,7 @@ With the application running in development mode (default):
         ```
         with credentials:
         ```
-        user: admin
+        login: admin
         password: admin
         ```
 

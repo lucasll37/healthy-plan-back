@@ -1,6 +1,6 @@
 import { InvalidCredenctialsError } from "@/errors/invalid-credentials";
 import { ITrainerRepository } from "@/repositories/trainer/ITrainerRepository";
-import { Athlete, Prisma, Trainer } from "@prisma/client";
+import { Trainer } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 
@@ -24,12 +24,12 @@ export class AuthenticateService {
         if (!trainer) {
             throw new InvalidCredenctialsError();
         }
-        
+
         const doesPasswordMatch = await bcrypt.compare(password, trainer.password);
 
         if(!doesPasswordMatch) {
             throw new InvalidCredenctialsError();
-        } 
+        }
 
         return { trainer };
     }

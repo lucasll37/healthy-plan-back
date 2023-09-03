@@ -3,7 +3,6 @@ import { BodyEvaluationRepositoryPrisma } from "@/repositories/bodyEvaluation/pr
 import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
-import { AthleteCreateService } from "@/services/athlete";
 import { BodyEvaluationCreateService } from "@/services/bodyEvaluation";
 import { AthleteDontExistsError } from "@/errors/athlete-dont-exists";
 import { AthleteAndTrainerDontMeet } from "@/errors/athlete-and-trainer-dont-meet";
@@ -17,12 +16,12 @@ export class BodyEvaluationCreateController {
 
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
         const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma();
-        
+
         const bodyEvaluationCreateService = new BodyEvaluationCreateService(
             bodyEvaluationRepositoryPrisma,
             athleteRepositoryPrisma
         );
-    
+
         const athleteBodySchema = z.object({
             ageAtTheMoment: z.number(),
             fatMass_kg: z.number(),
@@ -52,7 +51,7 @@ export class BodyEvaluationCreateController {
             fatPercentage: z.number(),
             athleteId: z.string()
         });
-        
+
         try {
             const requestBodyParsed = athleteBodySchema.parse(request.body);
 
@@ -89,15 +88,15 @@ export class BodyEvaluationCreateController {
                     }
                 }
             };
-            
+
             const bodyEvaluation = await bodyEvaluationCreateService.execute({
                 data,
                 trainerId: request.user.sub
             });
 
-            return reply.status(200).send(bodyEvaluation);    
+            return reply.status(200).send(bodyEvaluation);
         }
-        
+
         catch(error) {
             if(error instanceof AthleteDontExistsError) {
                 return reply.status(error.code).send(error);
@@ -106,9 +105,9 @@ export class BodyEvaluationCreateController {
             else if(error instanceof AthleteAndTrainerDontMeet) {
                 return reply.status(error.code).send(error);
             }
-    
+
             throw error;
         }
-        
+
     }
 }

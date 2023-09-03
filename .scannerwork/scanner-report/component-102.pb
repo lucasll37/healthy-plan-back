@@ -1,1 +1,1 @@
-f 2tsXnhrsrc/docs/trainer.ts
+f 2tsXÏhrsrc/docs/trainer.ts

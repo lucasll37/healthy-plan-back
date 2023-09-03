@@ -96,20 +96,62 @@ describe("Trainer (e2e)", () => {
 
         const { token } = response2.body;
 
-
         const response3 = await request(app.server)
-            .get(`/v1/trainer/${trainer.id}`)
+            .patch(`/v1/trainer/${trainer.id}`)
             .set("Authorization", `Bearer ${token}`)
             .send({ name: newTrainerName });
 
         const trainerUpdated = response3.body;
 
         expect(response3.status).toBe(200);
-
-        console.log(trainerUpdated);
-
         expect(trainerUpdated).toHaveProperty("name");
-        // expect(trainerUpdated.name).not.toBe(trainerMock.name);
-        // expect(trainerUpdated.name).toBe(newTrainerName);
+        expect(trainerUpdated.name).not.toBe(trainerMock.name);
+        expect(trainerUpdated.name).toBe(newTrainerName);
     });
+
+    it("Should be able to delete a personal trainer", async () => {
+        const trainerMock = {
+            name: "John",
+            surname: "Doe",
+            email: `${randomUUID()}@mock.com`,
+            password: "123456",
+            phone: "123456789"
+        };
+
+        const response1 = await request(app.server)
+            .post("/v1/trainer")
+            .send(trainerMock);
+
+        const trainer = response1.body;
+
+        const response2 = await request(app.server)
+            .post("/v1/session")
+            .send({
+                email: trainerMock.email,
+                password: trainerMock.password
+            });
+
+        const { token } = response2.body;
+
+
+        const response3 = await request(app.server)
+            .delete(`/v1/trainer/${trainer.id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send();
+
+        expect(response3.status).toBe(204);
+
+        // expect(response3.status).toBe(204);
+
+        // const response4 = await request(app.server)
+        //     .get(`/v1/trainer/${trainer.id}`)
+        //     .set("Authorization", `Bearer ${token}`)
+        //     .send();
+
+        // expect(response4.status).toBe(404);
+
+
+    });
+
+
 });

@@ -13,10 +13,9 @@ export class AthleteCreateController {
 
         await request.jwtVerify();
 
-        
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
         const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma);
-    
+
         const athleteBodySchema = z.object({
             id: z.string().optional(),
             name: z.string(),
@@ -34,7 +33,7 @@ export class AthleteCreateController {
             cep: z.string()
         });
 
-        
+
         try {
             const requestBodyParsed = athleteBodySchema.parse(request.body);
 
@@ -61,19 +60,19 @@ export class AthleteCreateController {
                     }
                 }
             };
-            
+
             const athlete = await athleteCreateService.execute(data);
-            return reply.status(200).send({athlete: athlete});    
+            return reply.status(200).send({athlete: athlete});
         }
-        
+
         catch(error) {
             if(error instanceof EmailAlreadyExistsError) {
                 return reply.status(error.code).send(error);
             }
-    
+
             throw error;
         }
-        
+
     }
 }
 
@@ -85,25 +84,25 @@ export class AthleteGetByIdController {
 
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
         const athleteGetByIdService = new AthleteGetByIdService(athleteRepositoryPrisma);
-    
+
         const registerBodySchema = z.object({
             id: z.string()
         });
-            
+
         try {
             const { id } = registerBodySchema.parse(request.params);
             const athlete = await athleteGetByIdService.execute(id);
             return reply.status(200).send(athlete);
         }
-        
+
         catch(error) {
             if(error instanceof AthleteDontExistsError) {
                 return reply.status(error.code).send({
                     error: error.message
                 });
             }
-    
+
             throw error;
-        } 
+        }
     }
 }

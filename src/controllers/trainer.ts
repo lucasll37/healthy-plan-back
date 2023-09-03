@@ -48,6 +48,8 @@ export class TrainerGetByIdController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
+        await request.jwtVerify();
+
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
         const trainerGetByIdService = new TrainerGetByIdService(trainerRepositoryPrisma);
 
@@ -77,6 +79,8 @@ export class TrainerGetByIdController {
 export class TrainerUpdateController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
 
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
         const trainerUpdateService = new TrainerUpdateService(trainerRepositoryPrisma);
@@ -118,6 +122,8 @@ export class TrainerDeleteController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
+        await request.jwtVerify();
+
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
         const trainerUpdateService = new TrainerDeleteService(trainerRepositoryPrisma);
 
@@ -128,7 +134,7 @@ export class TrainerDeleteController {
         try {
             const { id } = registerParamsSchema.parse(request.params);
             await trainerUpdateService.execute(id);
-            return reply.status(204).send(true);
+            return reply.status(204).send();
         }
 
         catch(error) {

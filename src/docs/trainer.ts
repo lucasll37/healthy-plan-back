@@ -95,7 +95,8 @@ export const getTrainerByIdDoc = {
                     error: { type: "string" }
                 }
             }
-        }
+        },
+        security: [{ apiKey: [] }]
     }
 };
 
@@ -120,7 +121,6 @@ export const updateTrainerDoc = {
                 email: {type: "string", format: "email"},
                 password: {type: "string"}
             },
-            required: ["id"]
         },
         response: {
             200: {
@@ -157,7 +157,8 @@ export const updateTrainerDoc = {
                 }
             }
 
-        }
+        },
+        security: [{ apiKey: [] }]
     }
 };
 
@@ -192,7 +193,8 @@ export const deleteTrainerDoc = {
                     error: { type: "string" }
                 }
             }
-        }
+        },
+        security: [{ apiKey: [] }]
     }
 };
 

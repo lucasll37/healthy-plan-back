@@ -1,1 +1,2 @@
-! 2tsXhr.src/repositories/trainer/ITrainerRepository.ts
+! 2tsX
+hr.src/repositories/trainer/ITrainerRepository.ts

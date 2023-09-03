@@ -1,5 +1,3 @@
-import { format } from "path";
-
 export const mockDoc = {
     schema: {
         tags: ["Body Evaluation"]

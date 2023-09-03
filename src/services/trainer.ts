@@ -47,6 +47,9 @@ export class TrainerGetByIdService {
             throw new TrainerDontExistsError();
         }
 
+        await this.cache.set<Trainer>(trainer.id, trainer);
+        trainer.password = "*";
+
         return trainer;
     }
 }
@@ -63,7 +66,7 @@ export class TrainerUpdateService {
             const trainer = await this.trainerRepository.update(id, data);
             await this.cache.set<Trainer>(trainer.id, trainer);
 
-            console.log(trainer); // aqui
+            trainer.password = "*";
             return trainer;
         }
 
@@ -75,11 +78,16 @@ export class TrainerUpdateService {
 
 export class TrainerDeleteService {
 
-    constructor(private trainerRepository: ITrainerRepository) {}
+    private cache: ICache;
+
+    constructor(private trainerRepository: ITrainerRepository) {
+        this.cache = new CacheRedis();
+    }
 
     async execute(id: string): Promise<void> {
         try {
             await this.trainerRepository.delete(id);
+            await this.cache.delete(id);
         }
         catch {
             throw new TrainerDontExistsError();

@@ -1,1 +1,1 @@
-; 2tsXhr/src/utils/tests/create-and-authenticate-user.ts
+; 2tsXhr2src/utils/tests/create-and-authenticate-trainer.ts

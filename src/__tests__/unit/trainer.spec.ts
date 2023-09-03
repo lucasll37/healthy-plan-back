@@ -64,7 +64,7 @@ describe("Trainer Services", () => {
         const newTrainerName = "John Doe 2";
         const trainerUpdated = await sut.execute(trainerCreated.id, { name: newTrainerName });
 
-        expect(trainerUpdated).toBe("name");
+        expect(trainerUpdated).toHaveProperty("name");
         expect(trainerUpdated.name).not.toBe(trainerMock.name);
         expect(trainerUpdated.name).toBe(newTrainerName);
     });
