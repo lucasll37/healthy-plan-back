@@ -1,6 +1,7 @@
 import { createClient } from "redis";
 import { env } from "../env";
 
+export let connected: boolean;
 
 export function RedisConect() {
     const client = createClient({
@@ -9,13 +10,11 @@ export function RedisConect() {
 
     try {
         client.connect();
-        // eslint-disable-next-line no-console
-        console.log("Redis connected!");
+        connected = true;
         return client;
     }
     catch {
-        // eslint-disable-next-line no-console
-        console.log("Redis not connected!");
+        connected = false;
         return null;
     }
 }
