@@ -2,6 +2,7 @@
 assets/
 coverage/
 node_modules
+build
 tsconfig.json
 *.sh
 *.md

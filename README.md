@@ -68,10 +68,6 @@ With the application running in development mode (default):
 - Consume API as per routes [documentation](http://localhost:3000/docs/).
 
 ## How to run tests
-- Run all tests (unit + end-to-end):
-    ```
-    npm run test
-    ```
 - Run unit tests:
     ```
     npm run test:unit
