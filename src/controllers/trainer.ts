@@ -20,7 +20,8 @@ export class TrainerCreateController {
             surname: z.string(),
             phone: z.string(),
             email: z.string().email(),
-            password: z.string().min(6)
+            password: z.string().min(6),
+            avatar: z.string().url().optional()
         });
 
 

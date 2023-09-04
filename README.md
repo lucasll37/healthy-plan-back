@@ -72,9 +72,13 @@ With the application running in development mode (default):
     ```
     npm run test:unit
     ```
-- Run e2e (end-to-end) tests:
+- Run e2e (end-to-end) tests (with server on):
     ```
     npm run test:e2e
+    ```
+- Run load tests (with server on):
+    ```
+    npm run test:load
     ```
 - Run code static analysis:
     - Start Sonarqube aplicattion:
@@ -97,10 +101,10 @@ With the application running in development mode (default):
 
     Obs.: The e2e tests need the relational database application to be running.
 ## Development
-- Execute the initial steps of *How to run*, replacing `npm run prisma:generate` e
-`npm run prisma:deploy` with the commands:
+- Execute the steps of **How to run**, replacing `npm run prisma:deploy`,
+`npm run build` e `npm run start` with the commands:
     ```
-    npm run prisma:generate
+    npm prisma:dev
     npm run dev
     ```
 
@@ -109,7 +113,8 @@ With the application running in development mode (default):
 
 Example:
 ```
-DATABASE_URL=mysql://root:docker@localhost/api-healthy-plan
+DATABASE_URL="postgresql://root:docker@localhost:5432/api-healthy-plan?schema=public"
+CACHE_URL="redis://localhost:6379"
 JWT_SECRET=secret
 PORT=3000
 ```

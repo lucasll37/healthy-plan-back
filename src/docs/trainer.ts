@@ -1,5 +1,3 @@
-import { object } from "zod";
-
 export const createTrainerDoc = {
     schema: {
         description: "Crete a new personal trainer",
@@ -12,7 +10,8 @@ export const createTrainerDoc = {
                 surname: {type: "string"},
                 phone: {type: "string"},
                 email: {type: "string", format: "email"},
-                password: {type: "string"}
+                password: {type: "string"},
+                avatar: {type: "string", format: "url"}
             },
             required: ["name", "surname", "phone", "email", "password"]
         },
@@ -78,11 +77,21 @@ export const getTrainerByIdDoc = {
                     surname: {type: "string", example: "Doe"},
                     phone: {type: "string", example: "123456789"},
                     email: {type: "string", example: "john@doe.com"},
-                    password: {type: "string"}
+                    password: {type: "string"},
+                    avatar: {type: "string", format: "url"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
                 description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            404: {
+                description: "Personal trainer doesn't exists",
                 type: "object",
                 properties: {
                     error: { type: "string" }
@@ -177,10 +186,17 @@ export const deleteTrainerDoc = {
         response: {
             204: {
                 description: "Successful response. Personal trainer deleteted",
-                type: "boolean"
+                type: "object"
             },
             400: {
                 description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            404: {
+                description: "Bad Request response. Trainer doesn't exists",
                 type: "object",
                 properties: {
                     error: { type: "string" }

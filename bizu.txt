@@ -1,1 +1,5 @@
     // "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
+
+    Corrigir github actions
+    Corrigir test environment
+
