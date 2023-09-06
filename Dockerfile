@@ -16,4 +16,6 @@ EXPOSE 80
 
 EXPOSE 3000
 
+EXPOSE 10000
+
 CMD npm run prisma:deploy && npm run start

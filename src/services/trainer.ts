@@ -20,7 +20,7 @@ export class TrainerCreateService {
                 password: await bcrypt.hash(data.password, 6)
             });
 
-            await this.cache.set<Trainer>(trainer.id, trainer);
+            if(this.cache.isConnected()) await this.cache.set<Trainer>(trainer.id, trainer);
             return trainer;
         }
 
@@ -38,16 +38,24 @@ export class TrainerGetByIdService {
     }
 
     async execute(id: string): Promise<Trainer> {
-        const trainer =
-            await this.cache.get<Trainer>(id)
-            ??
-            await this.trainerRepository.findById(id);
+        let trainer: Trainer | null;
+
+        if(this.cache.isConnected()) {
+            trainer =
+                await this.cache.get<Trainer>(id)
+                ??
+                await this.trainerRepository.findById(id);
+        }
+
+        else {
+            trainer = await this.trainerRepository.findById(id);
+        }
 
         if (!trainer) {
             throw new TrainerDontExistsError();
         }
 
-        await this.cache.set<Trainer>(trainer.id, trainer);
+        if(this.cache.isConnected()) await this.cache.set<Trainer>(trainer.id, trainer);
         trainer.password = "*";
 
         return trainer;
@@ -64,7 +72,7 @@ export class TrainerUpdateService {
     async execute(id: string, data: Prisma.TrainerUpdateInput): Promise<Trainer> {
         try {
             const trainer = await this.trainerRepository.update(id, data);
-            await this.cache.set<Trainer>(trainer.id, trainer);
+            if(this.cache.isConnected()) await this.cache.set<Trainer>(trainer.id, trainer);
 
             trainer.password = "*";
             return trainer;
@@ -87,7 +95,7 @@ export class TrainerDeleteService {
     async execute(id: string): Promise<void> {
         try {
             await this.trainerRepository.delete(id);
-            await this.cache.delete(id);
+            if(this.cache.isConnected()) await this.cache.delete(id);
         }
         catch {
             throw new TrainerDontExistsError();

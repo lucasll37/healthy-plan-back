@@ -1,19 +1,23 @@
 import { RedisClientType, createClient } from "redis";
 import { env } from "../env";
 
-export let connected: boolean;
+export let connected = false;
 
-export let client: RedisClientType | null = createClient({
+export const client: RedisClientType | null = createClient({
     url: env.CACHE_URL
 });
 
+client.connect();
 
-try {
-    client.connect();
+client.on("error", (error) => {
+    //
+});
+
+client.on("ready", () => {
     connected = true;
 }
+);
 
-catch (error) {
+client.on("end", () => {
     connected = false;
-    client = null;
-}
+});

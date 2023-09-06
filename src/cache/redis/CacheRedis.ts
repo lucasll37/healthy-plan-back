@@ -1,15 +1,16 @@
 import { ICache } from "../ICache";
-import { client } from "@/libs/redis";
+import { client, connected } from "@/libs/redis";
 
 export class CacheRedis implements ICache {
 
     private static client = client;
+    private static isConnected = connected;
 
     async set<T>(id: string, obj: T): Promise<void> {
         if(!CacheRedis.client) return;
 
         try {
-            await CacheRedis.client!.set(`${id}`, JSON.stringify(obj));
+            await CacheRedis.client.set(`${id}`, JSON.stringify(obj));
         }
         catch { return; }
     }
@@ -18,7 +19,7 @@ export class CacheRedis implements ICache {
         if(!CacheRedis.client) return null;
 
         try {
-            const value = await CacheRedis.client!.get(`${id}`);
+            const value = await CacheRedis.client.get(`${id}`);
             if(value) {
                 return JSON.parse(value);
             }
@@ -32,8 +33,12 @@ export class CacheRedis implements ICache {
         if(!CacheRedis.client) return;
 
         try {
-            await CacheRedis.client!.del(`${id}`);
+            await CacheRedis.client.del(`${id}`);
         }
         catch { return; }
+    }
+
+    isConnected(): boolean {
+        return CacheRedis.isConnected;
     }
 }
