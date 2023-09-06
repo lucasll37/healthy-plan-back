@@ -8,4 +8,4 @@ app.listen({host: env.HOST, port: env.PORT});
 if(connected) console.log("Redis Connected!");
 else console.log("Redis Not Connected!");
 
-console.log("HTTP Server Running!");
+console.log(`HTTP Server Running at ${env.HOST}:${env.PORT}`);

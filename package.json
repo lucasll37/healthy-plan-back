@@ -25,7 +25,8 @@
     "sonar:scanner": "sonar-scanner",
     "lint": "eslint src --fix",
     "test:load": "artillery run -o load_tests/results.json load_tests/artillary-conf.yml",
-    "test:load:view": "artillery report -o load_tests/results.html load_tests/results.json"
+    "test:load:view": "artillery report -o load_tests/results.html load_tests/results.json",
+    "tsup": "^7.2.0"
   },
   "keywords": [],
   "author": "",
@@ -45,7 +46,6 @@
     "prisma": "^5.1.0",
     "sonarqube-scanner": "^3.0.1",
     "supertest": "^6.3.3",
-    "tsup": "^7.2.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6",
     "vite-tsconfig-paths": "^4.2.0",
