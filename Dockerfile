@@ -4,14 +4,16 @@ WORKDIR /usr/src/app
 
 COPY ./package.json ./
 
-RUN npm install
-
-RUN npm ci --only=production
+RUN npm i
 
 COPY . .
 
-RUN chmod +x ./migration.sh
+RUN npm run prisma:generate
 
 RUN npm run build
 
+EXPOSE 80
+
 EXPOSE 3000
+
+CMD npm run prisma:deploy && npm run start

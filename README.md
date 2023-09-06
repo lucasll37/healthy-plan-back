@@ -67,6 +67,14 @@ With the application running in development mode (default):
     ```
 - Consume API as per routes [documentation](http://localhost:3000/docs/).
 
+## Development
+- Execute the steps of **How to run**, replacing `npm run prisma:deploy`,
+`npm run build` e `npm run start` with the commands:
+    ```
+    npm run prisma:dev
+    npm run dev
+    ```
+
 ## How to run tests
 - Run unit tests:
     ```
@@ -100,13 +108,6 @@ With the application running in development mode (default):
         ```
 
     Obs.: The e2e tests need the relational database application to be running.
-## Development
-- Execute the steps of **How to run**, replacing `npm run prisma:deploy`,
-`npm run build` e `npm run start` with the commands:
-    ```
-    npm prisma:dev
-    npm run dev
-    ```
 
 ## Environment variables
 ### Create a `.env` file in the root of the project and fill in the variables according to the `.env.example` file.

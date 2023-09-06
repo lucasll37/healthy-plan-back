@@ -234,7 +234,7 @@ export const docPDF = {
                     "application/pdf": {
                         schema: {
                             type: "string",
-                            format: "binary"
+                            format: "byte"
                         }
                     }
                 }
