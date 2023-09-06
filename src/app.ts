@@ -23,3 +23,6 @@ app.register(appRoutes);
 app.setErrorHandler(errorHandler);
 
 // populateRepositoriesWithMock();
+
+
+import "@libs/pdfmake";

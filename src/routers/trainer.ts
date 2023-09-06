@@ -4,7 +4,8 @@ import {
     getTrainerByIdDoc,
     updateTrainerDoc,
     deleteTrainerDoc,
-    mockDoc
+    // mockDoc,
+    docPDF
 } from "../docs/trainer";
 
 import {
@@ -19,10 +20,21 @@ const trainerGetByIdController = new TrainerGetByIdController();
 const trainerUpdateController = new TrainerUpdateController();
 const trainerDeleteController = new TrainerDeleteController();
 
+import { TDocumentDefinitions } from "pdfmake/interfaces";
+import { generatePdf } from "../libs/pdfmake";
+import { testPdf } from "@/template/test";
+
 export async function trainerRoutes(app: FastifyInstance) {
     // app.get("/trainer", mockDoc, ()=>{});
     app.get("/trainer/:id", getTrainerByIdDoc, trainerGetByIdController.handler);
     app.post("/trainer", createTrainerDoc, trainerCreateController.handler);
     app.patch("/trainer/:id", updateTrainerDoc, trainerUpdateController.handler);
     app.delete("/trainer/:id", deleteTrainerDoc, trainerDeleteController.handler);
+
+
+    app.get("/trainer/report", docPDF, async (request, reply) => {
+        const docDefinition: TDocumentDefinitions = testPdf();
+        const report = await generatePdf(docDefinition);
+        reply.type("application/pdf").send(report);
+    });
 }

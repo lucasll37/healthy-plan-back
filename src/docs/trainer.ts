@@ -220,3 +220,25 @@ export const mockDoc = {
         tags: ["Body Evaluation"]
     }
 };
+
+export const docPDF = {
+    schema: {
+        description: "Gera PDF",
+        // tags: ["Trainer"],
+        summary: "Gera PDF",
+        pruduce: "application/pdf",
+        response: {
+            200: {
+                description: "Successful response. Personal trainer deleteted",
+                content: {
+                    "application/pdf": {
+                        schema: {
+                            type: "string",
+                            format: "binary"
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
