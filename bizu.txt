@@ -3,3 +3,11 @@
     Corrigir github actions
     Corrigir test environment
 
+docker build . -t api
+docker run --network host --name api api
+
+
+
+
+docker kill $(docker ps -q)
+docker rmi $(docker images -aq) -f
