@@ -71,6 +71,7 @@ With the application running in development mode (default):
 - Execute the steps of **How to run**, replacing `npm run prisma:deploy`,
 `npm run build` e `npm run start` with the commands:
     ```
+    npm run prisma:generate
     npm run prisma:dev
     npm run dev
     ```

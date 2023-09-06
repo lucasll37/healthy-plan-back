@@ -3,23 +3,17 @@ import { env } from "../env";
 
 export let connected: boolean;
 
-export async function RedisConect(): Promise<RedisClientType | undefined> {
+export let client: RedisClientType | null = createClient({
+    url: env.CACHE_URL
+});
 
-    const client = createClient({
-        url: env.CACHE_URL
-    });
 
+try {
     client.connect();
+    connected = true;
+}
 
-    return new Promise(() => {
-        client.on("connect", () => {
-            connected = true;
-            return client;
-        });
-
-        client.on("error", (error) => {
-            connected = false;
-            return undefined;
-        });
-    });
+catch (error) {
+    connected = false;
+    client = null;
 }

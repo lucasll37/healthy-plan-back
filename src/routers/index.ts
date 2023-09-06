@@ -10,6 +10,7 @@ import { bodyEvaluationRoutes } from "./bodyEvaluation";
 // import { statusPhotoRoutes } from "./statusPhoto";
 // import { targetRoutes } from "./target";
 import { trainerRoutes } from "./trainer";
+import { healthRoutes } from "./health";
 // import { trainingRoutes } from "./training";
 // import { trainingEvolutionRoutes } from "./trainingEvolution";
 
@@ -39,6 +40,9 @@ async function releaseRoutes(app: FastifyInstance) {
 
 
 export async function appRoutes(app: FastifyInstance) {
+    // HEALTH CHECK /////////////////
+    await app.register(healthRoutes);
+    // HEALTH CHECK /////////////////
     await app.register(productionRoutes, { prefix: "/v1" });
     await app.register(releaseRoutes, { prefix: "/release" });
 }
