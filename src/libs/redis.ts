@@ -1,23 +1,20 @@
 import { RedisClientType, createClient } from "redis";
 import { env } from "../env";
 
-export let connected = false;
+export async function getRedisClient(): Promise<RedisClientType | null> {
+    const client: RedisClientType | null = createClient({
+        url: env.CACHE_URL
+    });
 
-export const client: RedisClientType | null = createClient({
-    url: env.CACHE_URL
-});
+    client.connect();
 
-client.connect();
+    return new Promise((resolve, reject) => {
+        client.on("error", (error) => {
+            resolve(null);
+        });
 
-client.on("error", (error) => {
-    //
-});
-
-client.on("ready", () => {
-    connected = true;
+        client.on("ready", () => {
+            resolve(client);
+        });
+    });
 }
-);
-
-client.on("end", () => {
-    connected = false;
-});

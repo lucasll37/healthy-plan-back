@@ -1,10 +1,33 @@
+import { RedisClientType } from "redis";
 import { ICache } from "../ICache";
-import { client, connected } from "@/libs/redis";
+import { getRedisClient } from "@/libs/redis";
 
 export class CacheRedis implements ICache {
+    private static instance: CacheRedis | null = null;
+    private static client: RedisClientType | null = null;
+    static isConnected = false;
 
-    private static client = client;
-    private static isConnected = connected;
+    private constructor() {}
+
+    static getInstance(): CacheRedis | null {
+        return CacheRedis.instance;
+    }
+
+    static async init(): Promise<void> {
+        if(!CacheRedis.client) {
+            CacheRedis.client = await getRedisClient();
+            CacheRedis.isConnected = CacheRedis.client !== null;
+        }
+        return new Promise((resolve, reject) => {
+            if(CacheRedis.isConnected) {
+                resolve();
+            }
+            else {
+                reject();
+            }
+        });
+    }
+
 
     async set<T>(id: string, obj: T): Promise<void> {
         if(!CacheRedis.client) return;
@@ -36,9 +59,5 @@ export class CacheRedis implements ICache {
             await CacheRedis.client.del(`${id}`);
         }
         catch { return; }
-    }
-
-    isConnected(): boolean {
-        return CacheRedis.isConnected;
     }
 }

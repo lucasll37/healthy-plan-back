@@ -4,14 +4,11 @@ import { ITrainerRepository } from "../repositories/trainer/ITrainerRepository";
 import { Trainer, Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { CacheRedis } from "@/cache/redis/CacheRedis";
-import { ICache } from "@/cache/ICache";
 
 export class TrainerCreateService {
-    private cache: ICache;
+    private cache = CacheRedis.getInstance();
 
-    constructor(private trainerRepository: ITrainerRepository) {
-        this.cache = new CacheRedis();
-    }
+    constructor(private trainerRepository: ITrainerRepository) {}
 
     async execute(data: Prisma.TrainerCreateInput): Promise<Trainer> {
         try {
@@ -20,7 +17,7 @@ export class TrainerCreateService {
                 password: await bcrypt.hash(data.password, 6)
             });
 
-            if(this.cache.isConnected()) await this.cache.set<Trainer>(trainer.id, trainer);
+            CacheRedis.isConnected && await this.cache!.set<Trainer>(trainer.id, trainer);
             return trainer;
         }
 
@@ -31,18 +28,16 @@ export class TrainerCreateService {
 }
 
 export class TrainerGetByIdService {
-    private cache: ICache;
+    private cache = CacheRedis.getInstance();
 
-    constructor(private trainerRepository: ITrainerRepository) {
-        this.cache = new CacheRedis();
-    }
+    constructor(private trainerRepository: ITrainerRepository) {}
 
     async execute(id: string): Promise<Trainer> {
         let trainer: Trainer | null;
 
-        if(this.cache.isConnected()) {
+        if(CacheRedis.isConnected) {
             trainer =
-                await this.cache.get<Trainer>(id)
+                await this.cache!.get<Trainer>(id)
                 ??
                 await this.trainerRepository.findById(id);
         }
@@ -55,7 +50,7 @@ export class TrainerGetByIdService {
             throw new TrainerDontExistsError();
         }
 
-        if(this.cache.isConnected()) await this.cache.set<Trainer>(trainer.id, trainer);
+        CacheRedis.isConnected && await this.cache!.set<Trainer>(trainer.id, trainer);
         trainer.password = "*";
 
         return trainer;
@@ -63,16 +58,14 @@ export class TrainerGetByIdService {
 }
 
 export class TrainerUpdateService {
-    private cache: ICache;
+    private cache = CacheRedis.getInstance();
 
-    constructor(private trainerRepository: ITrainerRepository) {
-        this.cache = new CacheRedis();
-    }
+    constructor(private trainerRepository: ITrainerRepository) {}
 
     async execute(id: string, data: Prisma.TrainerUpdateInput): Promise<Trainer> {
         try {
             const trainer = await this.trainerRepository.update(id, data);
-            if(this.cache.isConnected()) await this.cache.set<Trainer>(trainer.id, trainer);
+            if(CacheRedis.isConnected) await this.cache!.set<Trainer>(trainer.id, trainer);
 
             trainer.password = "*";
             return trainer;
@@ -85,17 +78,14 @@ export class TrainerUpdateService {
 }
 
 export class TrainerDeleteService {
+    private cache = CacheRedis.getInstance();
 
-    private cache: ICache;
-
-    constructor(private trainerRepository: ITrainerRepository) {
-        this.cache = new CacheRedis();
-    }
+    constructor(private trainerRepository: ITrainerRepository) {}
 
     async execute(id: string): Promise<void> {
         try {
             await this.trainerRepository.delete(id);
-            if(this.cache.isConnected()) await this.cache.delete(id);
+            if(CacheRedis.isConnected) await this.cache!.delete(id);
         }
         catch {
             throw new TrainerDontExistsError();
