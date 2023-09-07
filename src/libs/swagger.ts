@@ -20,7 +20,7 @@ export const swaggerConfig: SwaggerOptions = {
             description: "Find more info here",
             url: "https://swagger.io"
         },
-        schemes: ["http"],
+        schemes: ["http", "https"],
         consumes: ["application/json"],
         produces: ["application/json"],
         tags: [
