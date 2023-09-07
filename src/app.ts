@@ -4,7 +4,6 @@ import swagger from "@fastify/swagger";
 import swaggerUI from "@fastify/swagger-ui";
 import { swaggerConfig, swaggerUIConfig } from "@/libs/swagger";
 import cors from "@fastify/cors";
-// import { populateRepositoriesWithMock } from "@/mocks";
 import fastifyJwt from "@fastify/jwt";
 import fastifyCookie from "@fastify/cookie";
 import { corsOptions } from "@config/cors";
@@ -21,5 +20,3 @@ app.register(swagger, swaggerConfig);
 app.register(swaggerUI, swaggerUIConfig);
 app.register(appRoutes);
 app.setErrorHandler(errorHandler);
-
-// populateRepositoriesWithMock();

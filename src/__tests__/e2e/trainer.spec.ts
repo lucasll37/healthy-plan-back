@@ -25,11 +25,9 @@ describe("Trainer (e2e)", () => {
 
         const response = await request(app.server)
             .post("/v1/trainer")
-            // .set('Authorization', `Bearer ${token}`)
             .send(trainerMock);
 
         expect(response.status).toBe(201);
-        // expect(response.body.user).toEqual(expect.objectContaining({email: 'teste@gvdf'}));
     });
 
     it("Should be able to get a personal trainer by id", async () => {

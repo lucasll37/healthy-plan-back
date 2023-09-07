@@ -4,22 +4,21 @@ import { getRedisClient } from "@/libs/redis";
 
 export class CacheRedis implements ICache {
     private static instance: CacheRedis | null = null;
-    private static client: RedisClientType | null = null;
-    static isConnected = false;
+    private client: RedisClientType | null = null;
+    public isConnected = false;
 
     private constructor() {}
 
-    static getInstance(): CacheRedis | null {
-        return CacheRedis.instance;
-    }
 
     static async init(): Promise<void> {
-        if(!CacheRedis.client) {
-            CacheRedis.client = await getRedisClient();
-            CacheRedis.isConnected = CacheRedis.client !== null;
+        if(!CacheRedis.instance) {
+            CacheRedis.instance = new CacheRedis();
+            CacheRedis.instance.client = await getRedisClient();
+            CacheRedis.instance.isConnected = CacheRedis.instance.client !== null;
         }
+
         return new Promise((resolve, reject) => {
-            if(CacheRedis.isConnected) {
+            if(CacheRedis.instance!.isConnected) {
                 resolve();
             }
             else {
@@ -28,21 +27,24 @@ export class CacheRedis implements ICache {
         });
     }
 
+    static getInstance(): CacheRedis | null {
+        return CacheRedis.instance;
+    }
 
     async set<T>(id: string, obj: T): Promise<void> {
-        if(!CacheRedis.client) return;
+        if(!this.client) return;
 
         try {
-            await CacheRedis.client.set(`${id}`, JSON.stringify(obj));
+            await this.client.set(`${id}`, JSON.stringify(obj));
         }
         catch { return; }
     }
 
     async get<T>(id: string): Promise<T | null> {
-        if(!CacheRedis.client) return null;
+        if(!this.client) return null;
 
         try {
-            const value = await CacheRedis.client.get(`${id}`);
+            const value = await this.client.get(`${id}`);
             if(value) {
                 return JSON.parse(value);
             }
@@ -53,10 +55,10 @@ export class CacheRedis implements ICache {
     }
 
     async delete(id: string): Promise<void> {
-        if(!CacheRedis.client) return;
+        if(!this.client) return;
 
         try {
-            await CacheRedis.client.del(`${id}`);
+            await this.client.del(`${id}`);
         }
         catch { return; }
     }

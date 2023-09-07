@@ -30,6 +30,7 @@ export class TrainerCreateController {
             const trainer = await trainerCreateService.execute(data);
             trainer.password = "*";
             return reply.status(201).send( trainer );
+
         }
 
         catch(error) {

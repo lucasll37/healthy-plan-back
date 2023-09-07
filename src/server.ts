@@ -4,6 +4,11 @@ import { env } from "@/env";
 import { CacheRedis } from "./cache/redis/CacheRedis";
 import { testConnection } from "./utils/tests/testConnectionPrisma";
 
+////////////////////////////////////////////////////////
+// import { populateRepositoriesWithMock } from "@/mocks";
+// populateRepositoriesWithMock();
+////////////////////////////////////////////////////////
+
 testConnection()
     .then(() => console.log("Prisma Connected"))
     .catch(() => console.log("Prisma Not Connected"));
