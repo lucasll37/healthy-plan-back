@@ -9,4 +9,5 @@ load_tests
 .editorconfig
 .eslintrc.json
 .eslintignore
+build
 
