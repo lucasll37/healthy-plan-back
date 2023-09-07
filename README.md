@@ -71,7 +71,6 @@ With the application running in development mode (default):
 - Execute the steps of **How to run**, replacing `npm run prisma:deploy`,
 `npm run build` e `npm run start` with the commands:
     ```
-    npm run prisma:generate
     npm run prisma:dev
     npm run dev
     ```
@@ -117,6 +116,7 @@ Example:
 ```
 DATABASE_URL="postgresql://root:docker@localhost:5432/api-healthy-plan?schema=public"
 CACHE_URL="redis://localhost:6379"
-JWT_SECRET=secret
+JWT_SECRET=dummy-secret
+HOST=localhost
 PORT=3000
 ```

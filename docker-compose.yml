@@ -29,6 +29,7 @@ services:
         environment:
         - DATABASE_URL=postgresql://root:docker@database:5432/api-healthy-plan
         - CACHE_URL=redis://redis:6379
+        - PORT=3000
 
         depends_on:
         - database
@@ -38,4 +39,4 @@ services:
 
 networks:
     my-network:
-        driver: bridge
+        driver: host
