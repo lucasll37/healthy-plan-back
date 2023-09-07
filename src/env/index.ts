@@ -5,7 +5,7 @@ const envSchema = z.object({
     NODE_ENV: z.enum(["dev",  "test", "production"]).default("dev"),
     HOST: z.string().default("localhost"),
     PORT: z.coerce.number().default(3000),
-    JWT_SECRET: z.string(),
+    JWT_SECRET: z.string().default("dammy-secret"),
     DATABASE_URL: z.string(),
     CACHE_URL: z.string().optional()
 });

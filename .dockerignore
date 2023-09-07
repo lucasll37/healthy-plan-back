@@ -1,5 +1,12 @@
 node_modules
 .github
 .scannerwork
+.env
+.env.example
 .vscode
+.git
 load_tests
+.editorconfig
+.eslintrc.json
+.eslintignore
+

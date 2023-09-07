@@ -46,11 +46,11 @@ With the application running in development mode (default):
 
 - Start the relational database:
     ```
-    docker run -p 5432:5432 -e POSTGRESQL_USERNAME=root -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=api-healthy-plan --network host -d bitnami/postgresql:latest
+    docker run -p 5432:5432 -e POSTGRESQL_USERNAME=root -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=api-healthy-plan -d bitnami/postgresql:latest
     ```
 - Start the cache database (optional):
     ```
-    docker run -p 6379:6379 -d --network host redis:latest
+    docker run -p 6379:6379 -d redis:latest
     ```
 - Apply database schema (migrations):
     ```
