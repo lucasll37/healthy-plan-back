@@ -2,9 +2,10 @@ import { FastifyInstance, FastifyReply } from "fastify";
 import { env } from "@/env";
 import { testConnection } from "@/utils/tests/testConnectionPrisma";
 import { CacheRedis } from "@/cache/redis/CacheRedis";
+import { healthDoc } from "@/docs/health";
 
 export async function healthRoutes(app: FastifyInstance) {
-    app.get("/health", async (_, reply: FastifyReply) => {
+    app.get("/health", healthDoc, async (_, reply: FastifyReply) => {
 
         let conectionDB: boolean;
 
