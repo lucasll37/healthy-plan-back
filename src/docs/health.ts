@@ -3,14 +3,6 @@ export const healthDoc = {
         description: "Checks API state and integration with key services",
         tags: ["Check API health"],
         summary: "Checks API state and integration with key services",
-        body: {
-            type: "object",
-            properties: {
-                email: {type: "string", format: "email"},
-                password: {type: "string"}
-            },
-            required: ["email", "password"]
-        },
         response: {
             200: {
                 description: "Successful response.",
