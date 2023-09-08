@@ -12,7 +12,7 @@ export const healthDoc = {
             required: ["email", "password"]
         },
         response: {
-            201: {
+            200: {
                 description: "Successful response.",
                 type: "object",
                 properties: {
