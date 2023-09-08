@@ -1,15 +1,1 @@
-    // "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
-
-    Corrigir github actions
-    Corrigir test environment
-
-docker build . -t api
-docker run --network host --name api api
-
-
-tsup src --out-dir build
-
-docker kill $(docker ps -q)
-docker rmi $(docker images -aq) -f
-
-docker run --name api111 -e DATABASE_URL=postgresql://root:docker@localhost:5432/api-healthy-plan?schema=public -e CACHE_URL=redis://localhost:6379 --network host api
+Corrigir test environment

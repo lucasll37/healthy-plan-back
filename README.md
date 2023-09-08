@@ -28,6 +28,10 @@ With the application running in development mode (default):
     ```
     docker rm $(docker ps -a -q) -f
     ```
+- Force remove all images:
+    ```
+    docker rmi $(docker images -aq) -f
+    ```
 
 ## How to run
 - Clone the repository (ssh):
