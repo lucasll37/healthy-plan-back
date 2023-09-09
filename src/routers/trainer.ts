@@ -49,3 +49,6 @@ export async function trainerRoutes(app: FastifyInstance) {
 }
 
 
+// teste
+
+
