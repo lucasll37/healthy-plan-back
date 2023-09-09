@@ -1,0 +1,4 @@
+«
+
+typescriptS4822qConsider using 'await' for the promise inside this 'try' or replace it with 'Promise.prototype.catch(...)' usage. 2 :
+* Promise
