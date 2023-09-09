@@ -22,7 +22,8 @@ const trainerDeleteController = new TrainerDeleteController();
 
 import { TDocumentDefinitions } from "pdfmake/interfaces";
 import { generatePdf } from "../libs/pdfmake";
-import { testPdf } from "@/template/test";
+import { testPdf } from "@/template/pdf/test";
+import { testExcel } from "@/template/xlsx/test";
 
 export async function trainerRoutes(app: FastifyInstance) {
     // app.get("/trainer", mockDoc, ()=>{});
@@ -37,4 +38,14 @@ export async function trainerRoutes(app: FastifyInstance) {
         const report = await generatePdf(docDefinition);
         reply.type("application/pdf").send(report);
     });
+
+    app.get("/trainer/excel", async (request, reply) => {
+        const spreadsheet = await testExcel();
+
+        reply
+            .type("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            .send(spreadsheet);
+    });
 }
+
+
