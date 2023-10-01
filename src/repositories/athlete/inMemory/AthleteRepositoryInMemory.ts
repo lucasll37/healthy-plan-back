@@ -4,6 +4,9 @@ import { randomUUID } from "node:crypto";
 
 
 export class AthleteRepositoryInMemory implements IAthleteRepository {
+    getAthletesbyTrainer(id: string): Promise<Athlete[] | null> {
+        return new Promise(resolve => resolve(this.athletes.filter(athlete => athlete.trainerId === id)));
+    }
 
     private athletes: Athlete[] = [];
 

@@ -3,6 +3,13 @@ import { IAthleteRepository } from "../IAthleteRepository";
 import { prisma } from "../../../libs/prisma";
 
 export class AthleteRepositoryPrisma implements IAthleteRepository {
+    async getAthletesbyTrainer(id: string): Promise<Athlete[] | null> {
+        return await prisma.athlete.findMany({
+            where: {
+                trainerId: id
+            }
+        });
+    }
 
     async create(data: Prisma.AthleteCreateInput): Promise<Athlete> {
         return await prisma.athlete.create({ data });

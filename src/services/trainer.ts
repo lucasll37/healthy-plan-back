@@ -17,7 +17,7 @@ export class TrainerCreateService {
                 password: await bcrypt.hash(data.password, 6)
             });
 
-            CacheRedis.isConnected && await this.cache!.set<Trainer>(trainer.id, trainer);
+            // CacheRedis.isConnected && await this.cache!.set<Trainer>(trainer.id, trainer);
             return trainer;
         }
 
@@ -33,24 +33,25 @@ export class TrainerGetByIdService {
     constructor(private trainerRepository: ITrainerRepository) {}
 
     async execute(id: string): Promise<Trainer> {
-        let trainer: Trainer | null;
+        const trainer: Trainer | null = await this.trainerRepository.findById(id);
 
-        if(CacheRedis.isConnected) {
-            trainer =
-                await this.cache!.get<Trainer>(id)
-                ??
-                await this.trainerRepository.findById(id);
-        }
+        // if(CacheRedis.isConnected) {
+        //     trainer =
+        //         await this.cache!.get<Trainer>(id)
+        //         ??
+        //         await this.trainerRepository.findById(id);
+        // }
 
-        else {
-            trainer = await this.trainerRepository.findById(id);
-        }
+        // else {
+        //     trainer = await this.trainerRepository.findById(id);
+        // }
+
 
         if (!trainer) {
             throw new TrainerDontExistsError();
         }
 
-        CacheRedis.isConnected && await this.cache!.set<Trainer>(trainer.id, trainer);
+        // CacheRedis.isConnected && await this.cache!.set<Trainer>(trainer.id, trainer);
         trainer.password = "*";
 
         return trainer;
@@ -65,7 +66,7 @@ export class TrainerUpdateService {
     async execute(id: string, data: Prisma.TrainerUpdateInput): Promise<Trainer> {
         try {
             const trainer = await this.trainerRepository.update(id, data);
-            if(CacheRedis.isConnected) await this.cache!.set<Trainer>(trainer.id, trainer);
+            // if(CacheRedis.isConnected) await this.cache!.set<Trainer>(trainer.id, trainer);
 
             trainer.password = "*";
             return trainer;
@@ -85,7 +86,7 @@ export class TrainerDeleteService {
     async execute(id: string): Promise<void> {
         try {
             await this.trainerRepository.delete(id);
-            if(CacheRedis.isConnected) await this.cache!.delete(id);
+            // if(CacheRedis.isConnected) await this.cache!.delete(id);
         }
         catch {
             throw new TrainerDontExistsError();

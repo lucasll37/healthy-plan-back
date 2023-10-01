@@ -8,6 +8,7 @@ export const JWTConfig: FastifyJWTOptions = {
         cookieName: "refreshToken",
     },
     sign: {
-        expiresIn: "10m",
+        expiresIn: "7d",
+        // expiresIn: "10m",
     }
 };

@@ -1,3 +1,42 @@
+export const AthletesGetbyTrainerDoc = {
+    schema: {
+        description: "Get athletes",
+        tags: ["Athlete"],
+        summary: "Get athletes",
+        response: {
+            200: {
+                description: "Successful response. Personal trainer created",
+                type: "object",
+                properties: {
+                    athletes: {type: "array", items: {
+                        id: { type: "string", format: "uuid" },
+                        name: {type: "string"},
+                        surname: {type: "string"},
+                        phone: {type: "string"},
+                        email: {type: "string", format: "email"},
+                        password: {type: "string"}
+                    }}
+                }
+            },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "testestsetse",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+
 export const athleteGetByIdDoc = {
     schema: {
         description: "Get athlete by Id",

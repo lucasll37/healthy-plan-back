@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma";
-import { AthleteCreateService, AthleteGetByIdService } from "../services/athlete";
+import { AthleteCreateService, AthletesGetbyTrainerService, AthleteGetByIdService } from "../services/athlete";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { EmailAlreadyExistsError } from "../errors/email-already-exists";
@@ -73,6 +73,33 @@ export class AthleteCreateController {
             throw error;
         }
 
+    }
+}
+
+
+export class AthletesGetbyTrainerController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const athletesGetbyTrainerService = new AthletesGetbyTrainerService(athleteRepositoryPrisma);
+
+        try {
+            const athletes = await athletesGetbyTrainerService.execute(request.user.sub);
+            return reply.status(200).send({ athletes });
+        }
+
+        catch(error) {
+            if(error instanceof AthleteDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
     }
 }
 
