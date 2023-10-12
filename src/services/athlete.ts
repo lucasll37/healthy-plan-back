@@ -57,3 +57,40 @@ export class AthleteGetByIdService {
         return athlete;
     }
 }
+
+
+export class AthleteUpdateService {
+    private cache = CacheRedis.getInstance();
+
+    constructor(private athleteRepository: IAthleteRepository) {}
+
+    async execute(id: string, data: Prisma.AthleteUpdateInput): Promise<Athlete> {
+        try {
+            const athlete = await this.athleteRepository.update(id, data);
+            // if(CacheRedis.isConnected) await this.cache!.set<Athlete>(athlete.id, athlete);
+
+            return athlete;
+        }
+
+        catch {
+            throw new AthleteDontExistsError();
+        }
+    }
+}
+
+
+export class AthleteDeleteService {
+    private cache = CacheRedis.getInstance();
+
+    constructor(private athleteRepository: IAthleteRepository) {}
+
+    async execute(id: string): Promise<void> {
+        try {
+            await this.athleteRepository.delete(id);
+            // if(CacheRedis.isConnected) await this.cache!.delete(id);
+        }
+        catch {
+            throw new AthleteDontExistsError();
+        }
+    }
+}

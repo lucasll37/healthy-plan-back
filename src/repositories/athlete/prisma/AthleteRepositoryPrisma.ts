@@ -25,4 +25,18 @@ export class AthleteRepositoryPrisma implements IAthleteRepository {
         });
     }
 
+    async update(id: string, data: Prisma.AthleteUpdateInput): Promise<Athlete> {
+        const athlete = await prisma.athlete.update({
+            where: { id },
+            data
+        });
+
+        return athlete;
+    }
+
+    async delete(id: string): Promise<void> {
+        await prisma.athlete.delete({
+            where: { id }
+        });
+    }
 }

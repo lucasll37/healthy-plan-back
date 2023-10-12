@@ -4,7 +4,7 @@ import { FastifySwaggerUiOptions } from "@fastify/swagger-ui";
 export const swaggerUIConfig: FastifySwaggerUiOptions = {
     routePrefix: "/docs",
     uiConfig: {
-        docExpansion: "none",
+        docExpansion: "list",
         deepLinking: false
     }
 };

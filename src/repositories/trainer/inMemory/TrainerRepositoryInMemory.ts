@@ -30,22 +30,24 @@ export class TrainerRepositoryInMemory implements ITrainerRepository {
 
     findByEmail(email: string): Promise<Trainer | null> {
         const trainers = this.trainers.find(trainers => trainers.email === email);
+
         return new Promise(resolve => resolve( trainers || null));
     }
 
     findById(id: string): Promise<Trainer | null> {
         const trainers = this.trainers.find(trainers => trainers.id === id);
+
         return new Promise(resolve => resolve( trainers || null));
     }
 
     update(id: string, data: Prisma.TrainerUpdateInput): Promise<Trainer> {
         const index = this.trainers.findIndex(trainers => trainers.id === id);
         if(index === -1) throw new Error();
+        const updatedTrainer = Object.assign(this.trainers[index], data);
 
-        const updatedAthlete = Object.assign(this.trainers[index], data);
-
-        return new Promise<Trainer>(resolve => resolve(updatedAthlete));
+        return new Promise<Trainer>(resolve => resolve(updatedTrainer));
     }
+
     delete(id: string): Promise<void> {
         const index = this.trainers.findIndex(trainers => trainers.id === id);
         if(index === -1) throw new Error();

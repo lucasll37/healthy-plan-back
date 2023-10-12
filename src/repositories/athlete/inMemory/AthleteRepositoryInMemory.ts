@@ -38,8 +38,25 @@ export class AthleteRepositoryInMemory implements IAthleteRepository {
         return new Promise(resolve => resolve(athlete || null));
     }
 
-    findById(id: string): Promise<Athlete | null> {
+    async findById(id: string): Promise<Athlete | null> {
         const athlete = this.athletes.find(athlete => athlete.id === id);
         return new Promise(resolve => resolve(athlete || null));
+    }
+
+    async update(id: string, data: Prisma.AthleteUpdateInput): Promise<Athlete> {
+        const index = this.athletes.findIndex(athlete => athlete.id === id);
+        if(index === -1) throw new Error();
+
+        const updatedAthlete = Object.assign(this.athletes[index], data);
+
+        return new Promise<Athlete>(resolve => resolve(updatedAthlete));
+    }
+
+    async delete(id: string): Promise<void> {
+        const index = this.athletes.findIndex(athlete => athlete.id === id);
+        if(index === -1) throw new Error();
+        this.athletes.splice(index, 1);
+
+        return new Promise<void>(resolve => resolve());
     }
 }

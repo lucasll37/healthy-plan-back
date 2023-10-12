@@ -7,4 +7,27 @@ export class AnamnesisRepositoryPrisma implements IAnamnesisRepository {
     async create(data: Prisma.AnamnesisCreateInput): Promise<Anamnesis> {
         return await prisma.anamnesis.create({ data });
     }
+
+    async findById(id: string): Promise<Anamnesis | null> {
+        const anamnesis = await prisma.anamnesis.findUnique({
+            where: { id }
+        });
+
+        return anamnesis;
+    }
+
+    async update(id: string, data: Prisma.AnamnesisUpdateInput): Promise<Anamnesis> {
+        const anamnesis = await prisma.anamnesis.update({
+            where: { id },
+            data
+        });
+
+        return anamnesis;
+    }
+
+    async delete(id: string): Promise<void> {
+        await prisma.anamnesis.delete({
+            where: { id }
+        });
+    }
 }

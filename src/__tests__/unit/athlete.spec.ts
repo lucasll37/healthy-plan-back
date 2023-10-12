@@ -10,7 +10,7 @@ import { Prisma } from "@prisma/client";
 let athleteRepository: IAthleteRepository;
 let athlete: Prisma.AthleteCreateInput;
 
-describe("Athlete Use Case", () => {
+describe("Athlete Services", () => {
 
     beforeAll(async () => {
 
@@ -85,5 +85,13 @@ describe("Athlete Use Case", () => {
 
         expect(athletes1).toHaveLength(1);
         expect(athletes2).toHaveLength(2);
+    });
+
+    it("should be able update a new athlete that already exists", async () => {
+        const sut = new AthleteCreateService(athleteRepository);
+        await sut.execute(athlete);
+        await expect(async () => {
+            await sut.execute(athlete);
+        }).rejects.toBeInstanceOf(EmailAlreadyExistsError);
     });
 });

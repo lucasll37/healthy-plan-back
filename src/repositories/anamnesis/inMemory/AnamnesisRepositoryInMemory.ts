@@ -25,4 +25,26 @@ export class AnamnesisRepositoryInMemory implements IAnamnesisRepository {
 
         return new Promise(resolve => resolve(anamnesis));
     }
+
+    async findById(id: string): Promise<Anamnesis | null> {
+        const anamnesis = this.anamnesis.find(anamnesis => anamnesis.id === id);
+
+        return new Promise(resolve => resolve( anamnesis || null));
+    }
+
+    async update(id: string, data: Prisma.AnamnesisUpdateInput): Promise<Anamnesis> {
+        const index = this.anamnesis.findIndex(anamnesis => anamnesis.id === id);
+        if(index === -1) throw new Error();
+        const updatedAnamnesis = Object.assign(this.anamnesis[index], data);
+
+        return new Promise<Anamnesis>(resolve => resolve(updatedAnamnesis));
+    }
+
+    async delete(id: string): Promise<void> {
+        const index = this.anamnesis.findIndex(anamnesis => anamnesis.id === id);
+        if(index === -1) throw new Error();
+        this.anamnesis.splice(index, 1);
+
+        return new Promise<void>(resolve => resolve());
+    }
 }
