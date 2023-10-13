@@ -19,6 +19,7 @@ export function errorHandler(error: FastifyError, _: any, reply: FastifyReply) {
                 error: error.message
             });
     }
+
     if(env.NODE_ENV !== "production") {
         return reply
             .status(400)

@@ -36,15 +36,14 @@ export class AnamnesisCreateController {
             haveBipolarDisorder: z.boolean(),
             haveObsessiveCompDisorder: z.boolean(),
             haveOtherDisorders: z.boolean(),
-            AthleteId: z.string(),
             heartProblems: z.string().optional(),
             allergies: z.string().optional(),
             otherDiseases: z.string().optional(),
             medicalTreatments: z.string().optional(),
             medicationUse: z.string().optional(),
-            UseHealthDevice: z.string().optional()
+            UseHealthDevice: z.string().optional(),
+            AthleteId: z.string()
         });
-
 
         try {
             const requestBodyParsed = athleteBodySchema.parse(request.body);
@@ -160,7 +159,6 @@ export class AnamnesisUpdateController {
             haveBipolarDisorder: z.boolean().optional(),
             haveObsessiveCompDisorder: z.boolean().optional(),
             haveOtherDisorders: z.boolean().optional(),
-            AthleteId: z.string().optional(),
             heartProblems: z.string().optional(),
             allergies: z.string().optional(),
             otherDiseases: z.string().optional(),

@@ -14,7 +14,7 @@ export const athleteCreateDoc = {
                 email: {type: "string", format: "email"},
                 sex: {type: "string"},
                 birthDate: {type: "string", format: "date"},
-                avatar: {type: "string"},
+                avatar: {type: "string", format: "email"},
                 observation: {type: "string"},
                 addressInfo: {type: "string"},
                 addressNumber: {type: "string"},
@@ -80,13 +80,13 @@ export const AthletesGetbyTrainerDoc = {
         description: "Get athletes by Trainer Id",
         tags: ["Athlete"],
         summary: "Get athletes by Trainer Id",
-        params: {
-            type: "object",
-            properties: {
-                id: { type: "string", format: "uuid"}
-            },
-            required: ["id"]
-        },
+        // params: {
+        //     type: "object",
+        //     properties: {
+        //         id: { type: "string", format: "uuid"}
+        //     },
+        //     required: ["id"]
+        // },
         response: {
             200: {
                 description: "Successful response. Personal trainer created",

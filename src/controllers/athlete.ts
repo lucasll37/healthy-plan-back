@@ -17,7 +17,6 @@ export class AthleteCreateController {
         const athleteCreateService = new AthleteCreateService(athleteRepositoryPrisma);
 
         const athleteBodySchema = z.object({
-            id: z.string().optional(),
             name: z.string(),
             surname: z.string(),
             phone: z.string(),
@@ -149,13 +148,12 @@ export class AthleteUpdateController {
         });
 
         const registerBodySchema = z.object({
-            id: z.string().optional(),
-            name: z.string(),
-            surname: z.string(),
-            phone: z.string(),
+            name: z.string().optional(),
+            surname: z.string().optional(),
+            phone: z.string().optional(),
             avatar: z.string().optional(),
-            email: z.string().email(),
-            sex: z.string()
+            email: z.string().email().optional(),
+            sex: z.string().optional()
         });
 
         try {
