@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma";
-import { AthleteCreateService, AthletesGetbyTrainerService, AthleteGetByIdService } from "../services/athlete";
+import { AthleteCreateService, AthletesGetbyTrainerService, AthleteGetByIdService, AthleteUpdateService, AthleteDeleteService } from "../services/athlete";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { EmailAlreadyExistsError } from "../errors/email-already-exists";
@@ -120,6 +120,82 @@ export class AthleteGetByIdController {
             const { id } = registerBodySchema.parse(request.params);
             const athlete = await athleteGetByIdService.execute(id);
             return reply.status(200).send(athlete);
+        }
+
+        catch(error) {
+            if(error instanceof AthleteDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
+    }
+}
+
+
+export class AthleteUpdateController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const athleteUpdateService = new AthleteUpdateService(athleteRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        const registerBodySchema = z.object({
+            id: z.string().optional(),
+            name: z.string(),
+            surname: z.string(),
+            phone: z.string(),
+            avatar: z.string().optional(),
+            email: z.string().email(),
+            sex: z.string()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            const data: Prisma.AthleteUpdateInput = registerBodySchema.parse(request.body);
+
+            const athlete = await athleteUpdateService.execute(id, data);
+            return reply.status(200).send( athlete );
+        }
+
+        catch(error) {
+            if(error instanceof AthleteDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
+    }
+}
+
+
+export class AthleteDeleteController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const athleteDeleteService = new AthleteDeleteService(athleteRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            await athleteDeleteService.execute(id);
+            return reply.status(204).send();
         }
 
         catch(error) {

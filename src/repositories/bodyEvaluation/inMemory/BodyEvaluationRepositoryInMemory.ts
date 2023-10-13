@@ -1,7 +1,7 @@
 import { BodyEvaluation, Prisma } from "@prisma/client";
-import { IBodyValuationRepository } from "../IBodyEvaluationRepository";
+import { IBodyEvaluationRepository } from "../IBodyEvaluationRepository";
 
-export class BodyEvaluationRepositoryInMemory implements IBodyValuationRepository {
+export class BodyEvaluationRepositoryInMemory implements IBodyEvaluationRepository {
 
     private bodyEvaluations: BodyEvaluation[] = [];
 
@@ -41,5 +41,27 @@ export class BodyEvaluationRepositoryInMemory implements IBodyValuationRepositor
         this.bodyEvaluations.push(bodyEvaluation);
 
         return new Promise(resolve => resolve(bodyEvaluation));
+    }
+
+    async findById(id: string): Promise<BodyEvaluation | null> {
+        const bodyEvaluation = this.bodyEvaluations.find(bodyEvaluation => bodyEvaluation.id === id);
+
+        return new Promise(resolve => resolve( bodyEvaluation || null));
+    }
+
+    async update(id: string, data: Prisma.BodyEvaluationUpdateInput): Promise<BodyEvaluation> {
+        const index = this.bodyEvaluations.findIndex(bodyEvaluation => bodyEvaluation.id === id);
+        if(index === -1) throw new Error();
+        const updatedBodyEvaluation = Object.assign(this.bodyEvaluations[index], data);
+
+        return new Promise<BodyEvaluation>(resolve => resolve(updatedBodyEvaluation));
+    }
+
+    async delete(id: string): Promise<void> {
+        const index = this.bodyEvaluations.findIndex(bodyEvaluation => bodyEvaluation.id === id);
+        if(index === -1) throw new Error();
+        this.bodyEvaluations.splice(index, 1);
+
+        return new Promise<void>(resolve => resolve());
     }
 }

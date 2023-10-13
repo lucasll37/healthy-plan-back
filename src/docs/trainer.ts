@@ -1,3 +1,9 @@
+export const mockDoc = {
+    schema: {
+        tags: ["Trainer"]
+    }
+};
+
 export const createTrainerDoc = {
     schema: {
         description: "Crete a new personal trainer",
@@ -128,7 +134,7 @@ export const updateTrainerDoc = {
                 surname: {type: "string"},
                 phone: {type: "string"},
                 email: {type: "string", format: "email"},
-                password: {type: "string"}
+                avatar: {type: "string", format: "url"}
             },
         },
         response: {
@@ -215,11 +221,6 @@ export const deleteTrainerDoc = {
 };
 
 
-export const mockDoc = {
-    schema: {
-        tags: ["Body Evaluation"]
-    }
-};
 
 export const docPDF = {
     schema: {

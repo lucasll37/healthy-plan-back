@@ -3,7 +3,8 @@ import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
 import { AnamnesisRepositoryPrisma } from "../repositories/anamnesis/prisma/AnamnesisRepositoryPrisma";
-import { AnamnesisCreateService } from "../services/anaminesis";
+import { AnamnesisCreateService, AnamnesisDeleteService, AnamnesisGetByIdService, AnamnesisUpdateService } from "../services/anaminesis";
+import { AnamnesisDontExistsError } from "@/errors/anamnesis-dont-exists";
 
 
 export class AnamnesisCreateController {
@@ -12,10 +13,10 @@ export class AnamnesisCreateController {
 
         await request.jwtVerify();
 
-        
+
         const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma();
         const anamnesisCreateService = new AnamnesisCreateService(anamnesisRepositoryPrisma);
-    
+
         const athleteBodySchema = z.object({
             isAlcoholic: z.boolean(),
             isSmoker: z.boolean(),
@@ -41,10 +42,10 @@ export class AnamnesisCreateController {
             otherDiseases: z.string().optional(),
             medicalTreatments: z.string().optional(),
             medicationUse: z.string().optional(),
-            UseHealthDevice: z.string().optional(),
+            UseHealthDevice: z.string().optional()
         });
 
-        
+
         try {
             const requestBodyParsed = athleteBodySchema.parse(request.body);
 
@@ -79,18 +80,143 @@ export class AnamnesisCreateController {
                     }
                 }
             };
-            
+
             const anamnesis = await anamnesisCreateService.execute(data);
-            return reply.status(200).send({anamnesis: anamnesis});    
+            return reply.status(200).send({anamnesis: anamnesis});
         }
-        
+
         catch(error) {
             if(error instanceof AthleteDontExistsError) {
                 return reply.status(error.code).send(error);
             }
-    
+
             throw error;
         }
-        
+
+    }
+}
+
+export class AnamnesisGetByIdController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma();
+        const anamnesisGetByIdService = new AnamnesisGetByIdService(anamnesisRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            const anamnesis = await anamnesisGetByIdService.execute(id);
+
+            return reply.status(200).send( anamnesis );
+        }
+
+        catch(error) {
+            if(error instanceof AnamnesisDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
+    }
+}
+
+export class AnamnesisUpdateController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma();
+        const anamnesisUpdateService = new AnamnesisUpdateService(anamnesisRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        const registerBodySchema = z.object({
+            isAlcoholic: z.boolean().optional(),
+            isSmoker: z.boolean().optional(),
+            sleepQuality: z.string().optional(),
+            PhysicalActivityHabits: z.string().optional(),
+            HydrationHabits: z.string().optional(),
+            EatingHabits: z.string().optional(),
+            AmountWater: z.number().optional(),
+            UseFoodSupplement: z.string().optional(),
+            isAnemic: z.boolean().optional(),
+            isDiabetic: z.boolean().optional(),
+            systolicBloodPressure: z.number().optional(),
+            diastolicBloodPressure: z.number().optional(),
+            restingHeartRate: z.number().optional(),
+            haveAnxiety: z.boolean().optional(),
+            haveDepression: z.boolean().optional(),
+            haveBipolarDisorder: z.boolean().optional(),
+            haveObsessiveCompDisorder: z.boolean().optional(),
+            haveOtherDisorders: z.boolean().optional(),
+            AthleteId: z.string().optional(),
+            heartProblems: z.string().optional(),
+            allergies: z.string().optional(),
+            otherDiseases: z.string().optional(),
+            medicalTreatments: z.string().optional(),
+            medicationUse: z.string().optional(),
+            UseHealthDevice: z.string().optional()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            const data: Prisma.AnamnesisUpdateInput = registerBodySchema.parse(request.body);
+
+            const trainer = await anamnesisUpdateService.execute(id, data);
+            return reply.status(200).send( trainer );
+        }
+
+        catch(error) {
+            if(error instanceof AnamnesisDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
+    }
+}
+
+
+export class AnamnesisDeleteController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma();
+        const anamnesisDeleteService = new AnamnesisDeleteService(anamnesisRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            await anamnesisDeleteService.execute(id);
+            return reply.status(204).send();
+        }
+
+        catch(error) {
+            if(error instanceof AnamnesisDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
     }
 }

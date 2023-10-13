@@ -67,18 +67,18 @@ export class AnamnesisUpdateService {
     }
 }
 
-// export class TrainerDeleteService {
-//     private cache = CacheRedis.getInstance();
+export class AnamnesisDeleteService {
+    private cache = CacheRedis.getInstance();
 
-//     constructor(private trainerRepository: ITrainerRepository) {}
+    constructor(private anamnesisRepository: IAnamnesisRepository) {}
 
-//     async execute(id: string): Promise<void> {
-//         try {
-//             await this.trainerRepository.delete(id);
-//             // if(CacheRedis.isConnected) await this.cache!.delete(id);
-//         }
-//         catch {
-//             throw new TrainerDontExistsError();
-//         }
-//     }
-// }
+    async execute(id: string): Promise<void> {
+        try {
+            await this.anamnesisRepository.delete(id);
+            // if(CacheRedis.isConnected) await this.cache!.delete(id);
+        }
+        catch {
+            throw new AnamnesisDontExistsError();
+        }
+    }
+}

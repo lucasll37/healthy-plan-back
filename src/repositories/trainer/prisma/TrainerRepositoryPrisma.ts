@@ -5,7 +5,9 @@ import { prisma } from "../../../libs/prisma";
 export class TrainerRepositoryPrisma implements ITrainerRepository {
 
     async create(data: Prisma.TrainerCreateInput): Promise<Trainer> {
-        return await prisma.trainer.create({ data });
+        const trainer = await prisma.trainer.create({ data });
+
+        return trainer;
     }
 
     async findByEmail(email: string): Promise<Trainer | null> {

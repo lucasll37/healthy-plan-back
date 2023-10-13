@@ -16,26 +16,27 @@ import { healthRoutes } from "./health";
 
 
 async function productionRoutes(app: FastifyInstance) {
-    await app.register(authenticateRoutes);
-    await app.register(addressRoutes);
-    await app.register(anamnesisRoutes);
-    await app.register(athleteRoutes);
-    await app.register(bodyEvaluationRoutes);
-    // await app.register(exerciseRoutes);
-    // await app.register(flexEvaluationRoutes);
-    // await app.register(methodExerciseRoutes);
-    // await app.register(statusPhotoRoutes);
-    // await app.register(targetRoutes);
-    await app.register(trainerRoutes);
-    // await app.register(trainingRoutes);
-    // await app.register(trainingEvolutionRoutes);
+    await app.register(authenticateRoutes, { prefix: "/session" });
+    await app.register(trainerRoutes, { prefix: "/trainer" });
+    await app.register(athleteRoutes, { prefix: "/athlete" });
+    await app.register(anamnesisRoutes, { prefix: "/anamnesis" });
+    await app.register(bodyEvaluationRoutes, { prefix: "/body-evaluation" });
+    await app.register(addressRoutes, { prefix: "/address" });
+    // await app.register(exerciseRoutes, { prefix: "/" });
+    // await app.register(flexEvaluationRoutes, { prefix: "/" });
+    // await app.register(methodExerciseRoutes, { prefix: "/" });
+    // await app.register(statusPhotoRoutes, { prefix: "/" });
+    // await app.register(targetRoutes, { prefix: "/" });
+    // await app.register(trainingRoutes, { prefix: "/" });
+    // await app.register(trainingEvolutionRoutes, { prefix: "/" });
 }
 
 async function releaseRoutes(app: FastifyInstance) {
+    // RELEASE ROUTES ///////////////
     //
+    // ...
     //
-    //
-    //
+    // RELEASE ROUTES ///////////////
 }
 
 

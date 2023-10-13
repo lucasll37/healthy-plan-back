@@ -29,7 +29,7 @@ export class TrainerRepositoryInMemory implements ITrainerRepository {
     }
 
     findByEmail(email: string): Promise<Trainer | null> {
-        const trainers = this.trainers.find(trainers => trainers.email === email);
+        const trainers = this.trainers.find(trainer => trainer.email === email);
 
         return new Promise(resolve => resolve( trainers || null));
     }

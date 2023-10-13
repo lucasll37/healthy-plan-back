@@ -12,6 +12,7 @@ export class TrainerCreateService {
 
     async execute(data: Prisma.TrainerCreateInput): Promise<Trainer> {
         try {
+
             const trainer = await this.trainerRepository.create({
                 ...data,
                 password: await bcrypt.hash(data.password, 6)

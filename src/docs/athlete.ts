@@ -1,85 +1,4 @@
-export const AthletesGetbyTrainerDoc = {
-    schema: {
-        description: "Get athletes",
-        tags: ["Athlete"],
-        summary: "Get athletes",
-        response: {
-            200: {
-                description: "Successful response. Personal trainer created",
-                type: "object",
-                properties: {
-                    athletes: {type: "array", items: {
-                        id: { type: "string", format: "uuid" },
-                        name: {type: "string"},
-                        surname: {type: "string"},
-                        phone: {type: "string"},
-                        email: {type: "string", format: "email"},
-                        password: {type: "string"}
-                    }}
-                }
-            },
-            400: {
-                description: "Bad Request response. Invalid data",
-                type: "object",
-                properties: {
-                    error: { type: "string" }
-                }
-            },
-            500: {
-                description: "testestsetse",
-                type: "object",
-                properties: {
-                    error: { type: "string" }
-                }
-            }
-        },
-        security: [{ apiKey: [] }]
-    }
-};
 
-export const athleteGetByIdDoc = {
-    schema: {
-        description: "Get athlete by Id",
-        tags: ["Athlete"],
-        summary: "Get athlete by Id",
-        params: {
-            type: "object",
-            properties: {
-                id: { type: "string", format: "uuid"}
-            },
-            required: ["id"]
-        },
-        response: {
-            200: {
-                description: "Successful response. Personal trainer created",
-                type: "object",
-                properties: {
-                    id: { type: "string", format: "uuid" },
-                    name: {type: "string"},
-                    surname: {type: "string"},
-                    phone: {type: "string"},
-                    email: {type: "string", format: "email"},
-                    password: {type: "string"}
-                }
-            },
-            400: {
-                description: "Bad Request response. Invalid data",
-                type: "object",
-                properties: {
-                    error: { type: "string" }
-                }
-            },
-            500: {
-                description: "testestsetse",
-                type: "object",
-                properties: {
-                    error: { type: "string" }
-                }
-            }
-        },
-        security: [{ apiKey: [] }]
-    }
-};
 
 export const athleteCreateDoc = {
     schema: {
@@ -119,7 +38,7 @@ export const athleteCreateDoc = {
         },
         response: {
             201: {
-                description: "Successful response. Personal trainer created",
+                description: "Successful response. Athlete created",
                 type: "object",
                 properties: {
                     id: { type: "string", format: "uuid" },
@@ -138,14 +57,206 @@ export const athleteCreateDoc = {
                 }
             },
             409: {
-                description: "Conflict response. Personal trainer already exists",
+                description: "Conflict response. Athlete already exists",
                 type: "object",
                 properties: {
                     error: { type: "string" }
                 }
             },
             500: {
-                description: "testestsetse",
+                description: "Intern server error",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+
+export const AthletesGetbyTrainerDoc = {
+    schema: {
+        description: "Get athletes by Trainer Id",
+        tags: ["Athlete"],
+        summary: "Get athletes by Trainer Id",
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", format: "uuid"}
+            },
+            required: ["id"]
+        },
+        response: {
+            200: {
+                description: "Successful response. Personal trainer created",
+                type: "object",
+                properties: {
+                    athletes: {type: "array",
+                        items: {
+                            id: { type: "string", format: "uuid" },
+                            name: {type: "string"},
+                            surname: {type: "string"},
+                            phone: {type: "string"},
+                            email: {type: "string", format: "email"},
+                            password: {type: "string"}
+                        }
+                    }
+                }
+            },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "Intern server error",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+export const athleteGetByIdDoc = {
+    schema: {
+        description: "Get athlete by Id",
+        tags: ["Athlete"],
+        summary: "Get athlete by Id",
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", format: "uuid"}
+            },
+            required: ["id"]
+        },
+        response: {
+            200: {
+                description: "Successful response. Personal trainer created",
+                type: "object",
+                properties: {
+                    id: { type: "string", format: "uuid" },
+                    name: {type: "string"},
+                    surname: {type: "string"},
+                    phone: {type: "string"},
+                    email: {type: "string", format: "email"},
+                    password: {type: "string"}
+                }
+            },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "Intern server error",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+
+
+export const athleteUpdateDoc = {
+    schema: {
+        description: "Update athlete by Id",
+        tags: ["Athlete"],
+        summary: "Update athlete by Id",
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", format: "uuid"}
+            },
+            required: ["id"]
+        },
+        body: {
+            type: "object",
+            properties: {
+                name: {type: "string"},
+                surname: {type: "string"},
+                phone: {type: "string"},
+                email: {type: "string", format: "email"},
+                sex: {type: "string"},
+                birthDate: {type: "string", format: "date"},
+                avatar: {type: "string"}
+            },
+            required: []
+        },
+        response: {
+            200: {
+                description: "Successful response. Personal trainer created",
+                type: "object",
+                properties: {
+                    id: { type: "string", format: "uuid" },
+                    name: {type: "string"},
+                    surname: {type: "string"},
+                    phone: {type: "string"},
+                    email: {type: "string", format: "email"},
+                    password: {type: "string"}
+                }
+            },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "Intern server error",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+
+export const athleteDeleteDoc = {
+    schema: {
+        description: "Delete athlete by Id",
+        tags: ["Athlete"],
+        summary: "Delete athlete by Id",
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", format: "uuid"}
+            },
+            required: ["id"]
+        },
+        response: {
+            204: {
+                description: "Successful response. Athlete deleteted",
+                type: "object"
+            },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            404: {
+                description: "Bad Request response. Athlete doesn't exists",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "Intern server error",
                 type: "object",
                 properties: {
                     error: { type: "string" }

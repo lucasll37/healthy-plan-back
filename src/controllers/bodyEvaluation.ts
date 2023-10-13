@@ -3,9 +3,10 @@ import { BodyEvaluationRepositoryPrisma } from "@/repositories/bodyEvaluation/pr
 import { AthleteRepositoryPrisma } from "@/repositories/athlete/prisma/AthleteRepositoryPrisma";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
-import { BodyEvaluationCreateService } from "@/services/bodyEvaluation";
+import { BodyEvaluationCreateService, BodyEvaluationDeleteService, BodyEvaluationGetByIdService, BodyEvaluationUpdateService } from "@/services/bodyEvaluation";
 import { AthleteDontExistsError } from "@/errors/athlete-dont-exists";
 import { AthleteAndTrainerDontMeet } from "@/errors/athlete-and-trainer-dont-meet";
+import { BodyEvaluationDontExistsError } from "@/errors/bodyEvaluation-dont-exists";
 
 
 export class BodyEvaluationCreateController {
@@ -109,5 +110,132 @@ export class BodyEvaluationCreateController {
             throw error;
         }
 
+    }
+}
+
+export class BodyEvaluationGetByIdController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma();
+        const bodyEvaluationGetByIdService = new BodyEvaluationGetByIdService(bodyEvaluationRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            const bodyEvaluation = await bodyEvaluationGetByIdService.execute(id);
+
+            return reply.status(200).send( bodyEvaluation );
+        }
+
+        catch(error) {
+            if(error instanceof BodyEvaluationDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
+    }
+}
+
+export class BodyEvaluationUpdateController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma();
+        const bodyEvaluationUpdateService = new BodyEvaluationUpdateService(bodyEvaluationRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        const registerBodySchema = z.object({
+            ageAtTheMoment: z.number().optional(),
+            fatMass_kg: z.number().optional(),
+            leanMass_kg: z.number().optional(),
+            weight_cm: z.number().optional(),
+            height_kg: z.number().optional(),
+            bodyMassClass: z.string().optional(),
+            bodyMassIndex: z.number().optional(),
+            skeletalMass: z.number().optional(),
+            bodyAge: z.number().optional(),
+            basalMetabolicRate: z.number().optional(),
+            waistRatioHip: z.number().optional(),
+            visceralFat: z.string().optional(),
+            neck_circ_cm: z.number().optional(),
+            chest_circ_cm: z.number().optional(),
+            rightForearm_circ_cm: z.number().optional(),
+            leftForearm_circ_cm: z.number().optional(),
+            rightArm_circ_cm: z.number().optional(),
+            leftArm_circ_cm: z.number().optional(),
+            waist_circ_cm: z.number().optional(),
+            abdomen_circ_cm: z.number().optional(),
+            hip_circ_cm: z.number().optional(),
+            rightThigh_circ_cm: z.number().optional(),
+            leftThigh_circ_cm: z.number().optional(),
+            rightCalf_circ_cm: z.number().optional(),
+            leftCalf_circ_cm: z.number().optional(),
+            fatPercentage: z.number().optional(),
+            athleteId: z.string().optional()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            const data: Prisma.BodyEvaluationUpdateInput = registerBodySchema.parse(request.body);
+
+            const bodyEvaluation = await bodyEvaluationUpdateService.execute(id, data);
+            return reply.status(200).send( bodyEvaluation );
+        }
+
+        catch(error) {
+            if(error instanceof BodyEvaluationDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
+    }
+}
+
+
+export class BodyEvaluationDeleteController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma();
+        const bodyEvaluationDeleteService = new BodyEvaluationDeleteService(bodyEvaluationRepositoryPrisma);
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        try {
+            const { id } = registerParamsSchema.parse(request.params);
+            await bodyEvaluationDeleteService.execute(id);
+            return reply.status(204).send();
+        }
+
+        catch(error) {
+            if(error instanceof BodyEvaluationDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
     }
 }

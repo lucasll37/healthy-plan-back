@@ -2,19 +2,23 @@ import { FastifyInstance } from "fastify";
 import {
     AthletesGetbyTrainerController,
     AthleteCreateController,
-    AthleteGetByIdController
+    AthleteGetByIdController,
+    AthleteUpdateController,
+    AthleteDeleteController
 } from "../controllers/athlete";
 
-import { AthletesGetbyTrainerDoc, athleteGetByIdDoc, athleteCreateDoc } from "../docs/athlete";
+import { AthletesGetbyTrainerDoc, athleteGetByIdDoc, athleteCreateDoc, athleteUpdateDoc, athleteDeleteDoc } from "../docs/athlete";
 
 const athletesGetbyTrainerController = new AthletesGetbyTrainerController();
 const athleteCreateController = new AthleteCreateController();
 const athleteGetByIdController = new AthleteGetByIdController();
+const athleteUpdateController = new AthleteUpdateController();
+const athleteDeleteController = new AthleteDeleteController();
 
 export async function athleteRoutes(app: FastifyInstance) {
-    app.get("/athlete", AthletesGetbyTrainerDoc, athletesGetbyTrainerController.handler);
-    app.get("/athlete/:id", athleteGetByIdDoc, athleteGetByIdController.handler);
-    app.post("/athlete", athleteCreateDoc, athleteCreateController.handler);
-    // app.patch("/athlete/:id", mockDoc, ()=>{});
-    // app.delete("/athlete/:id", mockDoc, ()=>{});
+    app.get("", AthletesGetbyTrainerDoc, athletesGetbyTrainerController.handler);
+    app.get("/:id", athleteGetByIdDoc, athleteGetByIdController.handler);
+    app.post("", athleteCreateDoc, athleteCreateController.handler);
+    app.patch("/:id", athleteUpdateDoc, athleteUpdateController.handler);
+    app.delete("/:id", athleteDeleteDoc, athleteDeleteController.handler);
 }

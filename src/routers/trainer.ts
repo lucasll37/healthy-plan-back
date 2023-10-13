@@ -27,19 +27,19 @@ import { testExcel } from "@/template/xlsx/test";
 
 export async function trainerRoutes(app: FastifyInstance) {
     // app.get("/trainer", mockDoc, ()=>{});
-    app.get("/trainer/:id", getTrainerByIdDoc, trainerGetByIdController.handler);
-    app.post("/trainer", createTrainerDoc, trainerCreateController.handler);
-    app.patch("/trainer/:id", updateTrainerDoc, trainerUpdateController.handler);
-    app.delete("/trainer/:id", deleteTrainerDoc, trainerDeleteController.handler);
+    app.get("/:id", getTrainerByIdDoc, trainerGetByIdController.handler);
+    app.post("", createTrainerDoc, trainerCreateController.handler);
+    app.patch("/:id", updateTrainerDoc, trainerUpdateController.handler);
+    app.delete("/:id", deleteTrainerDoc, trainerDeleteController.handler);
 
 
-    app.get("/trainer/report", docPDF, async (request, reply) => {
+    app.get("/report", docPDF, async (request, reply) => {
         const docDefinition: TDocumentDefinitions = testPdf();
         const report = await generatePdf(docDefinition);
         reply.type("application/pdf").send(report);
     });
 
-    app.get("/trainer/excel", async (request, reply) => {
+    app.get("/excel", async (request, reply) => {
         const spreadsheet = await testExcel();
 
         reply
@@ -47,8 +47,3 @@ export async function trainerRoutes(app: FastifyInstance) {
             .send(spreadsheet);
     });
 }
-
-
-// teste
-
-

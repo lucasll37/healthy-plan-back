@@ -95,8 +95,8 @@ export class TrainerUpdateController {
             name: z.string().optional(),
             surname: z.string().optional(),
             email: z.string().email().optional(),
-            password: z.string().min(6).optional(),
-            phone: z.string().optional()
+            phone: z.string().optional(),
+            avatar: z.string().url().optional()
         });
 
         try {
@@ -127,7 +127,7 @@ export class TrainerDeleteController {
         await request.jwtVerify();
 
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
-        const trainerUpdateService = new TrainerDeleteService(trainerRepositoryPrisma);
+        const trainerDeleteService = new TrainerDeleteService(trainerRepositoryPrisma);
 
         const registerParamsSchema = z.object({
             id: z.string()
@@ -135,7 +135,7 @@ export class TrainerDeleteController {
 
         try {
             const { id } = registerParamsSchema.parse(request.params);
-            await trainerUpdateService.execute(id);
+            await trainerDeleteService.execute(id);
             return reply.status(204).send();
         }
 
