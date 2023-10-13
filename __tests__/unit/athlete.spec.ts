@@ -1,9 +1,9 @@
 import { expect, describe, it, beforeEach, beforeAll } from "vitest";
-import { AthleteCreateService, AthletesGetbyTrainerService } from "../../services/athlete";
-import { IAthleteRepository } from "../../repositories/athlete/IAthleteRepository";
-import { AthleteRepositoryInMemory } from "../../repositories/athlete/inMemory/AthleteRepositoryInMemory";
+import { AthleteCreateService, AthletesGetbyTrainerService } from "../../src/services/athlete";
+import { IAthleteRepository } from "../../src/repositories/athlete/IAthleteRepository";
+import { AthleteRepositoryInMemory } from "../../src/repositories/athlete/inMemory/AthleteRepositoryInMemory";
 import { randomUUID } from "crypto";
-import { EmailAlreadyExistsError } from "../../errors/email-already-exists";
+import { EmailAlreadyExistsError } from "../../src/errors/email-already-exists";
 import { Prisma } from "@prisma/client";
 
 

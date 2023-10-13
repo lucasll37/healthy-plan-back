@@ -13,7 +13,7 @@ import { errorHandler } from "@middlewares/errorHandler";
 import { staticConfig } from "./config/static";
 
 
-export const app = fastify();
+export const app = fastify({ logger: true });
 
 app.register(cors, corsOptions);
 app.register(fastifyJwt, JWTConfig);

@@ -1,9 +1,9 @@
 import { expect, describe, it, beforeAll, beforeEach } from "vitest";
-import { TrainerCreateService, TrainerDeleteService, TrainerGetByIdService, TrainerUpdateService } from "../../services/trainer";
-import { TrainerRepositoryInMemory } from "../../repositories/trainer/inMemory/TrainerRepositoryInMemory";
+import { TrainerCreateService, TrainerDeleteService, TrainerGetByIdService, TrainerUpdateService } from "../../src/services/trainer";
+import { TrainerRepositoryInMemory } from "../../src/repositories/trainer/inMemory/TrainerRepositoryInMemory";
 import { randomUUID } from "node:crypto";
-import { EmailAlreadyExistsError } from "../../errors/email-already-exists";
-import { TrainerDontExistsError } from "../../errors/trainer-dont-exists";
+import { EmailAlreadyExistsError } from "../../src/errors/email-already-exists";
+import { TrainerDontExistsError } from "../../src/errors/trainer-dont-exists";
 import { ITrainerRepository } from "@/repositories/trainer/ITrainerRepository";
 import { Prisma } from "@prisma/client";
 
