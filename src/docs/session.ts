@@ -43,7 +43,7 @@ export const refreshTokenDoc = {
         tags: ["Session"],
         summary: "Execute a refresh token and return a new token without the need to login again",
         response: {
-            201: {
+            200: {
                 description: "Successful response. Token trainer created",
                 type: "object",
                 properties: {
