@@ -4,9 +4,9 @@ import vitestConfig from "./vite.config";
 
 export default mergeConfig(vitestConfig, defineConfig({
     test: {
-        include: ["src/__tests__/e2e/**"],
-        exclude: ["src/__tests__/unit/**"],
-        // environmentMatchGlobs: [["src/__tests__/e2e/**", "prisma"]] // problemático
+        include: ["__tests__/e2e/**"],
+        exclude: ["__tests__/unit/**"],
+        // environmentMatchGlobs: [["__tests__/e2e/**", "prisma"]] // problemático
     }
 })
 );

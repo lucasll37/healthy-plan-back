@@ -1,7 +1,7 @@
 import { expect, describe, it, beforeEach, beforeAll } from "vitest";
-import { AnamnesisCreateService } from "@/services/anaminesis";
-import { AnamnesisRepositoryInMemory } from "@/repositories/anamnesis/inMemory/AnamnesisRepositoryInMemory";
-import { IAnamnesisRepository } from "@/repositories/anamnesis/IAnamnesisRepository";
+import { AnamnesisCreateService } from "../../src/services/anaminesis";
+import { AnamnesisRepositoryInMemory } from "../../src/repositories/anamnesis/inMemory/AnamnesisRepositoryInMemory";
+import { IAnamnesisRepository } from "../../src/repositories/anamnesis/IAnamnesisRepository";
 import { randomUUID } from "crypto";
 import { Prisma } from "@prisma/client";
 
