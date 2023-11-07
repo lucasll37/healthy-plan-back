@@ -18,6 +18,7 @@ export class AnamnesisCreateController {
         const anamnesisCreateService = new AnamnesisCreateService(anamnesisRepositoryPrisma);
 
         const athleteBodySchema = z.object({
+            AthleteId: z.string(),
             isAlcoholic: z.boolean(),
             isSmoker: z.boolean(),
             sleepQuality: z.string(),
@@ -42,7 +43,7 @@ export class AnamnesisCreateController {
             medicalTreatments: z.string().optional(),
             medicationUse: z.string().optional(),
             UseHealthDevice: z.string().optional(),
-            AthleteId: z.string()
+            additionalObservations: z.string().optional()
         });
 
         try {
@@ -73,6 +74,7 @@ export class AnamnesisCreateController {
                 medicalTreatments: requestBodyParsed.medicalTreatments,
                 medicationUse: requestBodyParsed.medicationUse,
                 UseHealthDevice: requestBodyParsed.UseHealthDevice,
+                additionalObservations: requestBodyParsed.additionalObservations,
                 athlete: {
                     connect: {
                         id: requestBodyParsed.AthleteId

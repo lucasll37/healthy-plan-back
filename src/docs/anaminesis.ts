@@ -13,6 +13,7 @@ export const AnamnesisCreateDoc = {
         body: {
             type: "object",
             properties: {
+                AthleteId: {type: "string", format: "uuid"},
                 isAlcoholic: {type: "boolean"},
                 isSmoker: {type: "boolean"},
                 sleepQuality: {type: "string"},
@@ -25,13 +26,12 @@ export const AnamnesisCreateDoc = {
                 isDiabetic: {type: "boolean"},
                 systolicBloodPressure: {type: "integer"},
                 diastolicBloodPressure: {type: "integer"},
-                restingHeartRate: {type: "string"},
+                restingHeartRate: {type: "integer"},
                 haveAnxiety: {type: "boolean"},
                 haveDepression: {type: "boolean"},
                 haveBipolarDisorder: {type: "boolean"},
                 haveObsessiveCompDisorder: {type: "boolean"},
                 haveOtherDisorders: {type: "boolean"},
-                AthleteId: {type: "string", format: "uuid"},
                 heartProblems: {type: "string"},
                 allergies: {type: "string"},
                 otherDiseases: {type: "string"},
