@@ -11,14 +11,14 @@ export class AuthenticateController {
 
         const trainerRepositoryPrisma = new TrainerRepositoryPrisma();
         const authenticateService = new AuthenticateService(trainerRepositoryPrisma);
-    
+
         const authenticateBodySchema = z.object({
             email: z.string().email(),
             password: z.string().min(6),
         });
-            
-        
-        try {  
+
+
+        try {
             const { email, password } = authenticateBodySchema.parse(request.body);
             const { trainer } = await authenticateService.execute({ email, password });
 
@@ -46,16 +46,16 @@ export class AuthenticateController {
                     sameSite: true, // somente acessado pelo mesmo site
                     httpOnly: true, // somente acessado pelo backend
                 })
-                .status(200).send({ token });
+                .status(201).send({ token });
         }
-    
+
         catch(error) {
             if(error instanceof InvalidCredenctialsError) {
                 return reply.status(error.code).send({
                     error: error.message
                 });
             }
-    
+
             throw error;
         }
     }
@@ -90,6 +90,6 @@ export class RefreshTokenController {
                 sameSite: true, // somente acessado pelo mesmo site
                 httpOnly: true, // somente acessado pelo backend
             })
-            .status(200).send({ token });
+            .status(201).send({ token });
     }
 }

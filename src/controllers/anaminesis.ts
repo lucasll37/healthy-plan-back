@@ -83,7 +83,7 @@ export class AnamnesisCreateController {
             };
 
             const anamnesis = await anamnesisCreateService.execute(data);
-            return reply.status(200).send({anamnesis: anamnesis});
+            return reply.status(201).send({anamnesis: anamnesis});
         }
 
         catch(error) {
