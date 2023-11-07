@@ -166,7 +166,8 @@ export class AnamnesisUpdateController {
             otherDiseases: z.string().optional(),
             medicalTreatments: z.string().optional(),
             medicationUse: z.string().optional(),
-            UseHealthDevice: z.string().optional()
+            UseHealthDevice: z.string().optional(),
+            additionalObservations: z.string().optional()
         });
 
         try {
