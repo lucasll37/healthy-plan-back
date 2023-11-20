@@ -19,7 +19,7 @@ export const athleteCreateDoc = {
                 email: {type: "string", format: "email"},
                 sex: {type: "string"},
                 birthDate: {type: "string", format: "date"},
-                avatar: {type: "string", format: "email"},
+                avatar: {type: "string", format: "url"},
                 observation: {type: "string"},
                 addressInfo: {type: "string"},
                 addressNumber: {type: "string"},

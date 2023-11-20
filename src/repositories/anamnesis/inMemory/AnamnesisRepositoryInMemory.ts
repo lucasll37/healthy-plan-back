@@ -16,7 +16,7 @@ export class AnamnesisRepositoryInMemory implements IAnamnesisRepository {
             medicalTreatments: null,
             medicationUse: null,
             UseHealthDevice: null,
-            athleteId: data.athlete.create!.id!,
+            athleteId: data.athlete.connect!.id!,
             createdAt: new Date(),
             updatedAt: new Date()
         };
