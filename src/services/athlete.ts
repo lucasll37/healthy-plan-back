@@ -1,8 +1,11 @@
 import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
 import { EmailAlreadyExistsError } from "../errors/email-already-exists";
 import { IAthleteRepository } from "../repositories/athlete/IAthleteRepository";
-import { Athlete, Prisma } from "@prisma/client";
+import { Anamnesis, Athlete, BodyEvaluation, Prisma } from "@prisma/client";
 import { CacheRedis } from "@/cache/redis/CacheRedis";
+import { IAnamnesisRepository } from "@/repositories/anamnesis/IAnamnesisRepository";
+import { AthleteAndTrainerDontMeet } from "@/errors/athlete-and-trainer-dont-meet";
+import { IBodyEvaluationRepository } from "@/repositories/bodyEvaluation/IBodyEvaluationRepository";
 
 export class AthleteCreateService {
     private cache = CacheRedis.getInstance();
@@ -92,5 +95,57 @@ export class AthleteDeleteService {
         catch {
             throw new AthleteDontExistsError();
         }
+    }
+}
+
+
+export class AthleteGetAnamnesisService {
+    private cache = CacheRedis.getInstance();
+
+    constructor(
+        private athleteRepository: IAthleteRepository,
+        private anamnesisRepository: IAnamnesisRepository
+    ) {}
+
+    async execute(athleteId: string, trainerId: string): Promise<Anamnesis[] | null> {
+        const athlete = await this.athleteRepository.findById(athleteId);
+
+        if(!athlete){
+            throw new AthleteDontExistsError();
+        }
+
+        if(athlete.trainerId !== trainerId) {
+            throw new AthleteAndTrainerDontMeet();
+        }
+
+        const anamnesis = await this.anamnesisRepository.findByAthleteId(athleteId);
+
+        return anamnesis;
+    }
+}
+
+
+export class AthleteGetBodyEvaluationsService {
+    private cache = CacheRedis.getInstance();
+
+    constructor(
+        private athleteRepository: IAthleteRepository,
+        private bodyEvaluationRepository: IBodyEvaluationRepository
+    ) {}
+
+    async execute(athleteId: string, trainerId: string): Promise<BodyEvaluation[] | null> {
+        const athlete = await this.athleteRepository.findById(athleteId);
+
+        if(!athlete){
+            throw new AthleteDontExistsError();
+        }
+
+        if(athlete.trainerId !== trainerId) {
+            throw new AthleteAndTrainerDontMeet();
+        }
+
+        const bodyEvaluations = await this.bodyEvaluationRepository.findByAthleteId(athleteId);
+
+        return bodyEvaluations;
     }
 }

@@ -64,4 +64,10 @@ export class BodyEvaluationRepositoryInMemory implements IBodyEvaluationReposito
 
         return new Promise<void>(resolve => resolve());
     }
+
+    async findByAthleteId(athleteId: string): Promise<BodyEvaluation[] | null> {
+        const bodyEvaluations = this.bodyEvaluations.filter(bodyEvaluation => bodyEvaluation.athleteId === athleteId);
+
+        return new Promise(resolve => resolve( bodyEvaluations || null));
+    }
 }

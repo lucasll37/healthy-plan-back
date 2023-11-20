@@ -30,4 +30,12 @@ export class AnamnesisRepositoryPrisma implements IAnamnesisRepository {
             where: { id }
         });
     }
+
+    async findByAthleteId(athleteId: string): Promise<Anamnesis[] | null> {
+        const anamnesis = await prisma.anamnesis.findMany({
+            where: { athleteId }
+        });
+
+        return anamnesis;
+    }
 }

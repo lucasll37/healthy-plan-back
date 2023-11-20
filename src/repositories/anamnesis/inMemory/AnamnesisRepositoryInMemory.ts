@@ -3,7 +3,6 @@ import { IAnamnesisRepository } from "../IAnamnesisRepository";
 import { randomUUID } from "node:crypto";
 
 export class AnamnesisRepositoryInMemory implements IAnamnesisRepository {
-
     private anamnesis: Anamnesis[] = [];
 
     async create(data: Prisma.AnamnesisCreateInput): Promise<Anamnesis> {
@@ -46,5 +45,11 @@ export class AnamnesisRepositoryInMemory implements IAnamnesisRepository {
         this.anamnesis.splice(index, 1);
 
         return new Promise<void>(resolve => resolve());
+    }
+
+    async findByAthleteId(athleteId: string): Promise<Anamnesis[] | null> {
+        const anamnesis = this.anamnesis.filter(anamnesis => anamnesis.athleteId === athleteId);
+
+        return new Promise(resolve => resolve( anamnesis || null));
     }
 }

@@ -7,9 +7,9 @@ export const mockDoc = {
 
 export const bodyEvaluationCreateDoc = {
     schema: {
-        description: "Crete a new body evaluation",
+        description: "Create a new body evaluation",
         tags: ["Body Evaluation"],
-        summary: "Crete a new body evaluation",
+        summary: "Create a new body evaluation",
         body: {
             type: "object",
             properties: {
@@ -129,9 +129,9 @@ export const bodyEvaluationCreateDoc = {
 
 export const bodyEvaluationGetbyIdDoc = {
     schema: {
-        description: "Crete a new body evaluation",
+        description: "Get body evaluation by Id",
         tags: ["Body Evaluation"],
-        summary: "Crete a new body evaluation",
+        summary: "Get body evaluation by Id",
         params: {
             type: "object",
             properties: {
@@ -197,9 +197,9 @@ export const bodyEvaluationGetbyIdDoc = {
 
 export const bodyEvaluationUpdateDoc = {
     schema: {
-        description: "Crete a new body evaluation",
+        description: "Update body evaluation by Id",
         tags: ["Body Evaluation"],
-        summary: "Crete a new body evaluation",
+        summary: "Update body evaluation by Id",
         params: {
             type: "object",
             properties: {
@@ -298,9 +298,9 @@ export const bodyEvaluationUpdateDoc = {
 
 export const bodyEvaluationDeleteDoc = {
     schema: {
-        description: "Crete a new body evaluation",
+        description: "Delete body evaluation by Id",
         tags: ["Body Evaluation"],
-        summary: "Crete a new body evaluation",
+        summary: "Delete body evaluation by Id",
         params: {
             type: "object",
             properties: {

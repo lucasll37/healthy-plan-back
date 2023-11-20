@@ -30,4 +30,12 @@ export class BodyEvaluationRepositoryPrisma implements IBodyEvaluationRepository
             where: { id }
         });
     }
+
+    async findByAthleteId(athleteId: string): Promise<BodyEvaluation[] | null> {
+        const bodyEvaluation = prisma.bodyEvaluation.findMany({
+            where: { athleteId }
+        });
+
+        return bodyEvaluation;
+    }
 }

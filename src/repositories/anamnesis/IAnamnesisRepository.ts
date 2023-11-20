@@ -5,4 +5,5 @@ export interface IAnamnesisRepository {
     findById(id: string): Promise<Anamnesis | null>
     update(id: string, data: Prisma.AnamnesisUpdateInput): Promise<Anamnesis>
     delete(id: string): Promise<void>
+    findByAthleteId(athleteId: string): Promise<Anamnesis[] | null>
 }

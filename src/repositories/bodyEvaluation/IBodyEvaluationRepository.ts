@@ -5,4 +5,5 @@ export interface IBodyEvaluationRepository {
     findById(id: string): Promise<BodyEvaluation | null>
     update(id: string, data: Prisma.BodyEvaluationUpdateInput): Promise<BodyEvaluation>
     delete(id: string): Promise<void>
+    findByAthleteId(athleteId: string): Promise<BodyEvaluation[] | null>
 }

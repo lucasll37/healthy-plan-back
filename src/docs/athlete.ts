@@ -1,4 +1,9 @@
-
+export const mockDoc = {
+    schema: {
+        tags: ["Athlete"],
+        security: [{ apiKey: [] }]
+    }
+};
 
 export const athleteCreateDoc = {
     schema: {
@@ -80,13 +85,6 @@ export const AthletesGetbyTrainerDoc = {
         description: "Get athletes by Trainer Id",
         tags: ["Athlete"],
         summary: "Get athletes by Trainer Id",
-        // params: {
-        //     type: "object",
-        //     properties: {
-        //         id: { type: "string", format: "uuid"}
-        //     },
-        //     required: ["id"]
-        // },
         response: {
             200: {
                 description: "Successful response. Personal trainer created",
@@ -122,6 +120,7 @@ export const AthletesGetbyTrainerDoc = {
         security: [{ apiKey: [] }]
     }
 };
+
 export const athleteGetByIdDoc = {
     schema: {
         description: "Get athlete by Id",
@@ -250,6 +249,94 @@ export const athleteDeleteDoc = {
             },
             404: {
                 description: "Bad Request response. Athlete doesn't exists",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "Intern server error",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+
+export const athleteGetBodyEvaluationsDoc = {
+    schema: {
+        description: "Get Body Evaluations through athlete Id",
+        tags: ["Athlete"],
+        summary: "Get Body Evaluations through athlete Id",
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", format: "uuid"}
+            },
+            required: ["id"]
+        },
+        response: {
+            // 200: {
+            //     description: "Successful response. Personal trainer created",
+            //     type: "object",
+            //     properties: {
+            //         id: { type: "string", format: "uuid" },
+            //         name: {type: "string"},
+            //         surname: {type: "string"},
+            //         phone: {type: "string"},
+            //         email: {type: "string", format: "email"},
+            //         password: {type: "string"}
+            //     }
+            // },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "Intern server error",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+
+export const athleteGetAnamnesisDoc = {
+    schema: {
+        description: "Get Anamnesis through athlete Id",
+        tags: ["Athlete"],
+        summary: "Get Anamnesis through athlete Id",
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", format: "uuid"}
+            },
+            required: ["id"]
+        },
+        response: {
+            // 200: {
+            //     description: "Successful response. Personal trainer created",
+            //     type: "object",
+            //     properties: {
+            //         id: { type: "string", format: "uuid" },
+            //         name: {type: "string"},
+            //         surname: {type: "string"},
+            //         phone: {type: "string"},
+            //         email: {type: "string", format: "email"},
+            //         password: {type: "string"}
+            //     }
+            // },
+            400: {
+                description: "Bad Request response. Invalid data",
                 type: "object",
                 properties: {
                     error: { type: "string" }

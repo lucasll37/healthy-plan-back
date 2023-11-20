@@ -1,10 +1,24 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { AthleteRepositoryPrisma } from "../repositories/athlete/prisma/AthleteRepositoryPrisma";
-import { AthleteCreateService, AthletesGetbyTrainerService, AthleteGetByIdService, AthleteUpdateService, AthleteDeleteService } from "../services/athlete";
+
+import {
+    AthleteCreateService,
+    AthletesGetbyTrainerService,
+    AthleteGetByIdService,
+    AthleteUpdateService,
+    AthleteDeleteService,
+    AthleteGetAnamnesisService,
+    AthleteGetBodyEvaluationsService
+
+} from "../services/athlete";
+
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { EmailAlreadyExistsError } from "../errors/email-already-exists";
 import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
+import { AnamnesisRepositoryPrisma } from "@/repositories/anamnesis/prisma/AnamnesisRepositoryPrisma";
+import { BodyEvaluationRepositoryPrisma } from "@/repositories/bodyEvaluation/prisma/BodyEvaluationRepositoryPrisma";
+import { AthleteAndTrainerDontMeet } from "@/errors/athlete-and-trainer-dont-meet";
 
 
 export class AthleteCreateController {
@@ -201,6 +215,85 @@ export class AthleteDeleteController {
                 return reply.status(error.code).send({
                     error: error.message
                 });
+            }
+
+            throw error;
+        }
+    }
+}
+
+
+export class AthleteGetAnamnesisController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma();
+
+        const athleteGetAnamnesisService = new AthleteGetAnamnesisService(
+            athleteRepositoryPrisma,
+            anamnesisRepositoryPrisma
+        );
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        try {
+            const { id: athleteId } = registerParamsSchema.parse(request.params);
+            const trainerId = request.user.sub;
+
+            await athleteGetAnamnesisService.execute(athleteId, trainerId);
+            return reply.status(204).send();
+        }
+
+        catch(error) {
+            if(error instanceof AthleteDontExistsError) {
+                return reply.status(error.code).send({
+                    error: error.message
+                });
+            }
+
+            throw error;
+        }
+    }
+}
+
+export class AthleteGetBodyEvaluationsController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        await request.jwtVerify();
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma();
+
+        const athleteGetBodyEvaluationsService = new AthleteGetBodyEvaluationsService(
+            athleteRepositoryPrisma,
+            bodyEvaluationRepositoryPrisma
+        );
+
+        const registerParamsSchema = z.object({
+            id: z.string()
+        });
+
+        try {
+            const { id: athleteId } = registerParamsSchema.parse(request.params);
+            const trainerId = request.user.sub;
+
+            await athleteGetBodyEvaluationsService.execute(athleteId, trainerId);
+            return reply.status(204).send();
+        }
+
+        catch(error) {
+            if(error instanceof AthleteDontExistsError) {
+                return reply.status(error.code).send(error);
+            }
+
+            else if(error instanceof AthleteAndTrainerDontMeet) {
+                return reply.status(error.code).send(error);
             }
 
             throw error;
