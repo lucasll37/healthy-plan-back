@@ -32,7 +32,9 @@ export const createTrainerDoc = {
                     email: {type: "string", example: "john@doe.com"},
                     password: {type: "string"},
                     phone: {type: "string", example: "123456789"},
-                    avatar: {type: "string", format: "url"}
+                    avatar: {type: "string", format: "url"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -147,7 +149,9 @@ export const updateTrainerDoc = {
                     surname: {type: "string", example: "Doe"},
                     phone: {type: "string", example: "123456789"},
                     email: {type: "string", example: "john@doe.com"},
-                    password: {type: "string"}
+                    password: {type: "string"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {

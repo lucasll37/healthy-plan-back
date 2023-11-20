@@ -218,7 +218,7 @@ export const swaggerConfig: SwaggerOptions = {
                     bodyAge: {type: "integer"},
                     basalMetabolicRate: {type: "integer"},
                     waistRatioHip: {type: "float"},
-                    visceralFat: {type: "float"},
+                    visceralFat: {type: "string"},
                     neck_circ_cm: {type: "float"},
                     chest_circ_cm: {type: "float"},
                     rightForearm_circ_cm: {type: "float"},
@@ -233,7 +233,7 @@ export const swaggerConfig: SwaggerOptions = {
                     rightCalf_circ_cm: {type: "float"},
                     leftCalf_circ_cm: {type: "float"},
                     fatPercentage: {type: "float"},
-                    athleteId: {type: "string"},
+                    athleteId: {type: "string", format: "uuid"},
                     createdAt: {type: "datetime"},
                     updatedAt: {type: "datetime"}
                 }

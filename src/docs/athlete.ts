@@ -51,7 +51,8 @@ export const athleteCreateDoc = {
                     surname: {type: "string", example: "Doe"},
                     phone: {type: "string", example: "123456789"},
                     email: {type: "string", example: "john@doe.com"},
-                    password: {type: "string"}
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -90,14 +91,19 @@ export const AthletesGetbyTrainerDoc = {
                 description: "Successful response. Personal trainer created",
                 type: "object",
                 properties: {
-                    athletes: {type: "array",
+                    athletes: {
+                        type: "array",
                         items: {
-                            id: { type: "string", format: "uuid" },
-                            name: {type: "string"},
-                            surname: {type: "string"},
-                            phone: {type: "string"},
-                            email: {type: "string", format: "email"},
-                            password: {type: "string"}
+                            type: "object",
+                            properties: {
+                                id: { type: "string", format: "uuid" },
+                                name: {type: "string"},
+                                surname: {type: "string"},
+                                phone: {type: "string"},
+                                email: {type: "string", format: "email"},
+                                createdAt: {type: "string", format: "date-time"},
+                                updatedAt: {type: "string", format: "date-time"}
+                            }
                         }
                     }
                 }
@@ -143,7 +149,8 @@ export const athleteGetByIdDoc = {
                     surname: {type: "string"},
                     phone: {type: "string"},
                     email: {type: "string", format: "email"},
-                    password: {type: "string"}
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -201,7 +208,8 @@ export const athleteUpdateDoc = {
                     surname: {type: "string"},
                     phone: {type: "string"},
                     email: {type: "string", format: "email"},
-                    password: {type: "string"}
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -279,18 +287,50 @@ export const athleteGetBodyEvaluationsDoc = {
             required: ["id"]
         },
         response: {
-            // 200: {
-            //     description: "Successful response. Personal trainer created",
-            //     type: "object",
-            //     properties: {
-            //         id: { type: "string", format: "uuid" },
-            //         name: {type: "string"},
-            //         surname: {type: "string"},
-            //         phone: {type: "string"},
-            //         email: {type: "string", format: "email"},
-            //         password: {type: "string"}
-            //     }
-            // },
+            200: {
+                description: "Successful response. Personal trainer created",
+                type: "object",
+                properties: {
+                    bodyEvaluations: {
+                        type: "array",
+                        items: {
+                            type: "object",
+                            properties: {
+                                id: { type: "string", format: "uuid" },
+                                athleteId: {type: "string", format: "uuid"},
+                                ageAtTheMoment: {type: "number"},
+                                fatMass_kg: {type: "number"},
+                                leanMass_kg: {type: "number"},
+                                weight_cm: {type: "number"},
+                                height_kg: {type: "number"},
+                                bodyMassClass: {type: "string"},
+                                bodyMassIndex: {type: "number"},
+                                skeletalMass: {type: "number"},
+                                bodyAge: {type: "number"},
+                                basalMetabolicRate: {type: "number"},
+                                waistRatioHip: {type: "number"},
+                                visceralFat: {type: "string"},
+                                neck_circ_cm: {type: "number"},
+                                chest_circ_cm: {type: "number"},
+                                rightForearm_circ_cm: {type: "number"},
+                                leftForearm_circ_cm: {type: "number"},
+                                rightArm_circ_cm: {type: "number"},
+                                leftArm_circ_cm: {type: "number"},
+                                waist_circ_cm: {type: "number"},
+                                abdomen_circ_cm: {type: "number"},
+                                hip_circ_cm: {type: "number"},
+                                rightThigh_circ_cm: {type: "number"},
+                                leftThigh_circ_cm: {type: "number"},
+                                rightCalf_circ_cm: {type: "number"},
+                                leftCalf_circ_cm: {type: "number"},
+                                fatPercentage: {type: "number"},
+                                createdAt: {type: "string", format: "date-time"},
+                                updatedAt: {type: "string", format: "date-time"}
+                            }
+                        }
+                    }
+                }
+            },
             400: {
                 description: "Bad Request response. Invalid data",
                 type: "object",
@@ -323,18 +363,49 @@ export const athleteGetAnamnesisDoc = {
             required: ["id"]
         },
         response: {
-            // 200: {
-            //     description: "Successful response. Personal trainer created",
-            //     type: "object",
-            //     properties: {
-            //         id: { type: "string", format: "uuid" },
-            //         name: {type: "string"},
-            //         surname: {type: "string"},
-            //         phone: {type: "string"},
-            //         email: {type: "string", format: "email"},
-            //         password: {type: "string"}
-            //     }
-            // },
+            200: {
+                description: "Successful response. Personal trainer created",
+                type: "object",
+                properties: {
+                    anamnesis: {
+                        type: "array",
+                        items: {
+                            type: "object",
+                            properties: {
+                                id: { type: "string", format: "uuid" },
+                                AthleteId: {type: "string", format: "uuid"},
+                                isAlcoholic: {type: "boolean"},
+                                isSmoker: {type: "boolean"},
+                                sleepQuality: {type: "string"},
+                                PhysicalActivityHabits: {type: "string"},
+                                HydrationHabits: {type: "string"},
+                                EatingHabits: {type: "string"},
+                                AmountWater: {type: "number"},
+                                UseFoodSupplement: {type: "string"},
+                                isAnemic: {type: "boolean"},
+                                isDiabetic: {type: "boolean"},
+                                systolicBloodPressure: {type: "integer"},
+                                diastolicBloodPressure: {type: "integer"},
+                                restingHeartRate: {type: "string"},
+                                haveAnxiety: {type: "boolean"},
+                                haveDepression: {type: "boolean"},
+                                haveBipolarDisorder: {type: "boolean"},
+                                haveObsessiveCompDisorder: {type: "boolean"},
+                                haveOtherDisorders: {type: "boolean"},
+                                heartProblems: {type: "string"},
+                                allergies: {type: "string"},
+                                otherDiseases: {type: "string"},
+                                medicalTreatments: {type: "string"},
+                                medicationUse: {type: "string"},
+                                UseHealthDevice: {type: "string"},
+                                additionalObservations: {type: "string"},
+                                createdAt: {type: "string", format: "date-time"},
+                                updatedAt: {type: "string", format: "date-time"}
+                            }
+                        }
+                    }
+                }
+            },
             400: {
                 description: "Bad Request response. Invalid data",
                 type: "object",

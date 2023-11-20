@@ -83,7 +83,7 @@ export class AnamnesisCreateController {
             };
 
             const anamnesis = await anamnesisCreateService.execute(data);
-            return reply.status(201).send({anamnesis: anamnesis});
+            return reply.status(201).send( anamnesis );
         }
 
         catch(error) {
@@ -174,8 +174,8 @@ export class AnamnesisUpdateController {
             const { id } = registerParamsSchema.parse(request.params);
             const data: Prisma.AnamnesisUpdateInput = registerBodySchema.parse(request.body);
 
-            const trainer = await anamnesisUpdateService.execute(id, data);
-            return reply.status(200).send( trainer );
+            const anaminesis = await anamnesisUpdateService.execute(id, data);
+            return reply.status(200).send( anaminesis );
         }
 
         catch(error) {

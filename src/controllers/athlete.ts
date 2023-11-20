@@ -75,7 +75,7 @@ export class AthleteCreateController {
             };
 
             const athlete = await athleteCreateService.execute(data);
-            return reply.status(200).send({athlete: athlete});
+            return reply.status(200).send( athlete );
         }
 
         catch(error) {
@@ -245,8 +245,8 @@ export class AthleteGetAnamnesisController {
             const { id: athleteId } = registerParamsSchema.parse(request.params);
             const trainerId = request.user.sub;
 
-            await athleteGetAnamnesisService.execute(athleteId, trainerId);
-            return reply.status(204).send();
+            const anamnesis = await athleteGetAnamnesisService.execute(athleteId, trainerId);
+            return reply.status(200).send({ anamnesis });
         }
 
         catch(error) {
@@ -282,9 +282,8 @@ export class AthleteGetBodyEvaluationsController {
         try {
             const { id: athleteId } = registerParamsSchema.parse(request.params);
             const trainerId = request.user.sub;
-
-            await athleteGetBodyEvaluationsService.execute(athleteId, trainerId);
-            return reply.status(204).send();
+            const bodyEvaluations = await athleteGetBodyEvaluationsService.execute(athleteId, trainerId);
+            return reply.status(200).send({ bodyEvaluations });
         }
 
         catch(error) {

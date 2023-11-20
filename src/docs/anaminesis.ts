@@ -67,6 +67,8 @@ export const AnamnesisCreateDoc = {
                 description: "Successful response. Anamnesis created",
                 type: "object",
                 properties: {
+                    id: { type: "string", format: "uuid" },
+                    athleteId: {type: "string", format: "uuid"},
                     isAlcoholic: {type: "boolean"},
                     isSmoker: {type: "boolean"},
                     sleepQuality: {type: "string"},
@@ -85,14 +87,15 @@ export const AnamnesisCreateDoc = {
                     haveBipolarDisorder: {type: "boolean"},
                     haveObsessiveCompDisorder: {type: "boolean"},
                     haveOtherDisorders: {type: "boolean"},
-                    AthleteId: {type: "string", format: "uuid"},
                     heartProblems: {type: "string"},
                     allergies: {type: "string"},
                     otherDiseases: {type: "string"},
                     medicalTreatments: {type: "string"},
                     medicationUse: {type: "string"},
                     UseHealthDevice: {type: "string"},
-                    additionalObservations: {type: "string"}
+                    additionalObservations: {type: "string"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -129,10 +132,12 @@ export const getByIdDoc = {
             required: ["id"]
         },
         response: {
-            201: {
+            200: {
                 description: "Successful response. Anamnesis created",
                 type: "object",
                 properties: {
+                    id: { type: "string", format: "uuid" },
+                    athleteId: {type: "string", format: "uuid"},
                     isAlcoholic: {type: "boolean"},
                     isSmoker: {type: "boolean"},
                     sleepQuality: {type: "string"},
@@ -158,7 +163,9 @@ export const getByIdDoc = {
                     medicalTreatments: {type: "string"},
                     medicationUse: {type: "string"},
                     UseHealthDevice: {type: "string"},
-                    additionalObservations: {type: "string"}
+                    additionalObservations: {type: "string"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -226,10 +233,12 @@ export const UpdateByIdDoc = {
             required: []
         },
         response: {
-            201: {
+            200: {
                 description: "Successful response. Anamnesis created",
                 type: "object",
                 properties: {
+                    id: { type: "string", format: "uuid" },
+                    athleteId: {type: "string", format: "uuid"},
                     isAlcoholic: {type: "boolean"},
                     isSmoker: {type: "boolean"},
                     sleepQuality: {type: "string"},
@@ -248,14 +257,15 @@ export const UpdateByIdDoc = {
                     haveBipolarDisorder: {type: "boolean"},
                     haveObsessiveCompDisorder: {type: "boolean"},
                     haveOtherDisorders: {type: "boolean"},
-                    AthleteId: {type: "string", format: "uuid"},
                     heartProblems: {type: "string"},
                     allergies: {type: "string"},
                     otherDiseases: {type: "string"},
                     medicalTreatments: {type: "string"},
                     medicationUse: {type: "string"},
                     UseHealthDevice: {type: "string"},
-                    additionalObservations: {type: "string"}
+                    additionalObservations: {type: "string"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {

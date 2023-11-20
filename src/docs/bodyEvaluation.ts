@@ -82,13 +82,13 @@ export const bodyEvaluationCreateDoc = {
                     leanMass_kg: {type: "number"},
                     weight_cm: {type: "number"},
                     height_kg: {type: "number"},
-                    bodyMassClass: {type: "number"},
+                    bodyMassClass: {type: "string"},
                     bodyMassIndex: {type: "number"},
                     skeletalMass: {type: "number"},
                     bodyAge: {type: "number"},
                     basalMetabolicRate: {type: "number"},
                     waistRatioHip: {type: "number"},
-                    visceralFat: {type: "number"},
+                    visceralFat: {type: "string"},
                     neck_circ_cm: {type: "number"},
                     chest_circ_cm: {type: "number"},
                     rightForearm_circ_cm: {type: "number"},
@@ -103,7 +103,9 @@ export const bodyEvaluationCreateDoc = {
                     rightCalf_circ_cm: {type: "number"},
                     leftCalf_circ_cm: {type: "number"},
                     fatPercentage: {type: "number"},
-                    athleteId: {type: "number"}
+                    athleteId: {type: "string", format: "uuid"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -150,13 +152,13 @@ export const bodyEvaluationGetbyIdDoc = {
                     leanMass_kg: {type: "number"},
                     weight_cm: {type: "number"},
                     height_kg: {type: "number"},
-                    bodyMassClass: {type: "number"},
+                    bodyMassClass: {type: "string"},
                     bodyMassIndex: {type: "number"},
                     skeletalMass: {type: "number"},
                     bodyAge: {type: "number"},
                     basalMetabolicRate: {type: "number"},
                     waistRatioHip: {type: "number"},
-                    visceralFat: {type: "number"},
+                    visceralFat: {type: "string"},
                     neck_circ_cm: {type: "number"},
                     chest_circ_cm: {type: "number"},
                     rightForearm_circ_cm: {type: "number"},
@@ -171,7 +173,9 @@ export const bodyEvaluationGetbyIdDoc = {
                     rightCalf_circ_cm: {type: "number"},
                     leftCalf_circ_cm: {type: "number"},
                     fatPercentage: {type: "number"},
-                    athleteId: {type: "number"}
+                    athleteId: {type: "string", format: "uuid"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {
@@ -235,8 +239,7 @@ export const bodyEvaluationUpdateDoc = {
                 leftThigh_circ_cm: {type: "number"},
                 rightCalf_circ_cm: {type: "number"},
                 leftCalf_circ_cm: {type: "number"},
-                fatPercentage: {type: "number"},
-                athleteId: {type: "string"}
+                fatPercentage: {type: "number"}
             },
             required: []
         },
@@ -251,13 +254,13 @@ export const bodyEvaluationUpdateDoc = {
                     leanMass_kg: {type: "number"},
                     weight_cm: {type: "number"},
                     height_kg: {type: "number"},
-                    bodyMassClass: {type: "number"},
+                    bodyMassClass: {type: "string"},
                     bodyMassIndex: {type: "number"},
                     skeletalMass: {type: "number"},
                     bodyAge: {type: "number"},
                     basalMetabolicRate: {type: "number"},
                     waistRatioHip: {type: "number"},
-                    visceralFat: {type: "number"},
+                    visceralFat: {type: "string"},
                     neck_circ_cm: {type: "number"},
                     chest_circ_cm: {type: "number"},
                     rightForearm_circ_cm: {type: "number"},
@@ -272,7 +275,9 @@ export const bodyEvaluationUpdateDoc = {
                     rightCalf_circ_cm: {type: "number"},
                     leftCalf_circ_cm: {type: "number"},
                     fatPercentage: {type: "number"},
-                    athleteId: {type: "number"}
+                    athleteId: {type: "string", format: "uuid"},
+                    createdAt: {type: "string", format: "date-time"},
+                    updatedAt: {type: "string", format: "date-time"}
                 }
             },
             400: {

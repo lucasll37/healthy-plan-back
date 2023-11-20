@@ -95,7 +95,7 @@ export class BodyEvaluationCreateController {
                 trainerId: request.user.sub
             });
 
-            return reply.status(200).send(bodyEvaluation);
+            return reply.status(201).send( bodyEvaluation );
         }
 
         catch(error) {
