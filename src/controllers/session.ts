@@ -46,7 +46,7 @@ export class AuthenticateController {
                     sameSite: true, // somente acessado pelo mesmo site
                     httpOnly: true, // somente acessado pelo backend
                 })
-                .status(201).send({ token });
+                .status(201).send({ token: token, id: trainer.id });
         }
 
         catch(error) {

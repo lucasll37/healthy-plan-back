@@ -16,6 +16,7 @@ export const sessionDoc = {
                 description: "Successful response. Personal trainer created",
                 type: "object",
                 properties: {
+                    id: { type: "string", format: "uuid"},
                     token: { type: "string"}
                 }
             },
