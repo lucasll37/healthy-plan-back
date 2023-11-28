@@ -15,8 +15,8 @@ import { randomUUID } from "crypto";
 import { EmailAlreadyExistsError } from "../../src/errors/email-already-exists";
 import { Prisma } from "@prisma/client";
 import { AthleteDontExistsError } from "../../src/errors/athlete-dont-exists";
-import { BodyEvaluationRepositoryInMemory } from "@/repositories/bodyEvaluation/inMemory/BodyEvaluationRepositoryInMemory";
-import { AnamnesisRepositoryInMemory } from "@/repositories/anamnesis/inMemory/AnamnesisRepositoryInMemory";
+import { BodyEvaluationRepositoryInMemory } from "../../src/repositories/bodyEvaluation/inMemory/BodyEvaluationRepositoryInMemory";
+import { AnamnesisRepositoryInMemory } from "../../src/repositories/anamnesis/inMemory/AnamnesisRepositoryInMemory";
 
 
 let athleteRepository: IAthleteRepository;
