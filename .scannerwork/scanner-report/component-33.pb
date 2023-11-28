@@ -1,2 +1,0 @@
-! 2tsX
-hr.src/repositories/trainer/ITrainerRepository.ts

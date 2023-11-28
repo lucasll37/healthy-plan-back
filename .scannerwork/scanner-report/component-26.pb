@@ -1,1 +1,0 @@
- 2tsXhr2src/repositories/anamnesis/IAnamnesisRepository.ts

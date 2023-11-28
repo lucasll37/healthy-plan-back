@@ -118,6 +118,12 @@
   },
   "include": [
     "src/**/*.ts",
-    "server.ts"
-  ]
+    "__tests__/**/*.ts",
+    "./"
+  ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "./tsconfig.json"
+    ]
 }

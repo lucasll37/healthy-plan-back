@@ -6,7 +6,11 @@ export default mergeConfig(vitestConfig, defineConfig({
     test: {
         include: ["__tests__/e2e/**"],
         exclude: ["__tests__/unit/**"],
-        // environmentMatchGlobs: [["__tests__/e2e/**", "prisma"]] // problemático
+        // environmentMatchGlobs: [["__tests__/e2e/**", "prisma"]] // problemático,
+        coverage: {
+            include: ["src/services/**", "src/controllers/**"],
+            // exclude: ["src/**/*.test.ts"]
+        }
     }
 })
 );

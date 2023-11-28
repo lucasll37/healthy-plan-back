@@ -1,1 +1,0 @@
- 2tsXhrBsrc/repositories/trainingEvolution/ITrainingEvolutionRepository.ts

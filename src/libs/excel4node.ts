@@ -5,7 +5,7 @@ const wb = new excel4node.Workbook();
 
 // Add Worksheets to the workbook
 const ws = wb.addWorksheet("Sheet 1");
-const ws2 = wb.addWorksheet("Sheet 2");
+// const ws2 = wb.addWorksheet("Sheet 2");
 
 // Create a reusable style
 const style = wb.createStyle({

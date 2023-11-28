@@ -1,10 +1,22 @@
 import { expect, describe, it, beforeEach, beforeAll } from "vitest";
-import { AthleteCreateService, AthletesGetbyTrainerService } from "../../src/services/athlete";
+
+import {
+    AthleteCreateService,
+    AthleteDeleteService,
+    AthleteUpdateService,
+    AthletesGetbyTrainerService,
+    AthleteGetBodyEvaluationsService,
+    AthleteGetAnamnesisService
+} from "../../src/services/athlete";
+
 import { IAthleteRepository } from "../../src/repositories/athlete/IAthleteRepository";
 import { AthleteRepositoryInMemory } from "../../src/repositories/athlete/inMemory/AthleteRepositoryInMemory";
 import { randomUUID } from "crypto";
 import { EmailAlreadyExistsError } from "../../src/errors/email-already-exists";
 import { Prisma } from "@prisma/client";
+import { AthleteDontExistsError } from "../../src/errors/athlete-dont-exists";
+import { BodyEvaluationRepositoryInMemory } from "@/repositories/bodyEvaluation/inMemory/BodyEvaluationRepositoryInMemory";
+import { AnamnesisRepositoryInMemory } from "@/repositories/anamnesis/inMemory/AnamnesisRepositoryInMemory";
 
 
 let athleteRepository: IAthleteRepository;
@@ -57,6 +69,7 @@ describe("Athlete Services", () => {
     it("shouldn't be able create a new athlete that already exists", async () => {
         const sut = new AthleteCreateService(athleteRepository);
         await sut.execute(athlete);
+
         await expect(async () => {
             await sut.execute(athlete);
         }).rejects.toBeInstanceOf(EmailAlreadyExistsError);
@@ -90,8 +103,139 @@ describe("Athlete Services", () => {
     it("should be able update a new athlete that already exists", async () => {
         const sut = new AthleteCreateService(athleteRepository);
         await sut.execute(athlete);
+
         await expect(async () => {
             await sut.execute(athlete);
         }).rejects.toBeInstanceOf(EmailAlreadyExistsError);
     });
+
+    it("should fail to update a non-existent athlete", async () => {
+        const athleteCreateService = new AthleteCreateService(athleteRepository);
+        const sut = new AthleteUpdateService(athleteRepository);
+        await athleteCreateService.execute(athlete);
+
+        await expect(async () => {
+            await sut.execute(randomUUID(), { ...athlete, name: "Non-existent" });
+        }).rejects.toBeInstanceOf(AthleteDontExistsError);
+    });
+
+    it("should retrieve body evaluations for an athlete", async () => {
+        const athleteCreateService = new AthleteCreateService(athleteRepository);
+        const createdAthlete = await athleteCreateService.execute(athlete);
+
+        const bodyEvaluationMock = {
+            ageAtTheMoment: 0,
+            fatMass_kg: 0,
+            leanMass_kg: 0,
+            weight_cm: 0,
+            height_kg: 0,
+            bodyMassIndex: 0,
+            bodyMassClass: "",
+            skeletalMass: 0,
+            bodyAge: 0,
+            basalMetabolicRate: 0,
+            waistRatioHip: 0,
+            visceralFat: "",
+            neck_circ_cm: 0,
+            chest_circ_cm: 0,
+            rightForearm_circ_cm: 0,
+            leftForearm_circ_cm: 0,
+            rightArm_circ_cm: 0,
+            leftArm_circ_cm: 0,
+            waist_circ_cm: 0,
+            abdomen_circ_cm: 0,
+            hip_circ_cm: 0,
+            rightThigh_circ_cm: 0,
+            leftThigh_circ_cm: 0,
+            rightCalf_circ_cm: 0,
+            leftCalf_circ_cm: 0,
+            fatPercentage: 0,
+            athlete: {
+                connect: {
+                    id: createdAthlete.id
+                }
+            }
+        };
+
+        const bodyEvaluationRepository = new BodyEvaluationRepositoryInMemory();
+        await bodyEvaluationRepository.create(bodyEvaluationMock);
+
+        const sut = new AthleteGetBodyEvaluationsService(athleteRepository, bodyEvaluationRepository);
+        const evaluations = await sut.execute(createdAthlete.id!, athlete.trainer.connect!.id!);
+
+        expect(evaluations).toBeInstanceOf(Array);
+        expect(evaluations).toHaveLength(1);
+        expect(evaluations![0]).toHaveProperty("id");
+    });
+
+    it("should retrieve anamnesis for an athlete", async () => {
+        const athleteCreateService = new AthleteCreateService(athleteRepository);
+        const createdAthlete = await athleteCreateService.execute(athlete);
+
+        const anamnesisMock = {
+            isAlcoholic: false,
+            isSmoker: false,
+            sleepQuality: "",
+            PhysicalActivityHabits: "",
+            HydrationHabits: "",
+            EatingHabits: "",
+            AmountWater: 0,
+            UseFoodSupplement: "",
+            isAnemic: false,
+            isDiabetic: false,
+            systolicBloodPressure: 0,
+            diastolicBloodPressure: 0,
+            restingHeartRate: 0,
+            heartProblems: null,
+            allergies: null,
+            otherDiseases: null,
+            medicalTreatments: null,
+            medicationUse: null,
+            UseHealthDevice: null,
+            additionalObservations: null,
+            haveAnxiety: false,
+            haveDepression: false,
+            haveBipolarDisorder: false,
+            haveObsessiveCompDisorder: false,
+            haveOtherDisorders: false,
+            athlete: {
+                connect: {
+                    id: createdAthlete.id
+                }
+            }
+        };
+
+        const anamnesisRepository = new AnamnesisRepositoryInMemory();
+        await anamnesisRepository.create(anamnesisMock);
+
+        const sut = new AthleteGetAnamnesisService(athleteRepository, anamnesisRepository);
+        const anamnesis = await sut.execute(createdAthlete.id!, athlete.trainer.connect!.id!);
+
+        expect(anamnesis).toBeInstanceOf(Array);
+        expect(anamnesis).toHaveLength(1);
+        expect(anamnesis![0]).toHaveProperty("id");
+    });
+
+    it("should be able to delete an athlete", async () => {
+        const athleteCreateService = new AthleteCreateService(athleteRepository);
+        const sut = new AthleteDeleteService(athleteRepository);
+
+        const createdAthlete = await athleteCreateService.execute(athlete);
+
+        await expect(async () => {
+            await sut.execute(createdAthlete.id);
+        }).not.toThrow();
+    });
+
+    it("should fail to delete a non-existent athlete", async () => {
+        const athleteCreateService = new AthleteCreateService(athleteRepository);
+        const sut = new AthleteDeleteService(athleteRepository);
+        await athleteCreateService.execute(athlete);
+
+        await expect(async () => {
+            await sut.execute(randomUUID());
+        }).rejects.toBeInstanceOf(AthleteDontExistsError);
+    });
+
+
 });

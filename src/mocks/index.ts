@@ -5,7 +5,7 @@ import { BodyEvaluationRepositoryPrisma } from "../repositories/bodyEvaluation/p
 
 import { AthleteCreateService } from "../services/athlete";
 import { TrainerCreateService } from "../services/trainer";
-import { AnamnesisCreateService } from "../services/anaminesis";
+import { AnamnesisCreateService } from "../services/anamnesis";
 import { BodyEvaluationCreateService } from "../services/bodyEvaluation";
 
 
@@ -29,7 +29,7 @@ const anamnesisCreateService = new AnamnesisCreateService(anamnesisRepositoryPri
 
 const bodyEvaluationCreateService = new BodyEvaluationCreateService(
     bodyEvaluationRepositoryPrisma,
-    athleteRepositoryPrisma    
+    athleteRepositoryPrisma
 );
 
 
@@ -41,12 +41,12 @@ export async function populateRepositoriesWithMock() {
     const createdAthleteMock = await athleteCreateService.execute(athleteMock);
 
     anamnesisMock.athlete.connect!.id = createdAthleteMock.id;
-    const createdAnamnesisMock = await anamnesisCreateService.execute(anamnesisMock);
+    await anamnesisCreateService.execute(anamnesisMock);
 
     bodyEvaluationMock.athlete.connect!.id = createdAthleteMock.id;
-    const createdBodyEvaluationMock = await bodyEvaluationCreateService.execute({
+    await bodyEvaluationCreateService.execute({
         data: bodyEvaluationMock,
         trainerId: createdTrainerMock.id
     });
-        
+
 }

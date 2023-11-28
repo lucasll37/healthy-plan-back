@@ -2,7 +2,7 @@ import { FastifyError, FastifyReply } from "fastify";
 import { env } from "../env";
 import { ZodError } from "zod";
 
-export function errorHandler(error: FastifyError, _: any, reply: FastifyReply) {
+export function errorHandler(error: FastifyError, _, reply: FastifyReply) {
 
     if(error instanceof ZodError) {
         return reply

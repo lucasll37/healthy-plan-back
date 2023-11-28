@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { AnamnesisCreateDoc, mockDoc, getByIdDoc, UpdateByIdDoc, DeleteByIdDoc } from "../docs/anaminesis";
+import { AnamnesisCreateDoc, getByIdDoc, UpdateByIdDoc, DeleteByIdDoc } from "../docs/anaminesis";
 import {
     AnamnesisCreateController,
     AnamnesisDeleteController,

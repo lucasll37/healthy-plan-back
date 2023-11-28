@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { AthleteDontExistsError } from "../errors/athlete-dont-exists";
 import { AnamnesisRepositoryPrisma } from "../repositories/anamnesis/prisma/AnamnesisRepositoryPrisma";
-import { AnamnesisCreateService, AnamnesisDeleteService, AnamnesisGetByIdService, AnamnesisUpdateService } from "../services/anaminesis";
+import { AnamnesisCreateService, AnamnesisDeleteService, AnamnesisGetByIdService, AnamnesisUpdateService } from "../services/anamnesis";
 import { AnamnesisDontExistsError } from "@/errors/anamnesis-dont-exists";
 
 

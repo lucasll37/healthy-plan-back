@@ -75,7 +75,7 @@ export class AthleteCreateController {
             };
 
             const athlete = await athleteCreateService.execute(data);
-            return reply.status(200).send( athlete );
+            return reply.status(201).send( athlete );
         }
 
         catch(error) {

@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { mockDoc, bodyEvaluationCreateDoc, bodyEvaluationGetbyIdDoc, bodyEvaluationUpdateDoc, bodyEvaluationDeleteDoc } from "../docs/bodyEvaluation";
+import { bodyEvaluationCreateDoc, bodyEvaluationGetbyIdDoc, bodyEvaluationUpdateDoc, bodyEvaluationDeleteDoc } from "../docs/bodyEvaluation";
 import {
     BodyEvaluationCreateController,
     BodyEvaluationDeleteController,

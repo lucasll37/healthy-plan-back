@@ -8,6 +8,10 @@ export default defineConfig({
     ],
     publicDir: "public",
     test: {
-        include: ["__tests__/unit/**"]
+        include: ["__tests__/unit/**"],
+        coverage: {
+            include: ["src/services/**"],
+            // exclude: ["src/**/*.test.ts"]
+        }
     }
 });

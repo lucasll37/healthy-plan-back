@@ -4,7 +4,7 @@ import { TrainerRepositoryInMemory } from "../../src/repositories/trainer/inMemo
 import { randomUUID } from "node:crypto";
 import { EmailAlreadyExistsError } from "../../src/errors/email-already-exists";
 import { TrainerDontExistsError } from "../../src/errors/trainer-dont-exists";
-import { ITrainerRepository } from "@/repositories/trainer/ITrainerRepository";
+import { ITrainerRepository } from "../../src/repositories/trainer/ITrainerRepository";
 import { Prisma } from "@prisma/client";
 
 let trainerRepository: ITrainerRepository;

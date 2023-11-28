@@ -1,1 +1,0 @@
-7 2tsXhr!src/services/trainingEvolution.ts

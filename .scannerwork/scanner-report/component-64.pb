@@ -1,1 +1,0 @@
-@ 2tsXhr!src/errors/trainer-dont-exists.ts
