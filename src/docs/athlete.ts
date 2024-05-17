@@ -450,38 +450,16 @@ export const AthletesGetAllDoc = {
                 description: "Successful response. Personal trainer created",
                 type: "object",
                 properties: {
-                    anamnesis: {
+                    athletes: {
                         type: "array",
                         items: {
                             type: "object",
                             properties: {
                                 id: { type: "string", format: "uuid" },
-                                AthleteId: {type: "string", format: "uuid"},
-                                isAlcoholic: {type: "boolean"},
-                                isSmoker: {type: "boolean"},
-                                sleepQuality: {type: "string"},
-                                PhysicalActivityHabits: {type: "string"},
-                                HydrationHabits: {type: "string"},
-                                EatingHabits: {type: "string"},
-                                AmountWater: {type: "number"},
-                                UseFoodSupplement: {type: "string"},
-                                isAnemic: {type: "boolean"},
-                                isDiabetic: {type: "boolean"},
-                                systolicBloodPressure: {type: "integer"},
-                                diastolicBloodPressure: {type: "integer"},
-                                restingHeartRate: {type: "string"},
-                                haveAnxiety: {type: "boolean"},
-                                haveDepression: {type: "boolean"},
-                                haveBipolarDisorder: {type: "boolean"},
-                                haveObsessiveCompDisorder: {type: "boolean"},
-                                haveOtherDisorders: {type: "boolean"},
-                                heartProblems: {type: "string"},
-                                allergies: {type: "string"},
-                                otherDiseases: {type: "string"},
-                                medicalTreatments: {type: "string"},
-                                medicationUse: {type: "string"},
-                                UseHealthDevice: {type: "string"},
-                                additionalObservations: {type: "string"},
+                                name: {type: "string"},
+                                surname: {type: "string"},
+                                phone: {type: "string"},
+                                email: {type: "string", format: "email"},
                                 createdAt: {type: "string", format: "date-time"},
                                 updatedAt: {type: "string", format: "date-time"}
                             }
