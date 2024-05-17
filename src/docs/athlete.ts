@@ -438,13 +438,13 @@ export const AthletesGetAllDoc = {
         description: "Get All Athletes",
         tags: ["Athlete"],
         summary: "Get All Athletes",
-        params: {
-            type: "object",
-            properties: {
-                id: { type: "string", format: "uuid"}
-            },
-            required: ["id"]
-        },
+        // params: {
+        //     type: "object",
+        //     properties: {
+        //         id: { type: "string", format: "uuid"}
+        //     },
+        //     required: ["id"]
+        // },
         response: {
             200: {
                 description: "Successful response. Personal trainer created",
