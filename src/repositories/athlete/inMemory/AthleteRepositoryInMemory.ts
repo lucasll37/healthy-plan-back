@@ -59,4 +59,8 @@ export class AthleteRepositoryInMemory implements IAthleteRepository {
 
         return new Promise<void>(resolve => resolve());
     }
+
+    async getAll(): Promise<Athlete[]> {
+        return new Promise(resolve => resolve(this.athletes));
+    }
 }

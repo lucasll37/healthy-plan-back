@@ -41,4 +41,9 @@ export class AthleteRepositoryPrisma implements IAthleteRepository {
             where: { id }
         });
     }
+
+    async getAll(): Promise<Athlete[]> {
+        const athletes = await prisma.athlete.findMany();
+        return athletes;
+    }
 }

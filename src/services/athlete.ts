@@ -149,3 +149,15 @@ export class AthleteGetBodyEvaluationsService {
         return bodyEvaluations;
     }
 }
+
+
+export class AthletesGetAllService {
+
+    constructor(private athleteRepository: IAthleteRepository) {}
+
+    async execute(): Promise<Athlete[]> {
+        const athletes = await this.athleteRepository.getAll();
+
+        return athletes;
+    }
+}

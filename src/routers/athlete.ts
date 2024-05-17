@@ -6,7 +6,8 @@ import {
     AthleteUpdateController,
     AthleteDeleteController,
     AthleteGetAnamnesisController,
-    AthleteGetBodyEvaluationsController
+    AthleteGetBodyEvaluationsController,
+    AthletesGetAllController
 } from "../controllers/athlete";
 
 import {
@@ -16,10 +17,12 @@ import {
     athleteUpdateDoc,
     athleteDeleteDoc,
     athleteGetAnamnesisDoc,
-    athleteGetBodyEvaluationsDoc
+    athleteGetBodyEvaluationsDoc,
+    AthletesGetAllDoc
 } from "../docs/athlete";
 
 const athletesGetbyTrainerController = new AthletesGetbyTrainerController();
+const athletesGetAllController = new AthletesGetAllController();
 const athleteCreateController = new AthleteCreateController();
 const athleteGetByIdController = new AthleteGetByIdController();
 const athleteUpdateController = new AthleteUpdateController();
@@ -29,6 +32,7 @@ const athleteGetBodyEvaluationsController = new AthleteGetBodyEvaluationsControl
 
 export async function athleteRoutes(app: FastifyInstance) {
     app.get("", AthletesGetbyTrainerDoc, athletesGetbyTrainerController.handler);
+    app.get("/all", AthletesGetAllDoc, athletesGetAllController.handler);
     app.get("/:id", athleteGetByIdDoc, athleteGetByIdController.handler);
     app.get("/:id/anamnesis", athleteGetAnamnesisDoc, athleteGetAnamnesisController.handler);
     app.get("/:id/body-evaluation", athleteGetBodyEvaluationsDoc, athleteGetBodyEvaluationsController.handler);

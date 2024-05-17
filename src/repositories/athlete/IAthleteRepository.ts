@@ -7,4 +7,5 @@ export interface IAthleteRepository {
     getAthletesbyTrainer(id: string): Promise<Athlete[] | null>
     update(id: string, data: Prisma.AthleteUpdateInput): Promise<Athlete>
     delete(id: string): Promise<void>
+    getAll(): Promise<Athlete[]>
 }

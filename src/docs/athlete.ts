@@ -203,13 +203,21 @@ export const athleteUpdateDoc = {
                 description: "Successful response. Personal trainer created",
                 type: "object",
                 properties: {
-                    id: { type: "string", format: "uuid" },
-                    name: {type: "string"},
-                    surname: {type: "string"},
-                    phone: {type: "string"},
-                    email: {type: "string", format: "email"},
-                    createdAt: {type: "string", format: "date-time"},
-                    updatedAt: {type: "string", format: "date-time"}
+                    athletes: {
+                        type: "array",
+                        items: {
+                            type: "object",
+                            properties: {
+                                id: { type: "string", format: "uuid" },
+                                name: {type: "string"},
+                                surname: {type: "string"},
+                                phone: {type: "string"},
+                                email: {type: "string", format: "email"},
+                                createdAt: {type: "string", format: "date-time"},
+                                updatedAt: {type: "string", format: "date-time"}
+                            }
+                        }
+                    }
                 }
             },
             400: {
@@ -355,6 +363,81 @@ export const athleteGetAnamnesisDoc = {
         description: "Get Anamnesis through athlete Id",
         tags: ["Athlete"],
         summary: "Get Anamnesis through athlete Id",
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", format: "uuid"}
+            },
+            required: ["id"]
+        },
+        response: {
+            200: {
+                description: "Successful response. Personal trainer created",
+                type: "object",
+                properties: {
+                    anamnesis: {
+                        type: "array",
+                        items: {
+                            type: "object",
+                            properties: {
+                                id: { type: "string", format: "uuid" },
+                                AthleteId: {type: "string", format: "uuid"},
+                                isAlcoholic: {type: "boolean"},
+                                isSmoker: {type: "boolean"},
+                                sleepQuality: {type: "string"},
+                                PhysicalActivityHabits: {type: "string"},
+                                HydrationHabits: {type: "string"},
+                                EatingHabits: {type: "string"},
+                                AmountWater: {type: "number"},
+                                UseFoodSupplement: {type: "string"},
+                                isAnemic: {type: "boolean"},
+                                isDiabetic: {type: "boolean"},
+                                systolicBloodPressure: {type: "integer"},
+                                diastolicBloodPressure: {type: "integer"},
+                                restingHeartRate: {type: "string"},
+                                haveAnxiety: {type: "boolean"},
+                                haveDepression: {type: "boolean"},
+                                haveBipolarDisorder: {type: "boolean"},
+                                haveObsessiveCompDisorder: {type: "boolean"},
+                                haveOtherDisorders: {type: "boolean"},
+                                heartProblems: {type: "string"},
+                                allergies: {type: "string"},
+                                otherDiseases: {type: "string"},
+                                medicalTreatments: {type: "string"},
+                                medicationUse: {type: "string"},
+                                UseHealthDevice: {type: "string"},
+                                additionalObservations: {type: "string"},
+                                createdAt: {type: "string", format: "date-time"},
+                                updatedAt: {type: "string", format: "date-time"}
+                            }
+                        }
+                    }
+                }
+            },
+            400: {
+                description: "Bad Request response. Invalid data",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            },
+            500: {
+                description: "Intern server error",
+                type: "object",
+                properties: {
+                    error: { type: "string" }
+                }
+            }
+        },
+        security: [{ apiKey: [] }]
+    }
+};
+
+export const AthletesGetAllDoc = {
+    schema: {
+        description: "Get All Athletes",
+        tags: ["Athlete"],
+        summary: "Get All Athletes",
         params: {
             type: "object",
             properties: {

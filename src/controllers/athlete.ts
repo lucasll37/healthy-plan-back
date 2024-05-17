@@ -8,8 +8,8 @@ import {
     AthleteUpdateService,
     AthleteDeleteService,
     AthleteGetAnamnesisService,
-    AthleteGetBodyEvaluationsService
-
+    AthleteGetBodyEvaluationsService,
+    AthletesGetAllService
 } from "../services/athlete";
 
 import { Prisma } from "@prisma/client";
@@ -297,5 +297,18 @@ export class AthleteGetBodyEvaluationsController {
 
             throw error;
         }
+    }
+}
+
+export class AthletesGetAllController {
+
+    async handler(request: FastifyRequest, reply: FastifyReply) {
+
+        const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
+        const athletesGetAllService = new AthletesGetAllService(athleteRepositoryPrisma);
+
+        const athletes = await athletesGetAllService.execute();
+        return reply.status(200).send({ athletes });
+
     }
 }
