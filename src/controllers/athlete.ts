@@ -227,7 +227,7 @@ export class AthleteGetAnamnesisController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        await request.jwtVerify();
+        // await request.jwtVerify();
 
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
         const anamnesisRepositoryPrisma = new AnamnesisRepositoryPrisma();
@@ -265,7 +265,7 @@ export class AthleteGetBodyEvaluationsController {
 
     async handler(request: FastifyRequest, reply: FastifyReply) {
 
-        await request.jwtVerify();
+        // await request.jwtVerify();
 
         const athleteRepositoryPrisma = new AthleteRepositoryPrisma();
         const bodyEvaluationRepositoryPrisma = new BodyEvaluationRepositoryPrisma();
